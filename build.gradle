@@ -1,0 +1,30 @@
+project.group = 'com.walton.cob'
+project.version = '0.0.1'
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath 'com.android.tools.build:gradle:2.2.1'
+	}
+}
+
+repositories {
+	jcenter()
+}
+
+apply plugin: 'com.android.library'
+
+android {
+	compileSdkVersion 22
+	buildToolsVersion "25.0.2"
+
+	lintOptions {
+		abortOnError false
+	}
+}
+
+dependencies {
+}
