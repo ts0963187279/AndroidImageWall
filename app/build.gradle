@@ -18,7 +18,7 @@ android {
 		versionCode 1
 		versionName project.version
 		minSdkVersion 14
-		targetSdkVersion 17
+		targetSdkVersion 22
 		multiDexEnabled true
 	}
 
@@ -41,6 +41,7 @@ android {
 
 dependencies {
 	compile project(':library')
+	compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 configurations {

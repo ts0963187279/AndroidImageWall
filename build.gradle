@@ -20,11 +20,16 @@ apply plugin: 'com.android.library'
 android {
 	compileSdkVersion 22
 	buildToolsVersion "25.0.2"
-
+    defaultConfig{
+        minSdkVersion 9
+    }
 	lintOptions {
 		abortOnError false
 	}
 }
 
 dependencies {
+	compile "com.android.support:appcompat-v7:22.+"
+	compile "com.android.support:support-v4:22.+"
+	compile "com.android.support:recyclerview-v7:22.+"
 }
