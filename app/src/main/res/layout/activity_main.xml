@@ -4,23 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.walton.android.photowall.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
-
+    >
     <android.support.v7.widget.RecyclerView
         android:id="@+id/imagegallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp" />
-    <LinearLayout
-        android:id="@+id/full"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    </LinearLayout>
+        />
 </android.support.constraint.ConstraintLayout>

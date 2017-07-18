@@ -1,3 +1,4 @@
+//noinspection GradleCompatible
 project.group = 'com.walton.cob'
 project.version = '0.0.1'
 
@@ -32,4 +33,5 @@ dependencies {
 	compile "com.android.support:appcompat-v7:22.+"
 	compile "com.android.support:support-v4:22.+"
 	compile "com.android.support:recyclerview-v7:22.+"
+    compile 'com.android.support:gridlayout-v7:22.+'
 }

@@ -6,13 +6,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.walton.android.photowall.processer.MyAdapter;
+import com.walton.android.photowall.processer.MySpanSizeLookup;
 import com.walton.android.photowall.view.MyScaleAnimation;
+
 /**
  * Created by waltonmis on 2017/7/12.
  */
 
 public class ZoomOnTouchListener implements View.OnTouchListener{
     private RecyclerView recyclerView;
+    private int[] TitlePosition;
     private PointF SecondPointF = new PointF();
     private float Distance =1f;
     private static final int STATE_NONE = 0;
@@ -21,9 +26,14 @@ public class ZoomOnTouchListener implements View.OnTouchListener{
     private float NewScale;
     private Context context;
     private int row = 4;
-    public ZoomOnTouchListener(Context context, RecyclerView recyclerView){
+    private MyAdapter adapter;
+    public ZoomOnTouchListener(Context context, RecyclerView recyclerView, MyAdapter adapter){
         this.recyclerView = recyclerView;
         this.context = context;
+        this.adapter = adapter;
+    }
+    public void setTitlePosition(int[] TitlePosition){
+        this.TitlePosition = TitlePosition;
     }
     private float Spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
@@ -59,14 +69,18 @@ public class ZoomOnTouchListener implements View.OnTouchListener{
                         if(NewScale < 0.5 && row < 4)
                             row++;
                     }
-                    if (row > 2) {
-                        if(NewScale > 1 && row > 2)
+                    if (row > 1) {
+                        if(NewScale > 1 && row > 1)
                             row--;
-                        if(NewScale > 1.8 && row > 2)
+                        if(NewScale > 1.8 && row > 1)
                             row--;
                     }
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,row);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, row);
+                    MySpanSizeLookup mySpanSizeLookup = new MySpanSizeLookup(TitlePosition,row);
+                    ((GridLayoutManager)layoutManager).setSpanSizeLookup(mySpanSizeLookup);
                     recyclerView.setLayoutManager(layoutManager);
+                    adapter.UpdateView(row);
+                    adapter.notifyDataSetChanged();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
