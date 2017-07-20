@@ -19,10 +19,10 @@ repositories {
 apply plugin: 'com.android.library'
 
 android {
-	compileSdkVersion 22
+	compileSdkVersion 25
 	buildToolsVersion "25.0.2"
     defaultConfig{
-        minSdkVersion 9
+        minSdkVersion 14
     }
 	lintOptions {
 		abortOnError false
@@ -30,8 +30,8 @@ android {
 }
 
 dependencies {
-	compile "com.android.support:appcompat-v7:22.+"
-	compile "com.android.support:support-v4:22.+"
-	compile "com.android.support:recyclerview-v7:22.+"
-    compile 'com.android.support:gridlayout-v7:22.+'
+	compile "com.android.support:appcompat-v7:25.+"
+	compile "com.android.support:support-v4:25.+"
+	compile "com.android.support:recyclerview-v7:25.+"
+    compile 'com.android.support:gridlayout-v7:25.+'
 }

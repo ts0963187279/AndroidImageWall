@@ -6,18 +6,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.walton.android.photowall.processer.PhotoWallAdapter;
-import com.walton.android.photowall.processer.MySpanSizeLookup;
 import com.walton.android.photowall.view.MyAnimation;
 
+
 /**
- * Created by waltonmis on 2017/7/12.
+ * Created by waltonmis on 2017/7/14.
  */
 
-public class ZoomRecyclerViewOnTouchListener implements View.OnTouchListener{
+public class ZoomImageOnTouchListener implements View.OnTouchListener{
     private RecyclerView recyclerView;
-    private int[] TitlePosition;
     private PointF SecondPointF = new PointF();
     private float Distance =1f;
     private static final int STATE_NONE = 0;
@@ -25,15 +25,12 @@ public class ZoomRecyclerViewOnTouchListener implements View.OnTouchListener{
     private int State = STATE_NONE;
     private float NewScale;
     private Context context;
-    private int row = 4;
-    private PhotoWallAdapter adapter;
-    public ZoomRecyclerViewOnTouchListener(Context context, RecyclerView recyclerView, PhotoWallAdapter adapter){
+    private static int row = 4;
+    private TextView textView ;
+    public ZoomImageOnTouchListener(Context context, RecyclerView recyclerView,TextView textView){
         this.recyclerView = recyclerView;
         this.context = context;
-        this.adapter = adapter;
-    }
-    public void setTitlePosition(int[] TitlePosition){
-        this.TitlePosition = TitlePosition;
+        this.textView = textView;
     }
     private float Spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
@@ -48,6 +45,9 @@ public class ZoomRecyclerViewOnTouchListener implements View.OnTouchListener{
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch(motionEvent.getAction() & MotionEvent.ACTION_MASK){
+            case MotionEvent.ACTION_DOWN:
+                Toast.makeText(context,"click me",Toast.LENGTH_SHORT).show();
+                break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 Distance = Spacing(motionEvent);
                 if(Distance > 20f){
@@ -66,22 +66,22 @@ public class ZoomRecyclerViewOnTouchListener implements View.OnTouchListener{
                     if (row < 4) {
                         if(NewScale < 1 && row < 4)
                             row++;
-                        if(NewScale < 0.5 && row < 4)
+                        if(NewScale < 0.3 && row < 4)
                             row++;
                     }
-                    if (row > 1) {
-                        if(NewScale > 1 && row > 1)
+                    if (row > 2) {
+                        if(NewScale > 1 && row > 2)
                             row--;
-                        if(NewScale > 1.8 && row > 1)
+                        if(NewScale > 1.8 && row > 2)
                             row--;
                     }
-                    int scrollPosition = adapter.getScrollPosition();
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, row);
-                    MySpanSizeLookup mySpanSizeLookup = new MySpanSizeLookup(TitlePosition,row);
-                    ((GridLayoutManager)layoutManager).setSpanSizeLookup(mySpanSizeLookup);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,row);
+                    if(row == 1){
+                        textView.setVisibility(view.VISIBLE);
+                    }else{
+                        textView.setVisibility(view.GONE);
+                    }
                     recyclerView.setLayoutManager(layoutManager);
-                    adapter.UpdateView(row,scrollPosition,layoutManager);
-                    adapter.notifyDataSetChanged();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -95,6 +95,6 @@ public class ZoomRecyclerViewOnTouchListener implements View.OnTouchListener{
                 }
                 break;
         }
-        return false;
+        return true;
     }
 }
