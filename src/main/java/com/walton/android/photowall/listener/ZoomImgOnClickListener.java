@@ -33,6 +33,7 @@ public class ZoomImgOnClickListener implements View.OnClickListener{
             intent.putExtra(PUT_EXTRA_IMAGELIST_KEY, ImageListPath);
             intent.putExtra(PUT_EXTRA_POSITION_KEY, position);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(intent);
     }
 }
