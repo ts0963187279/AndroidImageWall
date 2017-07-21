@@ -40,7 +40,6 @@ public class PhotoWallAdapter extends RecyclerView.Adapter<PhotoWallAdapter.View
         this.context = context;
         this.count = count;
         this.FileTreeMap = FileTreeMap;
-
         Titleposition = new int[FileTreeMap.size()+1];
         ImageList = new File[count];
         Keytmp = new Object [FileTreeMap.size()];
@@ -69,7 +68,7 @@ public class PhotoWallAdapter extends RecyclerView.Adapter<PhotoWallAdapter.View
     }
     public void UpdateView(int row,int scrollPosition,RecyclerView.LayoutManager layoutManager){
         this.layoutManager = layoutManager;
-        this.layoutManager.scrollToPosition(scrollPosition+row/2 + 1);
+        this.layoutManager.scrollToPosition(scrollPosition);
     }
     @Override
     public PhotoWallAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -93,7 +92,7 @@ public class PhotoWallAdapter extends RecyclerView.Adapter<PhotoWallAdapter.View
             viewHolder.RecyclerViewImg.setImageBitmap(bitmap);
             viewHolder.RecyclerViewImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
             viewHolder.RecyclerViewImg.setVisibility(View.VISIBLE);
-            ZoomImgOnClickListener zoomImgOnClickListener = new ZoomImgOnClickListener(context,ImageList,position-numberOfTitle);
+            ZoomImgOnClickListener zoomImgOnClickListener = new ZoomImgOnClickListener(context, ImageList, position - numberOfTitle);
             viewHolder.RecyclerViewImg.setOnClickListener(zoomImgOnClickListener);
             viewHolder.Title.setVisibility(View.GONE);
         }else{

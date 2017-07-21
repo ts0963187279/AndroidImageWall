@@ -15,21 +15,7 @@ public class CreateFileTreeMap {
         this.file = file;FileTreeMap = new TreeMap<>();
     }
     public TreeMap<String ,File[]> GetTreeMap(){
-        newFile = new File[5];
-        for(int i = 0 ; i < 5 ; i++){
-            newFile[i] = file[i];
-        }
-        FileTreeMap.put("MyFirst Key",newFile);
-        newFile = new File[20];
-        for(int i=0;i<20;i++){
-            newFile[i] = file[i+5];
-        }
-        FileTreeMap.put("MySecond Key",newFile);
-        newFile = new File[13];
-        for(int i=0;i<13;i++){
-            newFile[i] = file[i+25];
-        }
-        FileTreeMap.put("My Key",newFile);
+        FileTreeMap.put("MyFirst Key",file);
         return FileTreeMap;
     }
 }

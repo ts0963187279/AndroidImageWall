@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 
+import com.walton.android.photowall.listener.RecyclerviewOnItemTouchListener;
 import com.walton.android.photowall.listener.ZoomRecyclerViewOnTouchListener;
 import com.walton.android.photowall.processer.CreateFileTreeMap;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         PhotoWallAdapter adapter = new PhotoWallAdapter(getApplicationContext(), FileTreeMap , ImageList.length , recyclerView);
         recyclerView.setAdapter(adapter);
-        ZoomRecyclerViewOnTouchListener zoomRecyclerViewOnTouchListener = new ZoomRecyclerViewOnTouchListener(getApplicationContext(), recyclerView, adapter);
-        zoomRecyclerViewOnTouchListener.setTitlePosition(adapter.getTitlePosition());
-        recyclerView.setOnTouchListener(zoomRecyclerViewOnTouchListener);
+        RecyclerviewOnItemTouchListener recyclerviewOnItemTouchListener = new RecyclerviewOnItemTouchListener(getApplicationContext(),adapter);
+        recyclerviewOnItemTouchListener.setTitlePosition(adapter.getTitlePosition());
+        recyclerView.addOnItemTouchListener(recyclerviewOnItemTouchListener);
     }
 }

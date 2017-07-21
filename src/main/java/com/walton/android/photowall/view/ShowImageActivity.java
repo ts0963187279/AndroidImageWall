@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.walton.android.photowall.listener.MyOnScrollListener;
 import com.walton.android.photowall.processer.GalleryAdapter;
 import com.walton.android.photowall.processer.PathFileConverter;
 
@@ -41,7 +40,5 @@ public class ShowImageActivity extends AppCompatActivity {
         GalleryAdapter galleryAdapter = new GalleryAdapter(this,ImageList,layoutManager);
         recyclerView.setAdapter(galleryAdapter);
         layoutManager.scrollToPosition(position);
-        MyOnScrollListener myOnScrollListener = new MyOnScrollListener();
-        recyclerView.addOnScrollListener(myOnScrollListener);
     }
 }
