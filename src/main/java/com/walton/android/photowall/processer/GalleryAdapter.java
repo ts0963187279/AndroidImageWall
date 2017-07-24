@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.List;
 
 import start.android.library.R;
 
@@ -21,9 +22,9 @@ import start.android.library.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
     private Context context;
-    private File[] ImageList;
+    private List<File> ImageList;
     private RecyclerView.LayoutManager layoutManager;
-    public GalleryAdapter(Context context , File[] ImageList, RecyclerView.LayoutManager layoutManager){
+    public GalleryAdapter(Context context , List<File> ImageList, RecyclerView.LayoutManager layoutManager){
         this.context = context;
         this.ImageList = ImageList;
         this.layoutManager = layoutManager;
@@ -43,7 +44,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final GalleryAdapter.ViewHolder viewHolder, final int position) {
-        Bitmap bitmap = BitmapFactory.decodeFile(ImageList[position].getAbsolutePath());
+        Bitmap bitmap = BitmapFactory.decodeFile(ImageList.get(position).getAbsolutePath());
         viewHolder.FullScreenImg.setImageBitmap(bitmap);
         viewHolder.FullScreenImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +57,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return ImageList.length;
+        return ImageList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView FullScreenImg;

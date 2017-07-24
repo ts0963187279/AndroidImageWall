@@ -16,6 +16,6 @@ include 'shared'
 include 'api'
 */
 
-include ':library'
+include ':library', ':stickyheadergrid'
 project(':library').projectDir = file('../')
 

@@ -1,22 +1,25 @@
 package com.walton.android.photowall.processer;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by waltonmis on 2017/7/19.
  */
 
 public class PathFileConverter {
-    public String[] getPath(File[] files){
-        String[] Path = new String[files.length];
-        for(int i=0;i<files.length;i++)
-            Path[i] = files[i].getAbsolutePath();
-        return Path;
+    public ArrayList<String> getPath(List<File> files){
+        List<String> Path = new ArrayList<>();
+        for(int i=0;i<files.size();i++)
+            Path.add(files.get(i).getAbsolutePath());
+        return (ArrayList<String>) Path;
     }
-    public File[] getFile(String[] Path){
-        File[] files = new File[Path.length];
-        for(int i=0;i<Path.length;i++)
-            files[i] = new File(Path[i]);
-        return files;
+    public ArrayList<File> getFile(List<String> Path){
+        List<File> files = new ArrayList<>();
+        for(int i=0;i<Path.size();i++)
+            files.add(new File(Path.get(i)));
+        return (ArrayList<File>) files;
     }
 }

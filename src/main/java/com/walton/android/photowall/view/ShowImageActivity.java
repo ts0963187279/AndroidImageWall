@@ -10,6 +10,9 @@ import com.walton.android.photowall.processer.GalleryAdapter;
 import com.walton.android.photowall.processer.PathFileConverter;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import start.android.library.R;
 
@@ -22,14 +25,14 @@ public class ShowImageActivity extends AppCompatActivity {
     private String GET_EXTRA_POSITION_KEY = "position";
     private RecyclerView recyclerView;
     private int position;
-    private String[] ImageListPath;
-    private File[] ImageList;
+    private ArrayList<String> ImageListPath;
+    private ArrayList<File> ImageList;
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.showimage_layout);
         Intent intent = this.getIntent();
-        ImageListPath = intent.getStringArrayExtra(GET_EXTRA_IMAGELIST_KEY);
+        ImageListPath = intent.getStringArrayListExtra(GET_EXTRA_IMAGELIST_KEY);
         position = intent.getIntExtra(GET_EXTRA_POSITION_KEY,1);
         recyclerView = (RecyclerView)findViewById(R.id.Gallery);
         recyclerView.setHasFixedSize(true);
