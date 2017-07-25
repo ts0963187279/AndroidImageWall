@@ -49,7 +49,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         viewHolder.FullScreenImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,String.valueOf(((LinearLayoutManager)layoutManager).findLastVisibleItemPosition()),
+                Toast.makeText(context,ImageList.get(position).toURI().toString(),
                         Toast.LENGTH_SHORT).show();
             }
         });

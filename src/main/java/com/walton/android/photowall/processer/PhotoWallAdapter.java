@@ -82,6 +82,27 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         selectMod = false;
         notifyDataSetChanged();
     }
+    public void removeItem(){
+        for(int i=0;i< isCheck.length;i++){
+            int deleteCount = 0;
+            for(int j=0;j< isCheck[i].length;j++){
+                if(isCheck[i][j]) {
+                    Files.get(i).remove(j - deleteCount);
+                    CheckCount--;
+                    isCheck[i][j] = false;
+                    notifySectionItemRemoved(i,j - deleteCount);
+                    deleteCount++;
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+    public void addItem(){
+
+    }
+    public void shareItem(){
+
+    }
     public int getScrollPosition(){
         return layoutManager.getLastVisibleItemPosition();
     }

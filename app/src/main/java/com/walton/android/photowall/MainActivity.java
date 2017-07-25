@@ -60,11 +60,13 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.action_delete:
-                break;
+                photoWallAdapter.removeItem();
+                return true;
             case R.id.action_add:
                 break;
             case R.id.action_share:
-                break;
+                photoWallAdapter.shareItem();
+                return true;
             case android.R.id.home:
                 photoWallAdapter.ViewMode();
                 photoWallAdapter.notifyDataSetChanged();
@@ -74,9 +76,4 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
         }
         return super.onOptionsItemSelected(item);
     }
-    /*@Override
-    public void onBackPressed(){
-        photoWallAdapter.ViewMode();
-        photoWallAdapter.notifyDataSetChanged();
-    }*/
 }
