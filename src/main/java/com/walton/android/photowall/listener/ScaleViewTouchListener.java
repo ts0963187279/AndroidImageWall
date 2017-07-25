@@ -102,10 +102,6 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                             row--;
                     }
                     int scrollPosition = adapter.getScrollPosition();
-                    //RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, row);
-                    //MySpanSizeLookup mySpanSizeLookup = new MySpanSizeLookup(TitlePosition,row);
-                    //((GridLayoutManager)layoutManager).setSpanSizeLookup(mySpanSizeLookup);
-                    //recyclerView.setLayoutManager(layoutManager);
                     StickyHeaderGridLayoutManager layoutManager = new StickyHeaderGridLayoutManager(row);
                     recyclerView.setLayoutManager(layoutManager);
                     adapter.UpdateView(row,scrollPosition,layoutManager);
