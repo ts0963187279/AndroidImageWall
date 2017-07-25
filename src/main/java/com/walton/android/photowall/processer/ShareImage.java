@@ -3,9 +3,7 @@ package com.walton.android.photowall.processer;
 import android.content.Intent;
 import android.net.Uri;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by waltonmis on 2017/7/25.

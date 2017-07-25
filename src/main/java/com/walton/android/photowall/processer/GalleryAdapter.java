@@ -3,6 +3,8 @@ package com.walton.android.photowall.processer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,11 +24,11 @@ import start.android.library.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
     private Context context;
-    private List<File> ImageList;
+    private List<Uri> ImageUriList;
     private RecyclerView.LayoutManager layoutManager;
-    public GalleryAdapter(Context context , List<File> ImageList, RecyclerView.LayoutManager layoutManager){
+    public GalleryAdapter(Context context , List<Uri> ImageUriList, RecyclerView.LayoutManager layoutManager){
         this.context = context;
-        this.ImageList = ImageList;
+        this.ImageUriList = ImageUriList;
         this.layoutManager = layoutManager;
     }
     public void UpdataView(RecyclerView.LayoutManager layoutManager, int position){
@@ -44,20 +46,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final GalleryAdapter.ViewHolder viewHolder, final int position) {
-        Bitmap bitmap = BitmapFactory.decodeFile(ImageList.get(position).getAbsolutePath());
-        viewHolder.FullScreenImg.setImageBitmap(bitmap);
-        viewHolder.FullScreenImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,ImageList.get(position).toURI().toString(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        viewHolder.FullScreenImg.setImageURI(ImageUriList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return ImageList.size();
+        return ImageUriList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView FullScreenImg;

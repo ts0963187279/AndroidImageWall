@@ -1,5 +1,6 @@
 package com.walton.android.photowall;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -9,11 +10,12 @@ import android.view.MenuItem;
 
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.AdapterCallBack;
-import com.walton.android.photowall.processer.CreateFileTreeMap;
+import com.walton.android.photowall.processer.CreateUriTreeMap;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.processer.SearchFile;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 
@@ -31,10 +33,13 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
 
         SearchFile searchFile = new SearchFile();
         File[] ImageList = searchFile.getImageList();
-        CreateFileTreeMap createFileTreeMap = new CreateFileTreeMap(ImageList);
-        TreeMap<String,File[]> FileTreeMap = createFileTreeMap.GetTreeMap();
 
-        photoWallAdapter = new PhotoWallAdapter(this,FileTreeMap,recyclerView,4,this);
+
+        CreateUriTreeMap createUriTreeMap = new CreateUriTreeMap(ImageList);
+        TreeMap<String,ArrayList<Uri>> UriTreeMap = createUriTreeMap.getTreeMap();
+
+
+        photoWallAdapter = new PhotoWallAdapter(this,UriTreeMap,recyclerView,4,this);
         recyclerView.setAdapter(photoWallAdapter);
         ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(getApplicationContext(), photoWallAdapter);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
@@ -63,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
                 photoWallAdapter.removeItem();
                 return true;
             case R.id.action_add:
-                break;
+                photoWallAdapter.addItem();
+                return true;
             case R.id.action_share:
                 photoWallAdapter.shareItem();
                 return true;
@@ -74,6 +80,5 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

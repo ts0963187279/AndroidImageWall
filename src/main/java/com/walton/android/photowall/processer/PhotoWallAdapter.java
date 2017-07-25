@@ -1,8 +1,7 @@
 package com.walton.android.photowall.processer;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.walton.android.photowall.listener.ZoomImgOnClickListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +25,7 @@ import start.android.library.R;
  */
 
 public class PhotoWallAdapter extends StickyHeaderGridAdapter{
-    private List<File> ImageList;
+    private ArrayList<Uri> UriList;
     private Context context;
     private RecyclerView recyclerView;
     private StickyHeaderGridLayoutManager layoutManager;
@@ -35,40 +33,38 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Iterator iterator;
     private String[] header;
     private int itemCount[];
-    private TreeMap<String,File[]> FileTreeMap;
+    private TreeMap<String,ArrayList<Uri>> UriTreeMap;
     private boolean[][] isCheck;
-    private List<List<File>> Files ;
+    private List<List<Uri>> URIS;
     private int CheckCount = 0;
     private boolean selectMod = false;
     private AdapterCallBack adapterCallBack;
-
-    public PhotoWallAdapter(Context context, TreeMap<String,File[]> FileTreeMap, RecyclerView recyclerView, int row, AdapterCallBack adapterCallBack){
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap, RecyclerView recyclerView, int row, AdapterCallBack adapterCallBack){
         this.recyclerView = recyclerView;
         this.context = context;
-        this.FileTreeMap = FileTreeMap;
         this.adapterCallBack = adapterCallBack;
-        ImageList = new ArrayList<>();
-        iterator = FileTreeMap.descendingKeySet().iterator();
-        Files = new ArrayList<>(FileTreeMap.size());
-        itemCount = new int[FileTreeMap.size()];
-        isCheck = new boolean[FileTreeMap.size()][];
-        header = new String[FileTreeMap.size()];
-        for(int i=0;i<FileTreeMap.size();i++){
+        this.UriTreeMap =UriTreeMap;
+        UriList = new ArrayList<>();
+        iterator = UriTreeMap.descendingKeySet().iterator();
+        URIS = new ArrayList<>(UriTreeMap.size());
+        itemCount = new int[UriTreeMap.size()];
+        isCheck = new boolean[UriTreeMap.size()][];
+        header = new String[UriTreeMap.size()];
+        for(int i =0;i<UriTreeMap.size();i++){
             itemCount[i] = 0;
             Key = iterator.next();
             header[i] = Key.toString();
-            List<File> files = new ArrayList<>(FileTreeMap.get(Key).length);
-            isCheck[i] = new boolean[FileTreeMap.get(Key).length];
-            for(int j=0;j<FileTreeMap.get(Key).length;j++){
-                File file = new File(FileTreeMap.get(Key)[j].getAbsolutePath());
+            List<Uri> URI = new ArrayList<>(UriTreeMap.get(Key).size());
+            isCheck[i] = new boolean[UriTreeMap.get(Key).size()];
+            for(int j =0;j< UriTreeMap.get(Key).size();j++){
+                Uri uri = UriTreeMap.get(Key).get(j);
                 itemCount[i]++;
                 isCheck[i][j] = false;
-                files.add(file);
-                ImageList.add(file);
+                URI.add(uri);
+                UriList.add(uri);
             }
-            Files.add(files);
+            URIS.add(URI);
         }
-
         layoutManager = new StickyHeaderGridLayoutManager(row);
         recyclerView.setLayoutManager(layoutManager);
     }
@@ -87,7 +83,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
             int deleteCount = 0;
             for(int j=0;j< isCheck[i].length;j++){
                 if(isCheck[i][j]) {
-                    Files.get(i).remove(j - deleteCount);
+                    URIS.get(i).remove(j-deleteCount);
                     CheckCount--;
                     isCheck[i][j] = false;
                     notifySectionItemRemoved(i,j - deleteCount);
@@ -112,12 +108,12 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     }
     @Override
     public int getSectionCount() {
-        return Files.size();
+        return URIS.size();
     }
 
     @Override
     public int getSectionItemCount(int section) {
-        return Files.get(section).size();
+        return URIS.get(section).size();
     }
 
     @Override
@@ -142,11 +138,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final MyItemViewHolder holder = (MyItemViewHolder) viewHolder;
-        final String path = Files.get(section).get(position).getAbsolutePath();
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        final Uri uri = URIS.get(section).get(position);
+        holder.img.setImageURI(uri);
         holder.checkBox.setChecked(false);
         holder.img.setPadding(0,0,0,0);
-        holder.img.setImageBitmap(bitmap);
         holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         adapterCallBack.hideActionBar(!selectMod);
         if(CheckCount == 0) {
@@ -188,7 +183,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
             int count = 0;
             for(int i =0;i<section;i++)
                 count += itemCount[i];
-            ZoomImgOnClickListener zoomImgOnClickListener = new ZoomImgOnClickListener(context, ImageList,count + position);
+            ZoomImgOnClickListener zoomImgOnClickListener = new ZoomImgOnClickListener(context, UriList,count + position);
             holder.img.setOnClickListener(zoomImgOnClickListener);
             holder.img.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
