@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.walton.android.photowall.processer.RecyclerViewAdapter;
+import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.processer.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.view.MyAnimation;
 
@@ -25,8 +25,8 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
     private float NewScale;
     private Context context;
     private int row = 4;
-    private RecyclerViewAdapter adapter;
-    public ScaleViewTouchListener(Context context, RecyclerViewAdapter adapter){
+    private PhotoWallAdapter adapter;
+    public ScaleViewTouchListener(Context context, PhotoWallAdapter adapter){
         this.context = context;
         this.adapter = adapter;
     }

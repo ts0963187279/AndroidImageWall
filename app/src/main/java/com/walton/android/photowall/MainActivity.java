@@ -5,11 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.AdapterCallBack;
 import com.walton.android.photowall.processer.CreateFileTreeMap;
-import com.walton.android.photowall.processer.RecyclerViewAdapter;
+import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.processer.SearchFile;
 
 import java.io.File;
@@ -18,10 +19,13 @@ import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity implements AdapterCallBack{
     RecyclerView recyclerView;
+    PhotoWallAdapter photoWallAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
         recyclerView.setHasFixedSize(true);
 
@@ -30,9 +34,9 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
         CreateFileTreeMap createFileTreeMap = new CreateFileTreeMap(ImageList);
         TreeMap<String,File[]> FileTreeMap = createFileTreeMap.GetTreeMap();
 
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this,FileTreeMap,recyclerView,4,this);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(getApplicationContext(),recyclerViewAdapter);
+        photoWallAdapter = new PhotoWallAdapter(this,FileTreeMap,recyclerView,4,this);
+        recyclerView.setAdapter(photoWallAdapter);
+        ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(getApplicationContext(), photoWallAdapter);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
     }
     @Override
@@ -52,4 +56,27 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
         else
             getSupportActionBar().show();
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_delete:
+                break;
+            case R.id.action_add:
+                break;
+            case R.id.action_share:
+                break;
+            case android.R.id.home:
+                photoWallAdapter.ViewMode();
+                photoWallAdapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    /*@Override
+    public void onBackPressed(){
+        photoWallAdapter.ViewMode();
+        photoWallAdapter.notifyDataSetChanged();
+    }*/
 }

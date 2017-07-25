@@ -1,12 +1,9 @@
 package com.walton.android.photowall.processer;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.test.ActivityUnitTestCase;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +26,7 @@ import start.android.library.R;
  * Created by waltonmis on 2017/7/21.
  */
 
-public class RecyclerViewAdapter extends StickyHeaderGridAdapter{
+public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private List<File> ImageList;
     private Context context;
     private RecyclerView recyclerView;
@@ -45,7 +42,7 @@ public class RecyclerViewAdapter extends StickyHeaderGridAdapter{
     private boolean selectMod = false;
     private AdapterCallBack adapterCallBack;
 
-    public RecyclerViewAdapter (Context context, TreeMap<String,File[]> FileTreeMap, RecyclerView recyclerView, int row,AdapterCallBack adapterCallBack){
+    public PhotoWallAdapter(Context context, TreeMap<String,File[]> FileTreeMap, RecyclerView recyclerView, int row, AdapterCallBack adapterCallBack){
         this.recyclerView = recyclerView;
         this.context = context;
         this.FileTreeMap = FileTreeMap;
@@ -74,6 +71,16 @@ public class RecyclerViewAdapter extends StickyHeaderGridAdapter{
 
         layoutManager = new StickyHeaderGridLayoutManager(row);
         recyclerView.setLayoutManager(layoutManager);
+    }
+    public void ViewMode(){
+        for (int i = 0; i < isCheck.length; i++) {
+            for (int j = 0; j < isCheck[i].length; j++) {
+                isCheck[i][j] = false;
+            }
+        }
+        CheckCount = 0;
+        selectMod = false;
+        notifyDataSetChanged();
     }
     public int getScrollPosition(){
         return layoutManager.getLastVisibleItemPosition();
@@ -148,14 +155,7 @@ public class RecyclerViewAdapter extends StickyHeaderGridAdapter{
                 public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                     if(selectMod) {
                         if (keyCode == keyEvent.KEYCODE_BACK) {
-                            for (int i = 0; i < isCheck.length; i++) {
-                                for (int j = 0; j < isCheck[i].length; j++) {
-                                    isCheck[i][j] = false;
-                                }
-                            }
-                            CheckCount = 0;
-                            selectMod = false;
-                            notifyDataSetChanged();
+                            ViewMode();
                             return true;
                         }
                     }
@@ -198,4 +198,5 @@ public class RecyclerViewAdapter extends StickyHeaderGridAdapter{
             img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
+
 }
