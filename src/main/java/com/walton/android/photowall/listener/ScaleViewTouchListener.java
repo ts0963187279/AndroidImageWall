@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
-import com.walton.android.photowall.processer.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.view.MyAnimation;
 
 /**

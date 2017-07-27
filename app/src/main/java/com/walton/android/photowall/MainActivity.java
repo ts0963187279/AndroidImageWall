@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
 
         SearchFile searchFile = new SearchFile();
         File[] ImageList = searchFile.getImageList();
-
-
         CreateUriTreeMap createUriTreeMap = new CreateUriTreeMap(ImageList);
         TreeMap<String,ArrayList<Uri>> UriTreeMap = createUriTreeMap.getTreeMap();
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
+        inflater.inflate(R.menu.main_activity_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

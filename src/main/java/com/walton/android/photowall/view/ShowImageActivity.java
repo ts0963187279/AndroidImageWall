@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.walton.android.photowall.processer.GalleryAdapter;
 
@@ -28,7 +30,8 @@ public class ShowImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.showimage_layout);
         Intent intent = this.getIntent();
         ImageUriList = intent.getParcelableArrayListExtra(GET_EXTRA_IMAGELIST_KEY);
@@ -44,5 +47,11 @@ public class ShowImageActivity extends AppCompatActivity {
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
         layoutManager.scrollToPosition(position);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.show_image_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
