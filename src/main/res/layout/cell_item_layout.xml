@@ -7,11 +7,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/img"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/frescoImg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#DDD"
             android:adjustViewBounds="true"
             />
         <CheckBox

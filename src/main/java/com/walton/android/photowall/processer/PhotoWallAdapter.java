@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.ExitSelectModListener;
 import com.walton.android.photowall.listener.SelectAllLongClickListener;
 import com.walton.android.photowall.listener.SelectAllOnClickListener;
@@ -80,6 +82,9 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         }
         layoutManager = new StickyHeaderGridLayoutManager(row);
         recyclerView.setLayoutManager(layoutManager);
+    }
+    public int getRow(){
+        return row;
     }
     public void ViewMode(){
         for (int i = 0; i < isCheck.length; i++) {
@@ -169,6 +174,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
+        Fresco.initialize(context);
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_item_layout,parent,false);
         return new MyItemViewHolder(view);
     }
@@ -209,10 +215,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final MyItemViewHolder holder = (MyItemViewHolder) viewHolder;
         final Uri uri = URIS.get(section).get(position);
-        holder.img.setImageURI(uri);
+        holder.frescoImg.setImageURI(uri);
         holder.select.setChecked(false);
-        holder.img.setPadding(0,0,0,0);
-        holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        holder.frescoImg.setPadding(0,0,0,0);
+        holder.frescoImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
         if(CheckCount == 0) {
             selectMod = false;
             holder.select.setVisibility(View.GONE);
@@ -226,22 +232,22 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             appCompatActivity.setTitle("已選取 "+String.valueOf(CheckCount));
             if(isCheck[section][position]){
                 holder.select.setChecked(true);
-                holder.img.setPadding(30,30,30,30);
+                holder.frescoImg.setPadding(30,30,30,30);
             }
             holder.select.setVisibility(View.VISIBLE);
             SelectModItemOnClickListener selectModItemOnClickListener = new SelectModItemOnClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectModItemOnClickListener.setSectionPosition(section,position);
-            holder.img.setOnClickListener(selectModItemOnClickListener);
+            holder.frescoImg.setOnClickListener(selectModItemOnClickListener);
         }else{
             appCompatActivity.getSupportActionBar().hide();
             int count = 0;
             for(int i =0;i<section;i++)
                 count += itemCount[i];
             goToImageGalleryOnClickListener goToImageGalleryOnClickListener = new goToImageGalleryOnClickListener(context, UriList,count + position);
-            holder.img.setOnClickListener(goToImageGalleryOnClickListener);
+            holder.frescoImg.setOnClickListener(goToImageGalleryOnClickListener);
             SelectModItemLongClickListener selectModItemLongClickListener = new SelectModItemLongClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter) recyclerView.getAdapter());
             selectModItemLongClickListener.setSectionPosition(section,position);
-            holder.img.setOnLongClickListener(selectModItemLongClickListener);
+            holder.frescoImg.setOnLongClickListener(selectModItemLongClickListener);
         }
     }
     public static class MyHeaderViewHolder extends HeaderViewHolder{
@@ -254,12 +260,12 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         }
     }
     public static class MyItemViewHolder extends ItemViewHolder{
-        ImageView img;
+        SimpleDraweeView frescoImg;
         CheckBox select;
         public MyItemViewHolder(View itemView) {
             super(itemView);
             select = (CheckBox) itemView.findViewById(R.id.select);
-            img = (ImageView) itemView.findViewById(R.id.img);
+            frescoImg = (SimpleDraweeView) itemView.findViewById(R.id.frescoImg);
         }
     }
 

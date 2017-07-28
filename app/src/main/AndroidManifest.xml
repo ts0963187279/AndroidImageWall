@@ -4,12 +4,11 @@
 	>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	<application
 		android:label="@string/app_name"
 		android:icon="@drawable/ic_launcher"
 		android:theme="@style/AppTheme">
-		<activity android:name=".MainActivity"
+		<activity android:name=".model.MainActivity"
 			android:label="StartAndroid">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

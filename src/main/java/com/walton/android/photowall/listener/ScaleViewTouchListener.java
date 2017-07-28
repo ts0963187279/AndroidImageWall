@@ -16,19 +16,25 @@ import com.walton.android.photowall.view.MyAnimation;
 
 public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener {
     private boolean isPointerDown = false;
-    private int[] TitlePosition;
     private PointF SecondPointF = new PointF();
     private float Distance =1f;
     private static final int STATE_NONE = 0;
     private static final int STATE_ZOOM =1;
     private int State = STATE_NONE;
     private float NewScale;
-    private Context context;
-    private int row = 4;
+    private int row;
+    private int maxrow = 4;
+    private int minRow = 2;
     private PhotoWallAdapter adapter;
-    public ScaleViewTouchListener(Context context, PhotoWallAdapter adapter){
-        this.context = context;
+    public ScaleViewTouchListener(PhotoWallAdapter adapter){
         this.adapter = adapter;
+        this.row = adapter.getRow();
+    }
+    public void setMinRow(int minRow){
+        this.minRow = minRow;
+    }
+    public void setMaxRow(int maxRow){
+        this.maxrow = maxRow;
     }
     private float Spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
@@ -86,16 +92,16 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                 if(State == STATE_ZOOM) {
                     MyAnimation myAnimation = new MyAnimation(1f, 1f, 1f, 1f);
                     myAnimation.StartScaleAnimation(recyclerView);
-                    if (row < 4) {
-                        if(NewScale < 1 && row < 4)
+                    if (row < maxrow) {
+                        if(NewScale < 1 && row < maxrow)
                             row++;
-                        if(NewScale < 0.5 && row < 4)
+                        if(NewScale < 0.5 && row < maxrow)
                             row++;
                     }
                     if (row > 2) {
-                        if(NewScale > 1 && row > 2)
+                        if(NewScale > 1 && row > minRow)
                             row--;
-                        if(NewScale > 1.8 && row > 2)
+                        if(NewScale > 1.8 && row > minRow)
                             row--;
                     }
                     int scrollPosition = adapter.getScrollPosition();

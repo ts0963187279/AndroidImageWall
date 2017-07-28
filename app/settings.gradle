@@ -20,5 +20,3 @@ include ':library'
 project(':library').projectDir = file('../')
 include ':stickyheadergrid'
 project(':stickyheadergrid').projectDir = file('../Sticky-Header-Grid-master/stickyheadergrid')
-include ':fresco-master'
-project(':fresco-master').projectDir = file('../fresco-master')

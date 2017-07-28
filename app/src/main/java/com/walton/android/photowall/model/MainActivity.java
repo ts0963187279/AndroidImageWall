@@ -1,4 +1,4 @@
-package com.walton.android.photowall;
+package com.walton.android.photowall.model;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import com.walton.android.photowall.R;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
-
+import com.walton.android.photowall.processor.PrepareUri;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -21,24 +21,21 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
-        recyclerView.setHasFixedSize(true);
-        /*SearchFile searchFile = new SearchFile();
-        File[] ImageList = searchFile.getImageList();
-        CreateUriTreeMap createUriTreeMap = new CreateUriTreeMap(ImageList);
-        TreeMap<String,ArrayList<Uri>> UriTreeMap = createUriTreeMap.getTreeMap();*/
-        TreeMap<String,ArrayList<Uri>> UriTreeMap = new TreeMap<String,ArrayList<Uri>>();
-        ArrayList<Uri> test = new ArrayList<Uri>();
-        test.add(Uri.parse("http://hunsci.com/data/out/221/904361.jpeg"));
-        UriTreeMap.put("test",test);
+
+        TreeMap<String,ArrayList<Uri>> UriTreeMap = new PrepareUri().getPrepareUri();
 
         photoWallAdapter = new PhotoWallAdapter(this,UriTreeMap,recyclerView,4,this);
         recyclerView.setAdapter(photoWallAdapter);
-        ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(getApplicationContext(), photoWallAdapter);
+
+        ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(photoWallAdapter);
+        scaleViewTouchListener.setMinRow(2);
+        scaleViewTouchListener.setMaxRow(6);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

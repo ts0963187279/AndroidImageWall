@@ -11,6 +11,11 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
 android {
 	compileSdkVersion 24
 	buildToolsVersion '25.0.2'

@@ -15,6 +15,11 @@ buildscript {
 repositories {
 	jcenter()
 }
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
 apply plugin: 'com.android.library'
 android {
 	compileSdkVersion 25
@@ -29,10 +34,10 @@ android {
 }
 
 dependencies {
-	compile "com.android.support:appcompat-v7:25.+"
-	compile "com.android.support:support-v4:25.+"
-	compile "com.android.support:recyclerview-v7:25.+"
-    compile 'com.android.support:gridlayout-v7:25.+'
+	compile 'com.android.support:appcompat-v7:25.+'
+	compile 'com.android.support:support-v4:25.+'
+	compile 'com.android.support:recyclerview-v7:25.+'
+	compile 'com.android.support:gridlayout-v7:25.+'
+	compile 'com.facebook.fresco:fresco:1.4.0'
 	compile project(':stickyheadergrid')
-	compile project(':fresco-master')
 }

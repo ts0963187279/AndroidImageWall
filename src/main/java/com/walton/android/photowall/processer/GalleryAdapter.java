@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.io.File;
 import java.util.List;
 
@@ -54,10 +56,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return ImageUriList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageView FullScreenImg;
+        private SimpleDraweeView FullScreenImg;
         public ViewHolder(View view){
             super(view);
-            FullScreenImg = (ImageView)view.findViewById(R.id.FullScreenImg);
+            FullScreenImg = (SimpleDraweeView) view.findViewById(R.id.FullScreenImg);
         }
     }
 }
