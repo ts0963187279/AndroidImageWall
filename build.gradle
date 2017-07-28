@@ -15,7 +15,6 @@ buildscript {
 repositories {
 	jcenter()
 }
-
 apply plugin: 'com.android.library'
 android {
 	compileSdkVersion 25
@@ -35,4 +34,5 @@ dependencies {
 	compile "com.android.support:recyclerview-v7:25.+"
     compile 'com.android.support:gridlayout-v7:25.+'
 	compile project(':stickyheadergrid')
+	compile project(':fresco-master')
 }

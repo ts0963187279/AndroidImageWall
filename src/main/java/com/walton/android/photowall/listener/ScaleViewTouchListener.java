@@ -30,9 +30,6 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
         this.context = context;
         this.adapter = adapter;
     }
-    public void setTitlePosition(int[] TitlePosition){
-        this.TitlePosition = TitlePosition;
-    }
     private float Spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
         double y = motionEvent.getY(0) - motionEvent.getY(1);

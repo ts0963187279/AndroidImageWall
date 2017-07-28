@@ -2,6 +2,7 @@ package com.walton.android.photowall.processer;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,11 +48,11 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private int row = 0;
     private boolean[] headerCheck;
     private int[] headerCheckCounter;
-    private AdapterCallBack adapterCallBack;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap, RecyclerView recyclerView, int row, AdapterCallBack adapterCallBack){
+    private AppCompatActivity appCompatActivity;
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap, RecyclerView recyclerView, int row, AppCompatActivity appCompatActivity){
         this.recyclerView = recyclerView;
+        this.appCompatActivity = appCompatActivity;
         this.context = context;
-        this.adapterCallBack = adapterCallBack;
         this.UriTreeMap =UriTreeMap;
         this.row = row;
         headerCheck = new boolean[UriTreeMap.size()];
@@ -134,7 +135,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         shareImage.StartShare();
     }
     public void TitleOnChange(String title){
-        adapterCallBack.titleOnChange(title);
+        appCompatActivity.setTitle(title);
         notifyDataSetChanged();
     }
     public void setSelectModData(boolean selectMod,int CheckCount,boolean isCheck[][]){
@@ -175,6 +176,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
         final MyHeaderViewHolder holder = (MyHeaderViewHolder) viewHolder;
         final String label = header[section];
+        if(CheckCount == 0) {
+            selectMod = false;
+        }else
+            selectMod = true;
         ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
         exitSelectModListener.setSelectMod(selectMod);
         recyclerView.setOnKeyListener(exitSelectModListener);
@@ -183,17 +188,17 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         holder.header.setText(label);
         holder.selectAll.setChecked(false);
         holder.header.setOnClickListener(null);
-        adapterCallBack.hideActionBar(!selectMod);
         if(selectMod){
+            appCompatActivity.getSupportActionBar().show();
             holder.header.setPadding(100,15,15,15);
             if(headerCheck[section])
                 holder.selectAll.setChecked(true);
             holder.selectAll.setVisibility(View.VISIBLE);
-
             SelectAllOnClickListener selectAllOnClickListener = new SelectAllOnClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectAllOnClickListener.setSection(section);
             holder.header.setOnClickListener(selectAllOnClickListener);
         }else{
+            appCompatActivity.getSupportActionBar().hide();
             holder.selectAll.setVisibility(View.GONE);
             SelectAllLongClickListener selectAllLongClickListener = new SelectAllLongClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectAllLongClickListener.setSection(section);
@@ -208,16 +213,17 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         holder.select.setChecked(false);
         holder.img.setPadding(0,0,0,0);
         holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        adapterCallBack.hideActionBar(!selectMod);
         if(CheckCount == 0) {
             selectMod = false;
             holder.select.setVisibility(View.GONE);
-        }
+        }else
+            selectMod = true;
         ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
         exitSelectModListener.setSelectMod(selectMod);
         recyclerView.setOnKeyListener(exitSelectModListener);
         if(selectMod){
-            adapterCallBack.titleOnChange("已選取 "+String.valueOf(CheckCount));
+            appCompatActivity.getSupportActionBar().show();
+            appCompatActivity.setTitle("已選取 "+String.valueOf(CheckCount));
             if(isCheck[section][position]){
                 holder.select.setChecked(true);
                 holder.img.setPadding(30,30,30,30);
@@ -227,6 +233,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             selectModItemOnClickListener.setSectionPosition(section,position);
             holder.img.setOnClickListener(selectModItemOnClickListener);
         }else{
+            appCompatActivity.getSupportActionBar().hide();
             int count = 0;
             for(int i =0;i<section;i++)
                 count += itemCount[i];

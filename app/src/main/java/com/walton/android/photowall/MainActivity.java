@@ -9,17 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
-import com.walton.android.photowall.processer.AdapterCallBack;
-import com.walton.android.photowall.processer.CreateUriTreeMap;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
-import com.walton.android.photowall.processer.SearchFile;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
 
-public class MainActivity extends AppCompatActivity implements AdapterCallBack{
+public class MainActivity extends AppCompatActivity{
     RecyclerView recyclerView;
     PhotoWallAdapter photoWallAdapter;
     @Override
@@ -30,12 +26,14 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
         recyclerView.setHasFixedSize(true);
-
-        SearchFile searchFile = new SearchFile();
+        /*SearchFile searchFile = new SearchFile();
         File[] ImageList = searchFile.getImageList();
         CreateUriTreeMap createUriTreeMap = new CreateUriTreeMap(ImageList);
-        TreeMap<String,ArrayList<Uri>> UriTreeMap = createUriTreeMap.getTreeMap();
-
+        TreeMap<String,ArrayList<Uri>> UriTreeMap = createUriTreeMap.getTreeMap();*/
+        TreeMap<String,ArrayList<Uri>> UriTreeMap = new TreeMap<String,ArrayList<Uri>>();
+        ArrayList<Uri> test = new ArrayList<Uri>();
+        test.add(Uri.parse("http://hunsci.com/data/out/221/904361.jpeg"));
+        UriTreeMap.put("test",test);
 
         photoWallAdapter = new PhotoWallAdapter(this,UriTreeMap,recyclerView,4,this);
         recyclerView.setAdapter(photoWallAdapter);
@@ -47,17 +45,6 @@ public class MainActivity extends AppCompatActivity implements AdapterCallBack{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_menu,menu);
         return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public void titleOnChange(String title) {
-        getSupportActionBar().setTitle(title);
-    }
-    @Override
-    public void hideActionBar(boolean hide) {
-        if(hide)
-            getSupportActionBar().hide();
-        else
-            getSupportActionBar().show();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
