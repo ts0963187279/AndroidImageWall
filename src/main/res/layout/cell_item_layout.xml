@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#FFF"
     android:padding="1dp">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:background="#FFF"
             />
         <CheckBox
             android:id="@+id/select"

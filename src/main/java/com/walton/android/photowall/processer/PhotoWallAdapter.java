@@ -170,13 +170,13 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_header_layout,parent,false);
-        return new MyHeaderViewHolder(view);
+        return new MyHeaderViewHolder(view,context);
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
         Fresco.initialize(context);
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_item_layout,parent,false);
-        return new MyItemViewHolder(view);
+        return new MyItemViewHolder(view,context);
     }
     @Override
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
@@ -189,39 +189,38 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
         exitSelectModListener.setSelectMod(selectMod);
         recyclerView.setOnKeyListener(exitSelectModListener);
-        holder.header.setPadding(20,20,20,20);
-        holder.selectAll.setVisibility(View.GONE);
-        holder.header.setText(label);
-        holder.selectAll.setChecked(false);
-        holder.header.setOnClickListener(null);
+        holder.photoWallCellHeaderView.setPadding(20,20,20,20);
+        holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
+        holder.photoWallCellHeaderView.setText(label);
+        holder.photoWallCellHeaderView.setChecked(false);
+        holder.photoWallCellHeaderView.setOnClickListener(null);
         if(selectMod){
             appCompatActivity.getSupportActionBar().show();
-            holder.header.setPadding(100,15,15,15);
+            holder.photoWallCellHeaderView.setPadding(100,15,15,15);
             if(headerCheck[section])
-                holder.selectAll.setChecked(true);
-            holder.selectAll.setVisibility(View.VISIBLE);
+                holder.photoWallCellHeaderView.setChecked(true);
+            holder.photoWallCellHeaderView.setCheckBoxVisible(View.VISIBLE);
             SelectAllOnClickListener selectAllOnClickListener = new SelectAllOnClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectAllOnClickListener.setSection(section);
-            holder.header.setOnClickListener(selectAllOnClickListener);
+            holder.photoWallCellHeaderView.setOnClickListener(selectAllOnClickListener);
         }else{
             appCompatActivity.getSupportActionBar().hide();
-            holder.selectAll.setVisibility(View.GONE);
+            holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
             SelectAllLongClickListener selectAllLongClickListener = new SelectAllLongClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectAllLongClickListener.setSection(section);
-            holder.header.setOnLongClickListener(selectAllLongClickListener);
+            holder.photoWallCellHeaderView.setOnLongClickListener(selectAllLongClickListener);
         }
     }
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final MyItemViewHolder holder = (MyItemViewHolder) viewHolder;
         final Uri uri = URIS.get(section).get(position);
-        holder.frescoImg.setImageURI(uri);
-        holder.select.setChecked(false);
-        holder.frescoImg.setPadding(0,0,0,0);
-        holder.frescoImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        holder.photoWallCellView.setImage(uri);
+        holder.photoWallCellView.setChecked(false);
+        holder.photoWallCellView.setPadding(0,0,0,0);
         if(CheckCount == 0) {
             selectMod = false;
-            holder.select.setVisibility(View.GONE);
+            holder.photoWallCellView.setCheckBoxVisible(View.GONE);
         }else
             selectMod = true;
         ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
@@ -231,42 +230,23 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             appCompatActivity.getSupportActionBar().show();
             appCompatActivity.setTitle("已選取 "+String.valueOf(CheckCount));
             if(isCheck[section][position]){
-                holder.select.setChecked(true);
-                holder.frescoImg.setPadding(30,30,30,30);
+                holder.photoWallCellView.setChecked(true);
+                holder.photoWallCellView.setPadding(30,30,30,30);
             }
-            holder.select.setVisibility(View.VISIBLE);
+            holder.photoWallCellView.setCheckBoxVisible(View.VISIBLE);
             SelectModItemOnClickListener selectModItemOnClickListener = new SelectModItemOnClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter)recyclerView.getAdapter());
             selectModItemOnClickListener.setSectionPosition(section,position);
-            holder.frescoImg.setOnClickListener(selectModItemOnClickListener);
+            holder.photoWallCellView.setOnClickListener(selectModItemOnClickListener);
         }else{
             appCompatActivity.getSupportActionBar().hide();
             int count = 0;
             for(int i =0;i<section;i++)
                 count += itemCount[i];
             goToImageGalleryOnClickListener goToImageGalleryOnClickListener = new goToImageGalleryOnClickListener(context, UriList,count + position);
-            holder.frescoImg.setOnClickListener(goToImageGalleryOnClickListener);
+            holder.photoWallCellView.setOnClickListener(goToImageGalleryOnClickListener);
             SelectModItemLongClickListener selectModItemLongClickListener = new SelectModItemLongClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter) recyclerView.getAdapter());
             selectModItemLongClickListener.setSectionPosition(section,position);
-            holder.frescoImg.setOnLongClickListener(selectModItemLongClickListener);
+            holder.photoWallCellView.setOnLongClickListener(selectModItemLongClickListener);
         }
     }
-    public static class MyHeaderViewHolder extends HeaderViewHolder{
-        TextView header;
-        CheckBox selectAll;
-        MyHeaderViewHolder(View itemView){
-            super(itemView);
-            header = (TextView) itemView.findViewById(R.id.header);
-            selectAll = (CheckBox) itemView.findViewById(R.id.select_all);
-        }
-    }
-    public static class MyItemViewHolder extends ItemViewHolder{
-        SimpleDraweeView frescoImg;
-        CheckBox select;
-        public MyItemViewHolder(View itemView) {
-            super(itemView);
-            select = (CheckBox) itemView.findViewById(R.id.select);
-            frescoImg = (SimpleDraweeView) itemView.findViewById(R.id.frescoImg);
-        }
-    }
-
 }

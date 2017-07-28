@@ -3,6 +3,7 @@ package com.walton.android.photowall.view;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,14 +16,13 @@ import start.android.library.R;
  * Created by waltonmis on 2017/7/28.
  */
 
-public class PhotoWallCellView extends LinearLayout{
+public class PhotoWallCellItemView extends LinearLayout{
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
-    public PhotoWallCellView(Context context) {
+    public PhotoWallCellItemView(Context context, View itemView) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.cell_item_layout,this);
-        showImage = (SimpleDraweeView)findViewById(R.id.frescoImg);
-        selectChecker = (CheckBox)findViewById(R.id.select);
+        showImage = (SimpleDraweeView)itemView.findViewById(R.id.frescoImg);
+        selectChecker = (CheckBox)itemView.findViewById(R.id.select);
     }
     public void setImage(Uri uri){
         showImage.setImageURI(uri);
@@ -31,8 +31,11 @@ public class PhotoWallCellView extends LinearLayout{
     public void setPadding(int left,int top,int right,int bottom){
         showImage.setPadding(left,top,right,bottom);
     }
-    public void setCheck(boolean isCheck){
+    public void setChecked(boolean isCheck){
         selectChecker.setChecked(isCheck);
+    }
+    public void setCheckBoxVisible(int isVisible){
+        selectChecker.setVisibility(isVisible);
     }
     public void setOnClickListener(OnClickListener onClickListener){
         showImage.setOnClickListener(onClickListener);

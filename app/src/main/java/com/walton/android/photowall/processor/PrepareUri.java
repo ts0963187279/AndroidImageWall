@@ -27,6 +27,11 @@ public class PrepareUri {
         UriList2.add(Uri.parse("https://isocpp.org/files/img/cpp_logo.png"));
         UriList2.add(Uri.parse("https://lh3.googleusercontent.com/3vGlLyKkKC46G1qqiqyKf0jeOyUtiZk5NxOxeuRJOfP4aZzCob9kabZX252mUmVAHA=w300"));
         UriList2.add(Uri.parse("https://www.visualstudio.com/wp-content/uploads/2016/05/C-4-562x309-OPx.png"));
+        UriList2.add(Uri.parse("https://daks2k3a4ib2z.cloudfront.net/590b02ac96d6fe11f3fcef0c/59143a1e01301267ba12abb3_cpp-1.jpg"));
+        UriList2.add(Uri.parse("https://lh3.ggpht.com/yB8HooRMBe9S23VT2rW127FOGirb9X5_ErczTGMgfJ_3SfyjCj-w5yekHCPNmSxri-kf=w300"));
+        UriList2.add(Uri.parse("https://www.embarcadero.com/images/free-tools/CCompiler_Logo_256x256px.png"));
+        UriList2.add(Uri.parse("http://errorpage.b0.upaiyun.com/jbcdn2-403"));
+        UriList2.add(Uri.parse("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg"));
         ImageUriTreeMap.put("C++",UriList2);
 
         UriList3 = new ArrayList<>();
@@ -34,6 +39,12 @@ public class PrepareUri {
         UriList3.add(Uri.parse("https://udemy-images.udemy.com/course/750x422/567828_67d0.jpg"));
         UriList3.add(Uri.parse("http://eli.thegreenplace.net/images/2010/07/smilingpython.gif"));
         UriList3.add(Uri.parse("https://www.sololearn.com/Icons/Courses/1073.png"));
+        UriList3.add(Uri.parse("http://unanth.com/blog/wp-content/uploads/2016/12/python.png"));
+        UriList3.add(Uri.parse("https://www.filepicker.io/api/file/kM33ZaTQWSrb1QLymej9"));
+        UriList3.add(Uri.parse("https://ee5817f8e2e9a2e34042-3365e7f0719651e5b8d0979bce83c558.ssl.cf5.rackcdn.com/python.png"));
+        UriList3.add(Uri.parse("https://realpython.com/learn/python-first-steps/images/pythonlogo.jpg"));
+        UriList3.add(Uri.parse("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png"));
+
         ImageUriTreeMap.put("Python",UriList3);
     }
     public TreeMap<String, ArrayList<Uri>> getPrepareUri(){

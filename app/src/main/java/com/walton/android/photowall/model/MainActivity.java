@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
 
         ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener(photoWallAdapter);
         scaleViewTouchListener.setMinRow(2);
-        scaleViewTouchListener.setMaxRow(6);
+        scaleViewTouchListener.setMaxRow(10);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
 
 
