@@ -13,8 +13,8 @@ import start.android.library.R;
  */
 
 public class PhotoWallCellHeaderView extends LinearLayout{
-    private TextView header;
-    private CheckBox selectAllChecker;
+    public TextView header;
+    public CheckBox selectAllChecker;
     public PhotoWallCellHeaderView(Context context,View HeaderView) {
         super(context);
         header = (TextView)HeaderView.findViewById(R.id.header);
@@ -32,10 +32,10 @@ public class PhotoWallCellHeaderView extends LinearLayout{
     public void setCheckBoxVisible(int isVisible){
         selectAllChecker.setVisibility(isVisible);
     }
-    public void setOnClickListener(OnClickListener onClickListener){
+    public void setOnClickListener(View.OnClickListener onClickListener){
         header.setOnClickListener(onClickListener);
     }
-    public void setOnLongClickListener(OnLongClickListener onLongClickListener){
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener){
         header.setOnLongClickListener(onLongClickListener);
     }
 }

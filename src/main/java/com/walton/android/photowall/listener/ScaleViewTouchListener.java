@@ -1,9 +1,7 @@
 package com.walton.android.photowall.listener;
 
-import android.content.Context;
 import android.graphics.PointF;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
@@ -23,18 +21,18 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
     private int State = STATE_NONE;
     private float NewScale;
     private int row;
-    private int maxrow = 4;
+    private int maxRow = 4;
     private int minRow = 2;
     private PhotoWallAdapter adapter;
     public ScaleViewTouchListener(PhotoWallAdapter adapter){
         this.adapter = adapter;
         this.row = adapter.getRow();
     }
+    public void setMaxRow(int maxRow){
+        this.maxRow = maxRow;
+    }
     public void setMinRow(int minRow){
         this.minRow = minRow;
-    }
-    public void setMaxRow(int maxRow){
-        this.maxrow = maxRow;
     }
     private float Spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
@@ -82,7 +80,6 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
             Distance = Spacing(motionEvent);
             if(Distance > 20f){
                 MidPoint(SecondPointF,motionEvent);
-                Log.d("Intercept","STATE_ZOOM");
                 State = STATE_ZOOM;
             }
             isPointerDown = false;
@@ -92,18 +89,14 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                 if(State == STATE_ZOOM) {
                     MyAnimation myAnimation = new MyAnimation(1f, 1f, 1f, 1f);
                     myAnimation.StartScaleAnimation(recyclerView);
-                    if (row < maxrow) {
-                        if(NewScale < 1 && row < maxrow)
-                            row++;
-                        if(NewScale < 0.5 && row < maxrow)
-                            row++;
-                    }
-                    if (row > 2) {
-                        if(NewScale > 1 && row > minRow)
-                            row--;
-                        if(NewScale > 1.8 && row > minRow)
-                            row--;
-                    }
+                    if(NewScale < 1 && row < maxRow)
+                        row++;
+                    if(NewScale < 0.5 && row < maxRow)
+                        row++;
+                    if(NewScale > 1 && row > minRow)
+                        row--;
+                    if(NewScale > 1.8 && row > minRow)
+                        row--;
                     int scrollPosition = adapter.getScrollPosition();
                     StickyHeaderGridLayoutManager layoutManager = new StickyHeaderGridLayoutManager(row);
                     recyclerView.setLayoutManager(layoutManager);
@@ -113,7 +106,6 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.d("Intercept","Action_move onTouch");
                 if(State == STATE_ZOOM){
                     float NewDistance = Spacing(motionEvent);
                     if(NewDistance > 20f){
@@ -125,9 +117,7 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                 break;
         }
     }
-
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
     }
 }

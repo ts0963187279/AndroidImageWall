@@ -7,11 +7,6 @@
         android:title="分享"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_add"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="新增"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_delete"
         android:icon="@android:drawable/ic_menu_delete"
         android:title="刪除"

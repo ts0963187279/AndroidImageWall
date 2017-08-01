@@ -30,6 +30,7 @@ public class ShowImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
+        getSupportActionBar().hide();
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.showimage_layout);
@@ -42,7 +43,7 @@ public class ShowImageActivity extends AppCompatActivity {
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         layoutManager.setAutoMeasureEnabled(false);
         recyclerView.setLayoutManager(layoutManager);
-        GalleryAdapter galleryAdapter = new GalleryAdapter(this,ImageUriList,layoutManager);
+        GalleryAdapter galleryAdapter = new GalleryAdapter(this,ImageUriList);
         recyclerView.setAdapter(galleryAdapter);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);

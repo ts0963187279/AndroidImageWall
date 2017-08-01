@@ -7,20 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.ExitSelectModListener;
 import com.walton.android.photowall.listener.SelectAllLongClickListener;
 import com.walton.android.photowall.listener.SelectAllOnClickListener;
 import com.walton.android.photowall.listener.SelectModItemLongClickListener;
 import com.walton.android.photowall.listener.SelectModItemOnClickListener;
 import com.walton.android.photowall.listener.goToImageGalleryOnClickListener;
+import com.walton.android.photowall.view.PhotoWallCellHeaderView;
+import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -124,9 +122,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         selectMod = false;
         notifyDataSetChanged();
     }
-    public void addItem(){
-
-    }
     public void shareItem(){
         ArrayList<Uri> ImageUriList = new ArrayList<>();
         for(int i=0;i< URIS.size();i++){
@@ -170,17 +165,17 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_header_layout,parent,false);
-        return new MyHeaderViewHolder(view,context);
+        return new PhotoWallHeaderViewHolder(view,new PhotoWallCellHeaderView(context,view));
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
         Fresco.initialize(context);
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_item_layout,parent,false);
-        return new MyItemViewHolder(view,context);
+        return new PhotoWallItemViewHolder(view,new PhotoWallCellItemView(context,view));
     }
     @Override
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
-        final MyHeaderViewHolder holder = (MyHeaderViewHolder) viewHolder;
+        final PhotoWallHeaderViewHolder holder = (PhotoWallHeaderViewHolder) viewHolder;
         final String label = header[section];
         if(CheckCount == 0) {
             selectMod = false;
@@ -213,7 +208,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
-        final MyItemViewHolder holder = (MyItemViewHolder) viewHolder;
+        final PhotoWallItemViewHolder holder = (PhotoWallItemViewHolder) viewHolder;
         final Uri uri = URIS.get(section).get(position);
         holder.photoWallCellView.setImage(uri);
         holder.photoWallCellView.setChecked(false);

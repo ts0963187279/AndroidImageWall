@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.walton.android.photowall.view.GalleryCellItemView;
 
 import java.io.File;
 import java.util.List;
@@ -24,42 +25,24 @@ import start.android.library.R;
  * Created by waltonmis on 2017/7/19.
  */
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
+public class GalleryAdapter extends RecyclerView.Adapter<GalleryItemViewHolder>{
     private Context context;
     private List<Uri> ImageUriList;
-    private RecyclerView.LayoutManager layoutManager;
-    public GalleryAdapter(Context context , List<Uri> ImageUriList, RecyclerView.LayoutManager layoutManager){
+    public GalleryAdapter(Context context , List<Uri> ImageUriList){
         this.context = context;
         this.ImageUriList = ImageUriList;
-        this.layoutManager = layoutManager;
-    }
-    public void UpdataView(RecyclerView.LayoutManager layoutManager, int position){
-        this.layoutManager = layoutManager;
-        this.layoutManager.scrollToPosition(position);
-    }
-    public int getPosition(){
-        return((LinearLayoutManager)layoutManager).findFirstVisibleItemPosition();
     }
     @Override
-    public GalleryAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public GalleryItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.gallery_layout,viewGroup,false);
-        return new ViewHolder(view);
+        return new GalleryItemViewHolder(view,context);
     }
-
     @Override
-    public void onBindViewHolder(final GalleryAdapter.ViewHolder viewHolder, final int position) {
-        viewHolder.FullScreenImg.setImageURI(ImageUriList.get(position));
+    public void onBindViewHolder(final GalleryItemViewHolder viewHolder, final int position) {
+        viewHolder.galleryCellItemView.setImageURI(ImageUriList.get(position));
     }
-
     @Override
     public int getItemCount() {
         return ImageUriList.size();
-    }
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private SimpleDraweeView FullScreenImg;
-        public ViewHolder(View view){
-            super(view);
-            FullScreenImg = (SimpleDraweeView) view.findViewById(R.id.FullScreenImg);
-        }
     }
 }

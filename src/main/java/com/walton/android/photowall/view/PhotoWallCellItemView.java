@@ -2,7 +2,6 @@ package com.walton.android.photowall.view;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -17,8 +16,8 @@ import start.android.library.R;
  */
 
 public class PhotoWallCellItemView extends LinearLayout{
-    private SimpleDraweeView showImage;
-    private CheckBox selectChecker;
+    public SimpleDraweeView showImage;
+    public CheckBox selectChecker;
     public PhotoWallCellItemView(Context context, View itemView) {
         super(context);
         showImage = (SimpleDraweeView)itemView.findViewById(R.id.frescoImg);
@@ -37,10 +36,10 @@ public class PhotoWallCellItemView extends LinearLayout{
     public void setCheckBoxVisible(int isVisible){
         selectChecker.setVisibility(isVisible);
     }
-    public void setOnClickListener(OnClickListener onClickListener){
+    public void setOnClickListener(View.OnClickListener onClickListener){
         showImage.setOnClickListener(onClickListener);
     }
-    public void setOnLongClickListener(OnLongClickListener onLongClickListener){
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener){
         showImage.setOnLongClickListener(onLongClickListener);
     }
 }
