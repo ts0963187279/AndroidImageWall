@@ -20,14 +20,9 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
     private static final int STATE_ZOOM =1;
     private int State = STATE_NONE;
     private float NewScale;
-    private int row;
+    private int row = 4;
     private int maxRow = 4;
     private int minRow = 2;
-    private PhotoWallAdapter adapter;
-    public ScaleViewTouchListener(PhotoWallAdapter adapter){
-        this.adapter = adapter;
-        this.row = adapter.getRow();
-    }
     public void setMaxRow(int maxRow){
         this.maxRow = maxRow;
     }
@@ -97,11 +92,8 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                         row--;
                     if(NewScale > 1.8 && row > minRow)
                         row--;
-                    int scrollPosition = adapter.getScrollPosition();
                     StickyHeaderGridLayoutManager layoutManager = new StickyHeaderGridLayoutManager(row);
                     recyclerView.setLayoutManager(layoutManager);
-                    adapter.UpdateView(row,scrollPosition,layoutManager);
-                    adapter.notifyDataSetChanged();
                     State = STATE_NONE;
                 }
                 break;

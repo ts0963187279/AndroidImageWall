@@ -1,7 +1,6 @@
 package com.walton.android.photowall.processer;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 

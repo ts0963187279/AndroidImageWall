@@ -9,20 +9,16 @@ import com.walton.android.photowall.processer.PhotoWallAdapter;
  * Created by waltonmis on 2017/7/27.
  */
 
-public class ExitSelectModListener implements View.OnKeyListener{
+public class ExitSelectModOnKeyListener implements View.OnKeyListener{
     private PhotoWallAdapter adapter;
-    private boolean selectMod;
-    public ExitSelectModListener(PhotoWallAdapter adapter){
+    public ExitSelectModOnKeyListener(PhotoWallAdapter adapter){
         this.adapter = adapter;
-    }
-    public void setSelectMod(boolean selectMod){
-        this.selectMod = selectMod;
     }
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if(selectMod) {
+        if(adapter.isSelectMod()) {
             if (keyCode == event.KEYCODE_BACK) {
-                adapter.ViewMode();
+                adapter.ViewMod();
                 return true;
             }
         }

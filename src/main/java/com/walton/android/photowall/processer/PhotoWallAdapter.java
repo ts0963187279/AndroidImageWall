@@ -3,20 +3,23 @@ package com.walton.android.photowall.processer;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.walton.android.photowall.listener.ExitSelectModListener;
-import com.walton.android.photowall.listener.SelectAllLongClickListener;
-import com.walton.android.photowall.listener.SelectAllOnClickListener;
+import com.walton.android.photowall.listener.DefaultSelectModHeaderLongClickListener;
+import com.walton.android.photowall.listener.DefaultSelectModHeaderOnClickListener;
+import com.walton.android.photowall.listener.DefaultSelectModItemLongClickListener;
+import com.walton.android.photowall.listener.DefaultSelectModItemOnClickListener;
+import com.walton.android.photowall.listener.SelectModHeaderLongClickListener;
+import com.walton.android.photowall.listener.SelectModHeaderOnClickListener;
 import com.walton.android.photowall.listener.SelectModItemLongClickListener;
 import com.walton.android.photowall.listener.SelectModItemOnClickListener;
-import com.walton.android.photowall.listener.goToImageGalleryOnClickListener;
+import com.walton.android.photowall.model.SelectModData;
+import com.walton.android.photowall.view.DefaultPhotoWallCellHeaderView;
+import com.walton.android.photowall.view.DefaultPhotoWallCellItemView;
 import com.walton.android.photowall.view.PhotoWallCellHeaderView;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
@@ -25,8 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
-import start.android.library.R;
-
 /**
  * Created by waltonmis on 2017/7/21.
  */
@@ -34,83 +35,75 @@ import start.android.library.R;
 public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private ArrayList<Uri> UriList;
     private Context context;
-    private RecyclerView recyclerView;
-    private StickyHeaderGridLayoutManager layoutManager;
-    private Object Key;
-    private Iterator iterator;
     private String[] header;
     private int itemCount[];
-    private TreeMap<String,ArrayList<Uri>> UriTreeMap;
-    private boolean[][] isCheck;
     private List<List<Uri>> URIS;
-    private int CheckCount = 0;
-    private boolean selectMod = false;
-    private int row = 0;
-    private boolean[] headerCheck;
-    private int[] headerCheckCounter;
+    private PhotoWallCellItemView photoWallCellItemView;
+    private PhotoWallCellHeaderView photoWallCellHeaderView;
+    private SelectModHeaderLongClickListener selectModHeaderLongClickListener;
+    private SelectModHeaderOnClickListener selectModHeaderOnClickListener;
+    private SelectModItemOnClickListener selectModItemOnClickListener;
+    private SelectModItemLongClickListener selectModItemLongClickListener;
     private AppCompatActivity appCompatActivity;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap, RecyclerView recyclerView, int row, AppCompatActivity appCompatActivity){
-        this.recyclerView = recyclerView;
+    private View.OnClickListener goToImageGalleryOnClickListener;
+    private SelectModData selectModData;
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap,AppCompatActivity appCompatActivity){
+        Fresco.initialize(context);
+        Iterator iterator;
+        Object Key;
         this.appCompatActivity = appCompatActivity;
         this.context = context;
-        this.UriTreeMap =UriTreeMap;
-        this.row = row;
-        headerCheck = new boolean[UriTreeMap.size()];
+        photoWallCellItemView = new DefaultPhotoWallCellItemView(context);
+        photoWallCellHeaderView = new DefaultPhotoWallCellHeaderView(context);
+        selectModHeaderLongClickListener = new DefaultSelectModHeaderLongClickListener();
+        selectModHeaderOnClickListener = new DefaultSelectModHeaderOnClickListener();
+        selectModItemLongClickListener = new DefaultSelectModItemLongClickListener();
+        selectModItemOnClickListener = new DefaultSelectModItemOnClickListener();
+        selectModData = new SelectModData(UriTreeMap,this);
+        setHasStableIds(false);
+        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         UriList = new ArrayList<>();
         iterator = UriTreeMap.descendingKeySet().iterator();
         URIS = new ArrayList<>(UriTreeMap.size());
         itemCount = new int[UriTreeMap.size()];
-        isCheck = new boolean[UriTreeMap.size()][];
         header = new String[UriTreeMap.size()];
         for(int i =0;i<UriTreeMap.size();i++){
             itemCount[i] = 0;
-            headerCheck[i] = false;
             Key = iterator.next();
             header[i] = Key.toString();
             List<Uri> URI = new ArrayList<>(UriTreeMap.get(Key).size());
-            isCheck[i] = new boolean[UriTreeMap.get(Key).size()];
             for(int j =0;j< UriTreeMap.get(Key).size();j++){
                 Uri uri = UriTreeMap.get(Key).get(j);
                 itemCount[i]++;
-                isCheck[i][j] = false;
                 URI.add(uri);
                 UriList.add(uri);
             }
             URIS.add(URI);
         }
-        layoutManager = new StickyHeaderGridLayoutManager(row);
-        recyclerView.setLayoutManager(layoutManager);
     }
-    public int getRow(){
-        return row;
+    public boolean isSelectMod(){
+        return selectModData.isSelectMod();
     }
-    public void ViewMode(){
-        for (int i = 0; i < isCheck.length; i++) {
-            headerCheck[i] = false;
-            for (int j = 0; j < isCheck[i].length; j++) {
-                isCheck[i][j] = false;
-            }
-        }
-        CheckCount = 0;
-        selectMod = false;
-        notifyDataSetChanged();
+    public void ViewMod(){
+        selectModData.clearChecked();
+        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
     }
     public void removeItem(){
-        for(int i=0;i< isCheck.length;i++){
+        for(int i=0;i< selectModData.getSectionCount();i++){
             int deleteCount = 0;
-            headerCheck[i] = false;
-            for(int j=0;j< isCheck[i].length;j++){
-                if(isCheck[i][j]) {
+            selectModData.setHeaderCheck(i,false);
+            for(int j=0;j< selectModData.getPositionCount(i);j++){
+                if(selectModData.isCheck(i,j)) {
                     URIS.get(i).remove(j-deleteCount);
-                    CheckCount--;
-                    isCheck[i][j] = false;
+                    selectModData.decCheckCount();
+                    selectModData.setIsCheck(i,j,false);
                     notifySectionItemRemoved(i,j - deleteCount);
                     deleteCount++;
                 }
             }
         }
         UriList.clear();
-        itemCount = new int[UriTreeMap.size()];
+        itemCount = new int[getSectionCount()];
         for(int i =0;i<URIS.size();i++) {
             itemCount[i] = 0;
             for (int j = 0; j < URIS.get(i).size(); j++) {
@@ -119,14 +112,14 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
                 UriList.add(uri);
             }
         }
-        selectMod = false;
-        notifyDataSetChanged();
+        selectModData.setIsSelectMod(false);
+        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
     }
     public void shareItem(){
         ArrayList<Uri> ImageUriList = new ArrayList<>();
         for(int i=0;i< URIS.size();i++){
             for(int j=0;j< URIS.get(i).size();j++){
-                if(isCheck[i][j]) {
+                if(selectModData.isCheck(i,j)) {
                     ImageUriList.add(URIS.get(i).get(j));
                 }
             }
@@ -136,23 +129,28 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     public void TitleOnChange(String title){
         appCompatActivity.setTitle(title);
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
     }
-    public void setSelectModData(boolean selectMod,int CheckCount,boolean isCheck[][]){
-        this.selectMod = selectMod;
-        this.CheckCount = CheckCount;
-        this.isCheck = isCheck;
+    public void setItemView(PhotoWallCellItemView photoWallCellItemView){
+        this.photoWallCellItemView = photoWallCellItemView;
     }
-    public void setHeaderCheck(boolean[] headerCheck){
-        this.headerCheck = headerCheck;
+    public void setHeaderView(PhotoWallCellHeaderView photoWallCellHeaderView){
+        this.photoWallCellHeaderView = photoWallCellHeaderView;
     }
-    public int getScrollPosition(){
-        return layoutManager.getLastVisibleItemPosition();
+    public void setGoToImageGalleryClickListener(View.OnClickListener goToImageGalleryOnClickListener){
+        this.goToImageGalleryOnClickListener = goToImageGalleryOnClickListener;
     }
-    public void UpdateView(int row,int ScrollPosition,StickyHeaderGridLayoutManager layoutManager){
-        this.row = row;
-        this.layoutManager = layoutManager;
-        this.layoutManager.scrollToPosition(ScrollPosition/row);
+    public void setSelectModHeaderLongClickListener(SelectModHeaderLongClickListener selectModHeaderLongClickListener){
+        this.selectModHeaderLongClickListener = selectModHeaderLongClickListener;
+    }
+    public void setSelectModHeaderOnClickListener(SelectModHeaderOnClickListener selectModHeaderOnClickListener){
+        this.selectModHeaderOnClickListener = selectModHeaderOnClickListener;
+    }
+    public void setSelectModItemLongClickListener(SelectModItemLongClickListener selectModItemLongClickListener){
+        this.selectModItemLongClickListener = selectModItemLongClickListener;
+    }
+    public void setSelectModItemOnClickListener(SelectModItemOnClickListener selectModItemOnClickListener){
+        this.selectModItemOnClickListener = selectModItemOnClickListener;
     }
     @Override
     public int getSectionCount() {
@@ -164,83 +162,78 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_header_layout,parent,false);
-        return new PhotoWallHeaderViewHolder(view,new PhotoWallCellHeaderView(context,view));
+        final PhotoWallCellHeaderView view = photoWallCellHeaderView.getNew();
+        return new PhotoWallHeaderViewHolder(view);
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
-        Fresco.initialize(context);
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_item_layout,parent,false);
-        return new PhotoWallItemViewHolder(view,new PhotoWallCellItemView(context,view));
+        final PhotoWallCellItemView view = photoWallCellItemView.getNew();
+        return new PhotoWallItemViewHolder(view);
     }
     @Override
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
         final PhotoWallHeaderViewHolder holder = (PhotoWallHeaderViewHolder) viewHolder;
         final String label = header[section];
-        if(CheckCount == 0) {
-            selectMod = false;
+        if(selectModData.getCheckCount() == 0) {
+            selectModData.setIsSelectMod(false);
         }else
-            selectMod = true;
-        ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
-        exitSelectModListener.setSelectMod(selectMod);
-        recyclerView.setOnKeyListener(exitSelectModListener);
+            selectModData.setIsSelectMod(true);
+        holder.photoWallCellHeaderView.setSection(section);
         holder.photoWallCellHeaderView.setPadding(20,20,20,20);
         holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
         holder.photoWallCellHeaderView.setText(label);
-        holder.photoWallCellHeaderView.setChecked(false);
         holder.photoWallCellHeaderView.setOnClickListener(null);
-        if(selectMod){
+        if(selectModData.isSelectMod()){
             appCompatActivity.getSupportActionBar().show();
-            holder.photoWallCellHeaderView.setPadding(100,15,15,15);
-            if(headerCheck[section])
+            if(selectModData.getHeaderCheck(section))
                 holder.photoWallCellHeaderView.setChecked(true);
+            else
+                holder.photoWallCellHeaderView.setChecked(false);
             holder.photoWallCellHeaderView.setCheckBoxVisible(View.VISIBLE);
-            SelectAllOnClickListener selectAllOnClickListener = new SelectAllOnClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
-            selectAllOnClickListener.setSection(section);
-            holder.photoWallCellHeaderView.setOnClickListener(selectAllOnClickListener);
+            selectModHeaderOnClickListener.setSelectModData(selectModData);
+            holder.photoWallCellHeaderView.setOnClickListener(selectModHeaderOnClickListener);
         }else{
             appCompatActivity.getSupportActionBar().hide();
             holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
-            SelectAllLongClickListener selectAllLongClickListener = new SelectAllLongClickListener(selectMod,CheckCount,isCheck,headerCheck,(PhotoWallAdapter)recyclerView.getAdapter());
-            selectAllLongClickListener.setSection(section);
-            holder.photoWallCellHeaderView.setOnLongClickListener(selectAllLongClickListener);
+            selectModHeaderLongClickListener.setSelectModData(selectModData);
+            holder.photoWallCellHeaderView.setOnLongClickListener(selectModHeaderLongClickListener);
         }
     }
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final PhotoWallItemViewHolder holder = (PhotoWallItemViewHolder) viewHolder;
         final Uri uri = URIS.get(section).get(position);
+        int count = 0;
+        for(int i =0;i<section;i++)
+            count += itemCount[i];
+        holder.photoWallCellView.setPosition(position);
+        holder.photoWallCellView.setAbsolutePosition(count + position);
+        holder.photoWallCellView.setSection(section);
+        holder.photoWallCellView.setUriList(UriList);
         holder.photoWallCellView.setImage(uri);
-        holder.photoWallCellView.setChecked(false);
         holder.photoWallCellView.setPadding(0,0,0,0);
-        if(CheckCount == 0) {
-            selectMod = false;
+        if(selectModData.getCheckCount() == 0) {
+            selectModData.setIsSelectMod(false);
             holder.photoWallCellView.setCheckBoxVisible(View.GONE);
         }else
-            selectMod = true;
-        ExitSelectModListener exitSelectModListener = new ExitSelectModListener((PhotoWallAdapter)recyclerView.getAdapter());
-        exitSelectModListener.setSelectMod(selectMod);
-        recyclerView.setOnKeyListener(exitSelectModListener);
-        if(selectMod){
+            selectModData.setIsSelectMod(true);
+        if(selectModData.isSelectMod()){
             appCompatActivity.getSupportActionBar().show();
-            appCompatActivity.setTitle("已選取 "+String.valueOf(CheckCount));
-            if(isCheck[section][position]){
+            appCompatActivity.setTitle("已選取 "+String.valueOf(selectModData.getCheckCount()));
+            if(selectModData.isCheck(section,position)){
                 holder.photoWallCellView.setChecked(true);
                 holder.photoWallCellView.setPadding(30,30,30,30);
+            }else{
+                holder.photoWallCellView.setChecked(false);
+                holder.photoWallCellView.setPadding(0,0,0,0);
             }
             holder.photoWallCellView.setCheckBoxVisible(View.VISIBLE);
-            SelectModItemOnClickListener selectModItemOnClickListener = new SelectModItemOnClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter)recyclerView.getAdapter());
-            selectModItemOnClickListener.setSectionPosition(section,position);
+            selectModItemOnClickListener.setSelectModData(selectModData);
             holder.photoWallCellView.setOnClickListener(selectModItemOnClickListener);
         }else{
             appCompatActivity.getSupportActionBar().hide();
-            int count = 0;
-            for(int i =0;i<section;i++)
-                count += itemCount[i];
-            goToImageGalleryOnClickListener goToImageGalleryOnClickListener = new goToImageGalleryOnClickListener(context, UriList,count + position);
             holder.photoWallCellView.setOnClickListener(goToImageGalleryOnClickListener);
-            SelectModItemLongClickListener selectModItemLongClickListener = new SelectModItemLongClickListener(selectMod,CheckCount,isCheck,(PhotoWallAdapter) recyclerView.getAdapter());
-            selectModItemLongClickListener.setSectionPosition(section,position);
+            selectModItemLongClickListener.setSelectModData(selectModData);
             holder.photoWallCellView.setOnLongClickListener(selectModItemLongClickListener);
         }
     }

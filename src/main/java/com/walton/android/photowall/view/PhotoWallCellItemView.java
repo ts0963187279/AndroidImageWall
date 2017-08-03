@@ -2,44 +2,47 @@ package com.walton.android.photowall.view;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import start.android.library.R;
+import java.util.ArrayList;
 
 /**
  * Created by waltonmis on 2017/7/28.
  */
 
-public class PhotoWallCellItemView extends LinearLayout{
-    public SimpleDraweeView showImage;
-    public CheckBox selectChecker;
-    public PhotoWallCellItemView(Context context, View itemView) {
+public abstract class PhotoWallCellItemView extends RelativeLayout{
+    private ArrayList<Uri> uriList;
+    private int position;
+    private int absolutePosition;
+    private int section;
+    public PhotoWallCellItemView(Context context) {
         super(context);
-        showImage = (SimpleDraweeView)itemView.findViewById(R.id.frescoImg);
-        selectChecker = (CheckBox)itemView.findViewById(R.id.select);
     }
-    public void setImage(Uri uri){
-        showImage.setImageURI(uri);
-        showImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    public abstract PhotoWallCellItemView getNew();
+    public void setAbsolutePosition(int absolutePosition){
+        this.absolutePosition = absolutePosition;
     }
-    public void setPadding(int left,int top,int right,int bottom){
-        showImage.setPadding(left,top,right,bottom);
+    public void setPosition(int position){this.position = position;
     }
-    public void setChecked(boolean isCheck){
-        selectChecker.setChecked(isCheck);
+    public void setSection(int section){ this.section = section; }
+    public int getSection(){
+        return section;
     }
-    public void setCheckBoxVisible(int isVisible){
-        selectChecker.setVisibility(isVisible);
+    public int getAbsolutePosition(){
+        return absolutePosition;
     }
-    public void setOnClickListener(View.OnClickListener onClickListener){
-        showImage.setOnClickListener(onClickListener);
+    public int getPosition(){
+        return position;
     }
-    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener){
-        showImage.setOnLongClickListener(onLongClickListener);
+    public void setUriList(ArrayList<Uri> uriList){
+        this.uriList = uriList;
     }
+    public ArrayList<Uri> getUriList(){
+        return uriList;
+    }
+    public abstract boolean isChecked();
+    public abstract void setImage(Uri uri);
+    public abstract void setPadding(int left, int top, int right, int bottom);
+    public abstract void setChecked(boolean isCheck);
+    public abstract void setCheckBoxVisible(int isVisible);
 }

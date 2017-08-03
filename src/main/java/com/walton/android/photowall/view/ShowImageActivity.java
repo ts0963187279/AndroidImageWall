@@ -37,7 +37,6 @@ public class ShowImageActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         ImageUriList = intent.getParcelableArrayListExtra(GET_EXTRA_IMAGELIST_KEY);
         position = intent.getIntExtra(GET_EXTRA_POSITION_KEY,1);
-
         recyclerView = (RecyclerView)findViewById(R.id.Gallery);
         recyclerView.setHasFixedSize(true);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);

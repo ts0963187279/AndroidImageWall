@@ -11,8 +11,8 @@ import com.walton.android.photowall.view.PhotoWallCellHeaderView;
 
 public class PhotoWallHeaderViewHolder extends StickyHeaderGridAdapter.HeaderViewHolder{
     PhotoWallCellHeaderView photoWallCellHeaderView;
-    public PhotoWallHeaderViewHolder(View itemView, PhotoWallCellHeaderView photoWallCellHeaderView) {
+    public PhotoWallHeaderViewHolder(PhotoWallCellHeaderView itemView) {
         super(itemView);
-        this.photoWallCellHeaderView = photoWallCellHeaderView;
+        this.photoWallCellHeaderView = itemView;
     }
 }

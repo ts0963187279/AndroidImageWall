@@ -2,40 +2,32 @@ package com.walton.android.photowall.listener;
 
 import android.view.View;
 
-import com.walton.android.photowall.processer.PhotoWallAdapter;
+import com.walton.android.photowall.model.SelectModData;
+import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 /**
  * Created by waltonmis on 2017/7/27.
  */
 
-public class SelectModItemOnClickListener implements View.OnClickListener {
-    private boolean selectMod;
-    private boolean isCheck[][];
-    private int CheckCount;
-    private int position;
-    private int section;
-    private PhotoWallAdapter adapter;
-    public SelectModItemOnClickListener(boolean selectMod, int CheckCount, boolean[][] isCheck, PhotoWallAdapter adapter){
-        this.selectMod = selectMod;
-        this.CheckCount = CheckCount;
-        this.isCheck = isCheck;
-        this.adapter = adapter;
+public abstract class SelectModItemOnClickListener implements View.OnClickListener {
+    private SelectModData selectModData;
+    public void setSelectModData(SelectModData selectModData){
+        this.selectModData = selectModData;
     }
-    public void setSectionPosition(int section , int position){
-        this.section = section;
-        this.position = position;
+    public void SelectModDataOnChange(View v){
+        PhotoWallCellItemView view = (PhotoWallCellItemView)v;
+        int section = view.getSection();
+        int position = view.getPosition();
+        view.setChecked(!view.isChecked());
+        if(view.isChecked()) {
+            selectModData.setIsCheck(section,position,true);
+            selectModData.incCheckCount();
+        }else{
+            selectModData.setIsCheck(section,position,false);
+            selectModData.decCheckCount();
+        }
+        selectModData.adapterNotify();
     }
     @Override
-    public void onClick(View v) {
-        if(!isCheck[section][position]) {
-            selectMod = true;
-            isCheck[section][position] = true;
-            CheckCount++;
-        }else{
-            isCheck[section][position] = false;
-            CheckCount--;
-        }
-        adapter.TitleOnChange("已選取 "+String.valueOf(CheckCount));
-        adapter.setSelectModData(selectMod,CheckCount,isCheck);
-    }
+    public abstract void onClick(View v);
 }
