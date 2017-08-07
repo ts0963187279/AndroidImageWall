@@ -14,10 +14,8 @@ import android.widget.TextView;
 public class DefaultPhotoWallCellHeaderView extends PhotoWallCellHeaderView{
     private TextView header;
     private CheckBox selectAllChecker;
-    private Context context;
     public DefaultPhotoWallCellHeaderView(Context context) {
         super(context);
-        this.context = context;
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header = new TextView(context);
         header.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -29,9 +27,6 @@ public class DefaultPhotoWallCellHeaderView extends PhotoWallCellHeaderView{
     }
 
     @Override
-    public PhotoWallCellHeaderView getNew() {
-        return new DefaultPhotoWallCellHeaderView(context);
-    }
 
     public void setText(String title){
         header.setText(title);
@@ -42,6 +37,7 @@ public class DefaultPhotoWallCellHeaderView extends PhotoWallCellHeaderView{
     public void setChecked(boolean isCheck){
         selectAllChecker.setChecked(isCheck);
     }
+    public boolean isChecked(){return selectAllChecker.isChecked();}
     public void setCheckBoxVisible(int isVisible){
         selectAllChecker.setVisibility(isVisible);
     }

@@ -2,6 +2,7 @@ package com.walton.android.photowall.listener;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.view.View;
 
 import com.walton.android.photowall.view.PhotoWallCellItemView;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/7/13.
  */
 
-public class GoToImageGalleryOnClickListener implements View.OnClickListener{
+public class DefaultImageGalleryOnClickListener implements View.OnClickListener{
     private String PUT_EXTRA_IMAGELIST_KEY = "ImageListPath";
     private String PUT_EXTRA_POSITION_KEY = "position";
     @Override

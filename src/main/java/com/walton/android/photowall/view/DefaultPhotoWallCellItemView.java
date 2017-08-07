@@ -5,12 +5,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.walton.android.photowall.listener.GoToImageGalleryOnClickListener;
-
-import java.util.ArrayList;
+import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
 
 /**
  * Created by waltonmis on 2017/7/28.
@@ -19,10 +16,8 @@ import java.util.ArrayList;
 public  class DefaultPhotoWallCellItemView extends PhotoWallCellItemView{
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
-    private Context context;
     public DefaultPhotoWallCellItemView(Context context) {
         super(context);
-        this.context = context;
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         showImage = new SimpleDraweeView(context);
         selectChecker = new CheckBox(context);
@@ -31,16 +26,13 @@ public  class DefaultPhotoWallCellItemView extends PhotoWallCellItemView{
         selectChecker.setClickable(false);
         selectChecker.setVisibility(GONE);
         setBackgroundColor(Color.GREEN);
-        GoToImageGalleryOnClickListener goToImageGalleryOnClickListener = new GoToImageGalleryOnClickListener();
-        setOnClickListener(goToImageGalleryOnClickListener);
+        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
+        setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);
         addView(selectChecker);
     }
 
     @Override
-    public PhotoWallCellItemView getNew() {
-        return new DefaultPhotoWallCellItemView(context);
-    }
     public  boolean isChecked(){
         return selectChecker.isChecked();
     }

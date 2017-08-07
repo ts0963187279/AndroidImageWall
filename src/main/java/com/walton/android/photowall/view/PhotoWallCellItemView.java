@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.widget.RelativeLayout;
 
+import com.walton.android.photowall.model.SelectModData;
+
 import java.util.ArrayList;
 
 /**
@@ -15,16 +17,22 @@ public abstract class PhotoWallCellItemView extends RelativeLayout{
     private int position;
     private int absolutePosition;
     private int section;
+    private SelectModData selectModData;
     public PhotoWallCellItemView(Context context) {
         super(context);
     }
-    public abstract PhotoWallCellItemView getNew();
     public void setAbsolutePosition(int absolutePosition){
         this.absolutePosition = absolutePosition;
     }
     public void setPosition(int position){this.position = position;
     }
     public void setSection(int section){ this.section = section; }
+    public void setSelectModData(SelectModData selectModData){
+        this.selectModData = selectModData;
+    }
+    public SelectModData getSelectModData(){
+        return selectModData;
+    }
     public int getSection(){
         return section;
     }

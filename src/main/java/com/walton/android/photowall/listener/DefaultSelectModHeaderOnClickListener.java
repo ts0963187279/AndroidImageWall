@@ -10,9 +10,12 @@ import com.walton.android.photowall.view.PhotoWallCellHeaderView;
  * Created by waltonmis on 2017/7/27.
  */
 
-public class DefaultSelectModHeaderOnClickListener extends SelectModHeaderOnClickListener{
+public class DefaultSelectModHeaderOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
-        super.SelectModDataOnChange(v);
+        PhotoWallCellHeaderView view = (PhotoWallCellHeaderView)v;
+        int section = view.getSection();
+        view.getSelectModData().isHeaderChecked(section,!view.isChecked());
+        view.getSelectModData().adapterNotify();
     }
 }

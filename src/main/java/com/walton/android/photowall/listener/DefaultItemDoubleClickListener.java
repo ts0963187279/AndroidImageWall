@@ -2,17 +2,15 @@ package com.walton.android.photowall.listener;
 
 import android.view.View;
 
-import com.walton.android.photowall.model.SelectModData;
-import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 /**
- * Created by waltonmis on 2017/7/26.
+ * Created by waltonmis on 2017/8/4.
  */
 
-public class DefaultSelectModItemLongClickListener implements View.OnLongClickListener {
+public class DefaultItemDoubleClickListener implements View.OnClickListener{
     @Override
-    public boolean onLongClick(View v) {
+    public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
         int section = view.getSection();
         int position = view.getPosition();
@@ -21,6 +19,5 @@ public class DefaultSelectModItemLongClickListener implements View.OnLongClickLi
         view.getSelectModData().setIsCheck(section,position,true);
         view.getSelectModData().incCheckCount();
         view.getSelectModData().adapterNotify();
-        return true;
     }
 }

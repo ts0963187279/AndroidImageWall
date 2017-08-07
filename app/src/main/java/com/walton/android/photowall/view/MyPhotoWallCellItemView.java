@@ -3,18 +3,12 @@ package com.walton.android.photowall.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.walton.android.photowall.listener.GoToImageGalleryOnClickListener;
-import com.walton.android.photowall.processer.PhotoWallHeaderViewHolder;
-
-import java.util.ArrayList;
+import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
 
 /**
  * Created by waltonmis on 2017/7/28.
@@ -23,10 +17,8 @@ import java.util.ArrayList;
 public class MyPhotoWallCellItemView extends PhotoWallCellItemView{
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
-    private Context context;
     public MyPhotoWallCellItemView(Context context) {
         super(context);
-        this.context = context;
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         showImage = new SimpleDraweeView(context);
         selectChecker = new CheckBox(context);
@@ -35,16 +27,13 @@ public class MyPhotoWallCellItemView extends PhotoWallCellItemView{
         selectChecker.setClickable(false);
         selectChecker.setVisibility(GONE);
         setBackgroundColor(Color.BLACK);
-        GoToImageGalleryOnClickListener goToImageGalleryOnClickListener = new GoToImageGalleryOnClickListener();
-        setOnClickListener(goToImageGalleryOnClickListener);
+        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
+        setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);
         addView(selectChecker);
     }
 
     @Override
-    public PhotoWallCellItemView getNew() {
-        return new MyPhotoWallCellItemView(context);
-    }
     public boolean isChecked(){
         return selectChecker.isChecked();
     }

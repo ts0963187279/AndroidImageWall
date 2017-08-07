@@ -2,7 +2,6 @@ package com.walton.android.photowall.model;
 
 import android.net.Uri;
 
-import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 
 import java.util.ArrayList;
@@ -43,6 +42,25 @@ public class SelectModData {
         }
         checkCount = 0;
         isSelectMod = false;
+    }
+    public void isHeaderChecked(int section,boolean Checked){
+        if(Checked){
+            for(int i=0;i<getPositionCount(section);i++){
+                if(!isCheck(section,i))
+                    incCheckCount();
+                setIsCheck(section,i,true);
+            }
+            setHeaderCheck(section,true);
+            setIsSelectMod(true);
+        }else{
+            for(int i=0;i<getPositionCount(section);i++){
+                if(isCheck(section,i))
+                    decCheckCount();
+                setIsCheck(section,i,false);
+            }
+            setHeaderCheck(section,false);
+            setIsSelectMod(false);
+        }
     }
     public boolean isCheck(int section,int position){
         return isCheck[section][position];

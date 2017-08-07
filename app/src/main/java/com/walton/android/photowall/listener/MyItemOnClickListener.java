@@ -2,25 +2,27 @@ package com.walton.android.photowall.listener;
 
 import android.view.View;
 
-import com.walton.android.photowall.model.SelectModData;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 /**
- * Created by waltonmis on 2017/7/26.
+ * Created by waltonmis on 2017/7/27.
  */
 
-public class DefaultSelectModItemLongClickListener implements View.OnLongClickListener {
+public class MyItemOnClickListener implements View.OnClickListener {
     @Override
-    public boolean onLongClick(View v) {
+    public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
         int section = view.getSection();
         int position = view.getPosition();
-        view.setVisibility(View.VISIBLE);
         view.setChecked(!view.isChecked());
-        view.getSelectModData().setIsCheck(section,position,true);
-        view.getSelectModData().incCheckCount();
+        if(view.isChecked()) {
+            view.getSelectModData().setIsCheck(section,position,true);
+            view.getSelectModData().incCheckCount();
+        }else{
+            view.getSelectModData().setIsCheck(section,position,false);
+            view.getSelectModData().decCheckCount();
+        }
         view.getSelectModData().adapterNotify();
-        return true;
     }
 }
