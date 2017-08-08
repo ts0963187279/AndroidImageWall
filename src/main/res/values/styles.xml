@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppsTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#FF9800</item>
         <item name="colorPrimaryDark">#FF9800</item>
         <item name="colorAccent">@color/colorAccent</item>

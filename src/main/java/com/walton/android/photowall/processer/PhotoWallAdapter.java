@@ -21,8 +21,6 @@ import com.walton.android.photowall.listener.ItemViewOnTouchListener;
 import com.walton.android.photowall.model.SelectModData;
 import com.walton.android.photowall.view.DefaultPhotoWallCellHeaderView;
 import com.walton.android.photowall.view.DefaultPhotoWallCellItemView;
-import com.walton.android.photowall.view.OnSelectHeaderView;
-import com.walton.android.photowall.view.OnSelectItemView;
 import com.walton.android.photowall.view.PhotoWallCellHeaderView;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
@@ -105,7 +103,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     public void removeItem(){
         for(int i=0;i< selectModData.getSectionCount();i++){
             int deleteCount = 0;
-            selectModData.headerOnChecked(i,false);
+            selectModData.setHeaderCheck(i,false);
             for(int j=0;j< selectModData.getPositionCount(i);j++){
                 if(selectModData.isItemCheck(i,j)) {
                     try {
@@ -191,11 +189,19 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public int getSectionHeaderViewType(int section){
-        return selectModData.isHeaderCheck(section) ? 1:0;
+        if(selectModData.isHeaderCheck(section) || selectModData.isSectionAllCheck(section,getSectionItemCount(section)))
+            return 2;
+        if(isSelectMod())
+            return 1;
+        return 0;
     }
     @Override
     public int getSectionItemViewType(int section,int position){
-        return selectModData.isItemCheck(section,position) ? 1:0;
+        if(selectModData.isItemCheck(section,position))
+            return 2;
+        if(isSelectMod())
+            return 1;
+        return 0;
     }
     @Override
     public int getSectionCount() {
@@ -207,20 +213,12 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
-        PhotoWallCellHeaderView view;
-        if(headerType == 0)
-            view = (PhotoWallCellHeaderView) headerViewCreator.createView();
-        else
-            view = new OnSelectHeaderView(context);
+        PhotoWallCellHeaderView view = (PhotoWallCellHeaderView) headerViewCreator.createView(headerType);
         return new PhotoWallHeaderViewHolder(view);
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
-        PhotoWallCellItemView view;
-        if(itemType == 0)
-            view = (PhotoWallCellItemView) itemViewCreator.createView();
-        else
-            view = new OnSelectItemView(context);
+        PhotoWallCellItemView view = (PhotoWallCellItemView) itemViewCreator.createView(itemType);
         return new PhotoWallItemViewHolder(view);
     }
     @Override
@@ -238,20 +236,15 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             selectModData.setSelectMod(true);
         holder.photoWallCellHeaderView.setSelectModData(selectModData);
         holder.photoWallCellHeaderView.setSection(section);
-        holder.photoWallCellHeaderView.setPadding(20,20,20,20);
-        holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
         holder.photoWallCellHeaderView.setText(label);
-        holder.photoWallCellHeaderView.setOnClickListener(null);
         if(selectModData.isSelectMod()){
             appCompatActivity.getSupportActionBar().show();
             if(selectModData.isHeaderCheck(section))
                 holder.photoWallCellHeaderView.setChecked(true);
             else
                 holder.photoWallCellHeaderView.setChecked(false);
-            holder.photoWallCellHeaderView.setCheckBoxVisible(View.VISIBLE);
         }else{
             appCompatActivity.getSupportActionBar().hide();
-            holder.photoWallCellHeaderView.setCheckBoxVisible(View.GONE);
         }
         holder.photoWallCellHeaderView.setOnTouchListener(headerViewOnTouchListener);
     }
@@ -267,24 +260,14 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         holder.photoWallCellView.setAbsolutePosition(count + position);
         holder.photoWallCellView.setSection(section);
         holder.photoWallCellView.setUriList(UriList);
-        holder.photoWallCellView.setImage(uri);
-        holder.photoWallCellView.setPadding(0,0,0,0);
+        holder.photoWallCellView.setImageUri(uri);
         if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
-            holder.photoWallCellView.setCheckBoxVisible(View.GONE);
         }else
             selectModData.setSelectMod(true);
         if(selectModData.isSelectMod()){
             appCompatActivity.getSupportActionBar().show();
             appCompatActivity.setTitle("已選取 "+String.valueOf(selectModData.getCheckCount()));
-            if(selectModData.isItemCheck(section,position)){
-                holder.photoWallCellView.setChecked(true);
-                holder.photoWallCellView.setPadding(30,30,30,30);
-            }else{
-                holder.photoWallCellView.setChecked(false);
-                holder.photoWallCellView.setPadding(0,0,0,0);
-            }
-            holder.photoWallCellView.setCheckBoxVisible(View.VISIBLE);
         }else{
             appCompatActivity.getSupportActionBar().hide();
         }

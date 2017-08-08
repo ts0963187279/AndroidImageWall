@@ -44,9 +44,10 @@ public class PrepareUri {
         ImageUriTreeMap.put("Python",UriList3);
 
         ArrayList<Uri> UriList4 = new ArrayList<>();
-        //UriList4.add(Uri.parse("http://travel.chiayi.gov.tw/upload/14/2012051514355672603.jpg"));
+        UriList4.add(Uri.parse("http://www.bomb01.com/upload/news/original/a7ffee577c127e703e667f1f0d3dbb79.jpg"));
         UriList4.add(Uri.parse("http://www.taiwan.net.tw/att/1/big_scenic_spots/pic_3229_24.jpg"));
         UriList4.add(Uri.parse("http://tourism.chcg.gov.tw/upload/17/2016112115184588019.jpg"));
+        UriList4.add(Uri.parse("http://www.v3wall.com/wallpaper/1920_1080/1111/1920_1080_20111117090135772230.jpg"));
         ImageUriTreeMap.put("View",UriList4);
     }
     public TreeMap<String, ArrayList<Uri>> getPrepareUri(){

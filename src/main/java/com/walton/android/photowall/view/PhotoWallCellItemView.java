@@ -48,9 +48,7 @@ public abstract class PhotoWallCellItemView extends RelativeLayout{
     public ArrayList<Uri> getUriList(){
         return uriList;
     }
-    public abstract boolean isChecked();
-    public abstract void setImage(Uri uri);
-    public abstract void setPadding(int left, int top, int right, int bottom);
-    public abstract void setChecked(boolean isCheck);
-    public abstract void setCheckBoxVisible(int isVisible);
+    public boolean isChecked(){return selectModData.isItemCheck(section,position);}
+    public void setChecked(boolean isCheck){selectModData.setItemCheck(section,position,isCheck);}
+    public abstract void setImageUri(Uri uri);
 }

@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity{
         RecyclerViewOnChangeAnimation recyclerViewOnChangeAnimation = new RecyclerViewOnChangeAnimation(recyclerView);
         recyclerViewOnChangeAnimation.setAnimationEnabled(false);
 
-        TreeMap<String,ArrayList<Uri>> UriTreeMap = new PrepareUri().getPrepareUri();
+        TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
 
-        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),UriTreeMap,this);
+        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap,this);
         photoWallAdapter.setItemViewCreator(new MyItemViewCreator(getApplicationContext()));
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
         photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());

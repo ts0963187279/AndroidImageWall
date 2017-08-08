@@ -8,24 +8,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by waltonmis on 2017/7/28.
+ * Created by waltonmis on 2017/8/8.
  */
 
-public class DefaultPhotoWallCellHeaderView extends PhotoWallCellHeaderView{
+public class MyOnSelectHeaderView extends PhotoWallCellHeaderView{
     private TextView header;
     private CheckBox selectAllChecker;
-    public DefaultPhotoWallCellHeaderView(Context context) {
+    public MyOnSelectHeaderView(Context context) {
         super(context);
-        setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header = new TextView(context);
-        header.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        header.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         selectAllChecker = new CheckBox(context);
         selectAllChecker.setClickable(false);
         setBackgroundColor(Color.GRAY);
+        addView(selectAllChecker);
         addView(header);
+        selectAllChecker.setChecked(true);
     }
+
     @Override
-    public void setText(String title){
+    public void setText(String title) {
         header.setText(title);
     }
 }

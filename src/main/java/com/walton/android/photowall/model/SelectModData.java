@@ -107,9 +107,10 @@ public class SelectModData {
         return isCheck[section].length;
     }
     public boolean isSectionAllCheck(int section , int positionCount){
-        if(itemCheckCount[section] == positionCount)
+        if(itemCheckCount[section] == positionCount) {
             return true;
-        else
+        }else {
             return false;
+        }
     }
 }

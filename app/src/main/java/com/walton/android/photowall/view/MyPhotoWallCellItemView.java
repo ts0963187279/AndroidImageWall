@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
@@ -32,22 +31,8 @@ public class MyPhotoWallCellItemView extends PhotoWallCellItemView{
         addView(showImage);
         addView(selectChecker);
     }
-
     @Override
-    public boolean isChecked(){
-        return selectChecker.isChecked();
-    }
-    public void setImage(Uri uri){
+    public void setImageUri(Uri uri) {
         showImage.setImageURI(uri);
-        showImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    }
-    public void setPadding(int left,int top,int right,int bottom){
-        showImage.setPadding(left,top,right,bottom);
-    }
-    public void setChecked(boolean isCheck){
-        selectChecker.setChecked(isCheck);
-    }
-    public void setCheckBoxVisible(int isVisible){
-        selectChecker.setVisibility(isVisible);
     }
 }

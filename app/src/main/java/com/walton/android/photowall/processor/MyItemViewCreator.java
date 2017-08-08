@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 
 import com.walton.android.photowall.processer.ViewCreator;
+import com.walton.android.photowall.view.MyOnSelectItemView;
 import com.walton.android.photowall.view.MyPhotoWallCellItemView;
+import com.walton.android.photowall.view.MyStaySelectionItemView;
 
 /**
  * Created by waltonmis on 2017/8/7.
@@ -16,7 +18,14 @@ public class MyItemViewCreator implements ViewCreator {
         this.context = context;
     }
     @Override
-    public View createView() {
-        return new MyPhotoWallCellItemView(context);
+    public View createView(int status) {
+        switch (status){
+            case 1:
+                return new MyStaySelectionItemView(context);
+            case 2:
+                return new MyOnSelectItemView(context);
+            default:
+                return new MyPhotoWallCellItemView(context);
+        }
     }
 }

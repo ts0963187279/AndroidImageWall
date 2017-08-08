@@ -13,6 +13,7 @@ import com.walton.android.photowall.model.SelectModData;
 public abstract class PhotoWallCellHeaderView extends LinearLayout{
     private int section;
     private SelectModData selectModData;
+    private boolean isCheck = false;
     public PhotoWallCellHeaderView(Context context) {
         super(context);
     }
@@ -28,9 +29,7 @@ public abstract class PhotoWallCellHeaderView extends LinearLayout{
     public SelectModData getSelectModData(){
         return selectModData;
     }
+    public void setChecked(boolean isCheck){selectModData.setHeaderCheck(section,isCheck);}
+    public boolean isChecked(){return selectModData.isHeaderCheck(section);}
     public abstract void setText(String title);
-    public abstract void setPadding(int left, int top, int right, int bottom);
-    public abstract void setChecked(boolean isCheck);
-    public abstract boolean isChecked();
-    public abstract void setCheckBoxVisible(int isVisible);
 }

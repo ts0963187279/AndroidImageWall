@@ -9,5 +9,5 @@ import com.walton.android.photowall.view.PhotoWallCellHeaderView;
  */
 
 public interface ViewCreator {
-    View createView();
+    View createView(int status);
 }
