@@ -2,14 +2,13 @@ package com.walton.android.photowall.listener;
 
 import android.view.View;
 
-import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 /**
  * Created by waltonmis on 2017/7/27.
  */
 
-public class MyItemOnClickListener implements View.OnClickListener {
+public class MyItemSelectModOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
@@ -17,10 +16,10 @@ public class MyItemOnClickListener implements View.OnClickListener {
         int position = view.getPosition();
         view.setChecked(!view.isChecked());
         if(view.isChecked()) {
-            view.getSelectModData().setIsCheck(section,position,true);
+            view.getSelectModData().setItemCheck(section,position,true);
             view.getSelectModData().incCheckCount();
         }else{
-            view.getSelectModData().setIsCheck(section,position,false);
+            view.getSelectModData().setItemCheck(section,position,false);
             view.getSelectModData().decCheckCount();
         }
         view.getSelectModData().adapterNotify();

@@ -15,6 +15,7 @@ import java.util.TreeMap;
 public class SelectModData {
     private boolean[][] isCheck;
     private boolean[] headerCheck;
+    private int[] itemCheckCount;
     private boolean isSelectMod;
     private int checkCount;
     private PhotoWallAdapter photoWallAdapter;
@@ -24,6 +25,7 @@ public class SelectModData {
         Object key;
         isCheck = new boolean[uriTreeMap.size()][];
         headerCheck = new boolean[uriTreeMap.size()];
+        itemCheckCount = new int[uriTreeMap.size()];
         iterator = uriTreeMap.descendingKeySet().iterator();
         for(int i=0;i<uriTreeMap.size();i++) {
             key = iterator.next();
@@ -36,6 +38,7 @@ public class SelectModData {
     public void clearChecked(){
         for(int i=0;i<isCheck.length;i++){
             headerCheck[i] = false;
+            itemCheckCount[i] = 0;
             for(int j=0;j<isCheck[i].length;j++){
                 isCheck[i][j] = false;
             }
@@ -43,35 +46,43 @@ public class SelectModData {
         checkCount = 0;
         isSelectMod = false;
     }
-    public void isHeaderChecked(int section,boolean Checked){
-        if(Checked){
+    public void headerOnChecked(int section,boolean checked){
+        if(checked){
             for(int i=0;i<getPositionCount(section);i++){
-                if(!isCheck(section,i))
+                if(!isItemCheck(section,i)) {
                     incCheckCount();
-                setIsCheck(section,i,true);
+                    itemCheckCount[section]++;
+                }
+                setItemCheck(section,i,true);
             }
-            setHeaderCheck(section,true);
-            setIsSelectMod(true);
+            setHeaderCheck(section,checked);
+            setSelectMod(true);
         }else{
             for(int i=0;i<getPositionCount(section);i++){
-                if(isCheck(section,i))
+                if(isItemCheck(section,i)) {
                     decCheckCount();
-                setIsCheck(section,i,false);
+                    itemCheckCount[section]--;
+                }
+                setItemCheck(section,i,false);
             }
-            setHeaderCheck(section,false);
-            setIsSelectMod(false);
+            setHeaderCheck(section,checked);
+            setSelectMod(false);
         }
     }
-    public boolean isCheck(int section,int position){
+    public void setHeaderCheck(int section,boolean checked){
+        headerCheck[section] = checked;
+    }
+    public boolean isItemCheck(int section,int position){
         return isCheck[section][position];
     }
-    public void setIsCheck(int section,int position,boolean isCheck){
+    public void setItemCheck(int section,int position,boolean isCheck){
+        if(isCheck)
+            itemCheckCount[section]++;
+        else
+            itemCheckCount[section]--;
         this.isCheck[section][position] = isCheck;
     }
-    public void setHeaderCheck(int section,boolean isCheck){
-        this.headerCheck[section] = isCheck;
-    }
-    public boolean getHeaderCheck(int section){
+    public boolean isHeaderCheck(int section){
         return headerCheck[section];
     }
     public void incCheckCount(){
@@ -83,7 +94,7 @@ public class SelectModData {
     public int getCheckCount(){
         return checkCount;
     }
-    public void setIsSelectMod(boolean isSelectMod){
+    public void setSelectMod(boolean isSelectMod){
         this.isSelectMod = isSelectMod;
     }
     public boolean isSelectMod(){
@@ -94,5 +105,11 @@ public class SelectModData {
     }
     public int getPositionCount(int section){
         return isCheck[section].length;
+    }
+    public boolean isSectionAllCheck(int section , int positionCount){
+        if(itemCheckCount[section] == positionCount)
+            return true;
+        else
+            return false;
     }
 }

@@ -10,12 +10,9 @@ import java.util.TreeMap;
 
 public class PrepareUri {
     TreeMap<String,ArrayList<Uri>> ImageUriTreeMap;
-    ArrayList<Uri> UriList1;
-    ArrayList<Uri> UriList2;
-    ArrayList<Uri> UriList3;
     public PrepareUri(){
         ImageUriTreeMap = new TreeMap<>();
-        UriList1 = new ArrayList<>();
+        ArrayList<Uri> UriList1 = new ArrayList<>();
         UriList1.add(Uri.parse("https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png"));
         UriList1.add(Uri.parse("https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F_400x400.png"));
         UriList1.add(Uri.parse("https://www.technotification.com/wp-content/uploads/2016/07/Why-is-Java-the-best-programming-Language.png"));
@@ -23,7 +20,7 @@ public class PrepareUri {
         UriList1.add(Uri.parse("https://java.com/ga/images/jv0h_gojava.jpg"));
         ImageUriTreeMap.put("Java",UriList1);
 
-        UriList2 = new ArrayList<>();
+        ArrayList<Uri> UriList2 = new ArrayList<>();
         UriList2.add(Uri.parse("https://isocpp.org/files/img/cpp_logo.png"));
         UriList2.add(Uri.parse("https://lh3.googleusercontent.com/3vGlLyKkKC46G1qqiqyKf0jeOyUtiZk5NxOxeuRJOfP4aZzCob9kabZX252mUmVAHA=w300"));
         UriList2.add(Uri.parse("https://www.visualstudio.com/wp-content/uploads/2016/05/C-4-562x309-OPx.png"));
@@ -34,7 +31,7 @@ public class PrepareUri {
         UriList2.add(Uri.parse("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg"));
         ImageUriTreeMap.put("C++",UriList2);
 
-        UriList3 = new ArrayList<>();
+        ArrayList<Uri> UriList3 = new ArrayList<>();
         UriList3.add(Uri.parse("https://www.python.org/static/opengraph-icon-200x200.png"));
         UriList3.add(Uri.parse("https://udemy-images.udemy.com/course/750x422/567828_67d0.jpg"));
         UriList3.add(Uri.parse("http://eli.thegreenplace.net/images/2010/07/smilingpython.gif"));
@@ -44,8 +41,13 @@ public class PrepareUri {
         UriList3.add(Uri.parse("https://ee5817f8e2e9a2e34042-3365e7f0719651e5b8d0979bce83c558.ssl.cf5.rackcdn.com/python.png"));
         UriList3.add(Uri.parse("https://realpython.com/learn/python-first-steps/images/pythonlogo.jpg"));
         UriList3.add(Uri.parse("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png"));
-
         ImageUriTreeMap.put("Python",UriList3);
+
+        ArrayList<Uri> UriList4 = new ArrayList<>();
+        //UriList4.add(Uri.parse("http://travel.chiayi.gov.tw/upload/14/2012051514355672603.jpg"));
+        UriList4.add(Uri.parse("http://www.taiwan.net.tw/att/1/big_scenic_spots/pic_3229_24.jpg"));
+        UriList4.add(Uri.parse("http://tourism.chcg.gov.tw/upload/17/2016112115184588019.jpg"));
+        ImageUriTreeMap.put("View",UriList4);
     }
     public TreeMap<String, ArrayList<Uri>> getPrepareUri(){
         return ImageUriTreeMap;

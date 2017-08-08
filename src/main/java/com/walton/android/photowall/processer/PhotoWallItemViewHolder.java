@@ -16,4 +16,5 @@ public class PhotoWallItemViewHolder extends StickyHeaderGridAdapter.ItemViewHol
         super(itemView);
         this.photoWallCellView = itemView;
     }
+    
 }

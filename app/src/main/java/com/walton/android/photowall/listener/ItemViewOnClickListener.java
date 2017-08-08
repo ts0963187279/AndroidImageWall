@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/7/13.
  */
 
-public class ImageGalleryClickListener implements View.OnClickListener{
+public class ItemViewOnClickListener implements View.OnClickListener{
     private String PUT_EXTRA_IMAGELIST_KEY = "ImageListPath";
     private String PUT_EXTRA_POSITION_KEY = "position";
     @Override

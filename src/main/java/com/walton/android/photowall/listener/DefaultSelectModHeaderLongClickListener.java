@@ -15,7 +15,7 @@ public class DefaultSelectModHeaderLongClickListener implements View.OnLongClick
     public boolean onLongClick(View v) {
         PhotoWallCellHeaderView view = (PhotoWallCellHeaderView)v;
         int section = view.getSection();
-        view.getSelectModData().isHeaderChecked(section,!view.isChecked());
+        view.getSelectModData().headerOnChecked(section,true);
         view.getSelectModData().adapterNotify();
         return true;
     }

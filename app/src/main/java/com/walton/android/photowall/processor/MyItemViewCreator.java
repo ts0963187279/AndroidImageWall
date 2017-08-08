@@ -10,7 +10,7 @@ import com.walton.android.photowall.view.MyPhotoWallCellItemView;
  * Created by waltonmis on 2017/8/7.
  */
 
-public class MyItemViewCreator extends ViewCreator {
+public class MyItemViewCreator implements ViewCreator {
     Context context;
     public MyItemViewCreator(Context context){
         this.context = context;

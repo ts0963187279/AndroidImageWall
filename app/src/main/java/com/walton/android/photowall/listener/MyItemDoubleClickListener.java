@@ -16,7 +16,7 @@ public class MyItemDoubleClickListener implements View.OnClickListener{
         int position = view.getPosition();
         view.setVisibility(View.VISIBLE);
         view.setChecked(!view.isChecked());
-        view.getSelectModData().setIsCheck(section,position,true);
+        view.getSelectModData().setItemCheck(section,position,true);
         view.getSelectModData().incCheckCount();
         view.getSelectModData().adapterNotify();
     }

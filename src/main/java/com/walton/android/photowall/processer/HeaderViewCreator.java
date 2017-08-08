@@ -9,7 +9,7 @@ import com.walton.android.photowall.view.DefaultPhotoWallCellHeaderView;
  * Created by waltonmis on 2017/8/4.
  */
 
-public class HeaderViewCreator extends ViewCreator {
+public class HeaderViewCreator implements ViewCreator {
     private Context context;
     public HeaderViewCreator(Context context){
         this.context = context;

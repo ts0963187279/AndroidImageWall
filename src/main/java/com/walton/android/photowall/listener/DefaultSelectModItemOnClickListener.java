@@ -19,10 +19,10 @@ public class DefaultSelectModItemOnClickListener implements View.OnClickListener
         int position = view.getPosition();
         view.setChecked(!view.isChecked());
         if(view.isChecked()) {
-            view.getSelectModData().setIsCheck(section,position,true);
+            view.getSelectModData().setItemCheck(section,position,true);
             view.getSelectModData().incCheckCount();
         }else{
-            view.getSelectModData().setIsCheck(section,position,false);
+            view.getSelectModData().setItemCheck(section,position,false);
             view.getSelectModData().decCheckCount();
         }
         view.getSelectModData().adapterNotify();

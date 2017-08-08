@@ -15,7 +15,7 @@ public class DefaultSelectModHeaderOnClickListener implements View.OnClickListen
     public void onClick(View v) {
         PhotoWallCellHeaderView view = (PhotoWallCellHeaderView)v;
         int section = view.getSection();
-        view.getSelectModData().isHeaderChecked(section,!view.isChecked());
+        view.getSelectModData().headerOnChecked(section,!view.isChecked());
         view.getSelectModData().adapterNotify();
     }
 }
