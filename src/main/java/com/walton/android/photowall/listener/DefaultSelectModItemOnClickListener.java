@@ -15,14 +15,10 @@ public class DefaultSelectModItemOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
-        int section = view.getSection();
-        int position = view.getPosition();
         view.setChecked(!view.isChecked());
         if(view.isChecked()) {
-            view.getSelectModData().setItemCheck(section,position,true);
             view.getSelectModData().incCheckCount();
         }else{
-            view.getSelectModData().setItemCheck(section,position,false);
             view.getSelectModData().decCheckCount();
         }
         view.getSelectModData().adapterNotify();

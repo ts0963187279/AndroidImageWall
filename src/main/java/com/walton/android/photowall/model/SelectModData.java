@@ -26,7 +26,7 @@ public class SelectModData {
         isCheck = new boolean[uriTreeMap.size()][];
         headerCheck = new boolean[uriTreeMap.size()];
         itemCheckCount = new int[uriTreeMap.size()];
-        iterator = uriTreeMap.descendingKeySet().iterator();
+        iterator = uriTreeMap.navigableKeySet().iterator();
         for(int i=0;i<uriTreeMap.size();i++) {
             key = iterator.next();
             isCheck[i] = new boolean[uriTreeMap.get(key).size()];
@@ -81,6 +81,9 @@ public class SelectModData {
         else
             itemCheckCount[section]--;
         this.isCheck[section][position] = isCheck;
+    }
+    public boolean[][] getIsCheck(){
+        return isCheck;
     }
     public boolean isHeaderCheck(int section){
         return headerCheck[section];

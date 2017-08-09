@@ -2,11 +2,10 @@ package com.walton.android.photowall.model;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.R;
@@ -18,12 +17,12 @@ import com.walton.android.photowall.listener.MyHeaderOnClickListener;
 import com.walton.android.photowall.listener.MyItemDoubleClickListener;
 import com.walton.android.photowall.listener.MyItemLongClickListener;
 import com.walton.android.photowall.listener.MyItemSelectModOnClickListener;
+import com.walton.android.photowall.listener.MyOnMenuClickListener;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.processor.MyItemViewCreator;
 import com.walton.android.photowall.processor.PrepareUri;
-import com.walton.android.photowall.processer.RecyclerViewOnChangeAnimation;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -36,14 +35,18 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar viewModToolBar = (Toolbar)findViewById(R.id.viewModToolBar);
+        viewModToolBar.setTitle("PhotoWall");
+        Toolbar selectModToolBar = (Toolbar)findViewById(R.id.selectModToolBar);
+        selectModToolBar.inflateMenu(R.menu.main_activity_menu);
 
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
-        RecyclerViewOnChangeAnimation recyclerViewOnChangeAnimation = new RecyclerViewOnChangeAnimation(recyclerView);
-        recyclerViewOnChangeAnimation.setAnimationEnabled(false);
 
         TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
-
-        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap,this);
+        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap);
+        selectModToolBar.setOnMenuItemClickListener(new MyOnMenuClickListener(photoWallAdapter));
+        photoWallAdapter.setViewModToolBar(viewModToolBar);
+        photoWallAdapter.setSelectModToolBar(selectModToolBar);
         photoWallAdapter.setItemViewCreator(new MyItemViewCreator(getApplicationContext()));
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
         photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());
@@ -61,29 +64,5 @@ public class MainActivity extends AppCompatActivity{
         scaleViewTouchListener.setMaxRow(4);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
 
-
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.action_delete:
-                photoWallAdapter.removeItem();
-                return true;
-            case R.id.action_share:
-                photoWallAdapter.shareItem();
-                return true;
-            case android.R.id.home:
-                photoWallAdapter.ViewMod();
-                photoWallAdapter.notifyDataSetChanged();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

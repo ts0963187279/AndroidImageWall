@@ -13,7 +13,6 @@ import com.walton.android.photowall.model.SelectModData;
 public abstract class PhotoWallCellHeaderView extends LinearLayout{
     private int section;
     private SelectModData selectModData;
-    private boolean isCheck = false;
     public PhotoWallCellHeaderView(Context context) {
         super(context);
     }

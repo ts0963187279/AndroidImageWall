@@ -12,10 +12,7 @@ public class MyItemLongClickListener implements View.OnLongClickListener {
     @Override
     public boolean onLongClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
-        //int section = view.getSection();
-        //int position = view.getPosition();
         view.setChecked(!view.isChecked());
-        //view.getSelectModData().setItemCheck(section,position,true);
         view.getSelectModData().incCheckCount();
         view.getSelectModData().adapterNotify();
         return true;

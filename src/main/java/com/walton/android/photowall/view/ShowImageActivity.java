@@ -30,9 +30,9 @@ public class ShowImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        getSupportActionBar().hide();
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().hide();
+//        getSupportActionBar().setTitle("");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.showimage_layout);
         Intent intent = this.getIntent();
         ImageUriList = intent.getParcelableArrayListExtra(GET_EXTRA_IMAGELIST_KEY);

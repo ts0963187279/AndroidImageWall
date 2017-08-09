@@ -24,7 +24,7 @@ public class DefaultStaySelectionItemView extends PhotoWallCellItemView{
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
-        setBackgroundColor(Color.RED);
+        setBackgroundColor(Color.WHITE);
         addView(showImage);
         addView(selectChecker);
         selectChecker.setChecked(false);

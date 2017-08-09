@@ -21,6 +21,6 @@ public class ShareImage {
         intent.setType("image/*");
     }
     public void StartShare(){
-        context.startActivity(Intent.createChooser(intent,"Image share"));
+        context.startActivity(Intent.createChooser(intent,"Image share").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

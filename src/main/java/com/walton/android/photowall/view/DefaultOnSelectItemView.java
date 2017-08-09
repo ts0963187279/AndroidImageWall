@@ -24,7 +24,7 @@ public class DefaultOnSelectItemView extends PhotoWallCellItemView{
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
-        setBackgroundColor(Color.GREEN);
+        setBackgroundColor(Color.RED);
         DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
         setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);

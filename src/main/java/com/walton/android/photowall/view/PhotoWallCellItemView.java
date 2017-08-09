@@ -30,6 +30,9 @@ public abstract class PhotoWallCellItemView extends RelativeLayout{
     public void setSelectModData(SelectModData selectModData){
         this.selectModData = selectModData;
     }
+    public Uri getUri(){
+        return uriList.get(absolutePosition);
+    }
     public SelectModData getSelectModData(){
         return selectModData;
     }

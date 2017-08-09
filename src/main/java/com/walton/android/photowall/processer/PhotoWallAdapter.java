@@ -3,6 +3,8 @@ package com.walton.android.photowall.processer;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,6 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
+import start.android.library.R;
+
 /**
  * Created by waltonmis on 2017/7/21.
  */
@@ -44,7 +48,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private View.OnClickListener selectModHeaderOnClickListener;
     private View.OnClickListener selectModItemOnClickListener;
     private View.OnLongClickListener selectModItemLongClickListener;
-    private AppCompatActivity appCompatActivity;
     private View.OnClickListener itemViewOnClickListener;
     private View.OnClickListener itemViewOnDoubleClickListener;
     private View.OnClickListener headerViewOnDoubleClickListener;
@@ -54,11 +57,12 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private HeaderViewGestureListener headerViewGestureListener;
     private HeaderViewOnTouchListener headerViewOnTouchListener;
     private ViewCreator itemViewCreator,headerViewCreator;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap,AppCompatActivity appCompatActivity){
+    private Toolbar viewModToolBar;
+    private Toolbar selectModToolBar;
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap){
         Fresco.initialize(context);
         Iterator iterator;
         Object Key;
-        this.appCompatActivity = appCompatActivity;
         this.context = context;
         photoWallCellItemView = new DefaultPhotoWallCellItemView(context);
         photoWallCellHeaderView = new DefaultPhotoWallCellHeaderView(context);
@@ -75,9 +79,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         itemViewCreator = new ItemViewCreator(context);
         headerViewCreator = new HeaderViewCreator(context);
         selectModData = new SelectModData(UriTreeMap,this);
-        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         UriList = new ArrayList<>();
-        iterator = UriTreeMap.descendingKeySet().iterator();
+        iterator = UriTreeMap.navigableKeySet().iterator();
         URIS = new ArrayList<>(UriTreeMap.size());
         header = new String[UriTreeMap.size()];
         for(int i =0;i<UriTreeMap.size();i++){
@@ -96,9 +99,9 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         return selectModData.isSelectMod();
     }
     public void ViewMod(){
-        selectModData.clearChecked();
-        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
-//        notifyDataSetChanged();
+            selectModData.clearChecked();
+            notifyItemRangeChanged(0,UriList.size()+getSectionCount());
+//          notifyDataSetChanged();
     }
     public void removeItem(){
         for(int i=0;i< selectModData.getSectionCount();i++){
@@ -126,8 +129,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             }
         }
         selectModData.setSelectMod(false);
-//        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
+//        notifyDataSetChanged();
     }
     public void shareItem(){
         ArrayList<Uri> ImageUriList = new ArrayList<>();
@@ -142,15 +145,24 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         shareImage.StartShare();
     }
     public void TitleOnChange(String title){
-        appCompatActivity.setTitle(title);
-//        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
-        notifyDataSetChanged();
+        try {
+            selectModToolBar.setTitle(title);
+        }catch (Exception e){}
+            notifyDataSetChanged();
     }
     public void setItemViewCreator(ViewCreator itemViewCreator){
         this.itemViewCreator = itemViewCreator;
     }
     public void setHeaderViewCreator(ViewCreator headerViewCreator){
         this.headerViewCreator = headerViewCreator;
+    }
+    public void setViewModToolBar(Toolbar viewModToolBar){
+        this.viewModToolBar = viewModToolBar;
+    }
+    public void setSelectModToolBar(Toolbar selectModToolBar){
+        this.selectModToolBar = selectModToolBar;
+        selectModToolBar.setTitle("");
+        selectModToolBar.setVisibility(View.GONE);
     }
     public void setItemViewOnClickListener(View.OnClickListener itemOnClickListener){
         this.itemViewOnClickListener = itemOnClickListener;
@@ -225,11 +237,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
         final PhotoWallHeaderViewHolder holder = (PhotoWallHeaderViewHolder) viewHolder;
         final String label = header[section];
-//        if(selectModData.isSectionAllCheck(section,getSectionItemCount(section))){
-//            selectModData.setHeaderCheck(section,true);
-//        }else{
-//            selectModData.setHeaderCheck(section,false);
-//        }
         if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
         }else
@@ -238,13 +245,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         holder.photoWallCellHeaderView.setSection(section);
         holder.photoWallCellHeaderView.setText(label);
         if(selectModData.isSelectMod()){
-            appCompatActivity.getSupportActionBar().show();
             if(selectModData.isHeaderCheck(section))
                 holder.photoWallCellHeaderView.setChecked(true);
             else
                 holder.photoWallCellHeaderView.setChecked(false);
-        }else{
-            appCompatActivity.getSupportActionBar().hide();
         }
         holder.photoWallCellHeaderView.setOnTouchListener(headerViewOnTouchListener);
     }
@@ -266,10 +270,19 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         }else
             selectModData.setSelectMod(true);
         if(selectModData.isSelectMod()){
-            appCompatActivity.getSupportActionBar().show();
-            appCompatActivity.setTitle("已選取 "+String.valueOf(selectModData.getCheckCount()));
+            if(selectModToolBar != null) {
+                viewModToolBar.setVisibility(View.GONE);
+                selectModToolBar.setVisibility(View.VISIBLE);
+            }else if(viewModToolBar != null) {
+                viewModToolBar.setVisibility(View.GONE);
+            }
         }else{
-            appCompatActivity.getSupportActionBar().hide();
+            if(viewModToolBar != null) {
+                selectModToolBar.setVisibility(View.GONE);
+                viewModToolBar.setVisibility(View.VISIBLE);
+            }else if(selectModToolBar != null) {
+                selectModToolBar.setVisibility(View.GONE);
+            }
         }
         holder.photoWallCellView.setOnTouchListener(itemViewOnTouchListener);
     }
