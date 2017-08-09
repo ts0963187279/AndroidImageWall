@@ -13,7 +13,8 @@ import java.util.TreeMap;
  */
 
 public class SelectModData {
-    private boolean[][] isCheck;
+    private ArrayList<ArrayList<Boolean>> isCheck;
+    private ArrayList<Uri> uriList;
     private boolean[] headerCheck;
     private int[] itemCheckCount;
     private boolean isSelectMod;
@@ -23,24 +24,27 @@ public class SelectModData {
         this.photoWallAdapter = photoWallAdapter;
         Iterator iterator;
         Object key;
-        isCheck = new boolean[uriTreeMap.size()][];
+        isCheck = new ArrayList<>(uriTreeMap.size());
         headerCheck = new boolean[uriTreeMap.size()];
         itemCheckCount = new int[uriTreeMap.size()];
         iterator = uriTreeMap.navigableKeySet().iterator();
         for(int i=0;i<uriTreeMap.size();i++) {
             key = iterator.next();
-            isCheck[i] = new boolean[uriTreeMap.get(key).size()];
+            ArrayList<Boolean> tmpCheck = new ArrayList<>(uriTreeMap.get(key).size());
+            for(int j=0;j<uriTreeMap.get(key).size();j++)
+                tmpCheck.add(false);
+            isCheck.add(tmpCheck);
         }
     }
     public void adapterNotify(){
         photoWallAdapter.TitleOnChange("已選取 "+String.valueOf(checkCount));
     }
     public void clearChecked(){
-        for(int i=0;i<isCheck.length;i++){
+        for(int i=0;i<isCheck.size();i++){
             headerCheck[i] = false;
             itemCheckCount[i] = 0;
-            for(int j=0;j<isCheck[i].length;j++){
-                isCheck[i][j] = false;
+            for(int j=0;j<isCheck.get(i).size();j++){
+                isCheck.get(i).set(j,false);
             }
         }
         checkCount = 0;
@@ -73,17 +77,26 @@ public class SelectModData {
         headerCheck[section] = checked;
     }
     public boolean isItemCheck(int section,int position){
-        return isCheck[section][position];
+        return isCheck.get(section).get(position);
     }
     public void setItemCheck(int section,int position,boolean isCheck){
         if(isCheck)
             itemCheckCount[section]++;
         else
             itemCheckCount[section]--;
-        this.isCheck[section][position] = isCheck;
+        this.isCheck.get(section).set(position,isCheck);
     }
-    public boolean[][] getIsCheck(){
+    public ArrayList<ArrayList<Boolean>> getIsCheck(){
         return isCheck;
+    }
+    public void checkRemove(int section,int position){
+        isCheck.get(section).remove(position);
+    }
+    public void setUriList(ArrayList<Uri> uriList){
+        this.uriList = uriList;
+    }
+    public ArrayList<Uri> getUriList(){
+        return uriList;
     }
     public boolean isHeaderCheck(int section){
         return headerCheck[section];
@@ -104,10 +117,10 @@ public class SelectModData {
         return isSelectMod;
     }
     public int getSectionCount(){
-        return isCheck.length;
+        return isCheck.size();
     }
     public int getPositionCount(int section){
-        return isCheck[section].length;
+        return isCheck.get(section).size();
     }
     public boolean isSectionAllCheck(int section , int positionCount){
         if(itemCheckCount[section] == positionCount) {

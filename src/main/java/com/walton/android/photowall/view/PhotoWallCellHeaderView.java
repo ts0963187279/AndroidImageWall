@@ -1,10 +1,13 @@
 package com.walton.android.photowall.view;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.walton.android.photowall.model.SelectModData;
+
+import java.util.ArrayList;
 
 /**
  * Created by waltonmis on 2017/7/28.

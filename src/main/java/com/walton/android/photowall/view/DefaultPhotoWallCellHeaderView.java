@@ -22,6 +22,7 @@ public class DefaultPhotoWallCellHeaderView extends PhotoWallCellHeaderView{
         selectAllChecker = new CheckBox(context);
         selectAllChecker.setClickable(false);
         setBackgroundColor(Color.GRAY);
+        setPadding(20,20,20,20);
         addView(header);
     }
     @Override

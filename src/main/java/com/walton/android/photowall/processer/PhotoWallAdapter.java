@@ -2,9 +2,7 @@ package com.walton.android.photowall.processer;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,17 +29,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
-import start.android.library.R;
-
 /**
  * Created by waltonmis on 2017/7/21.
  */
 
 public class PhotoWallAdapter extends StickyHeaderGridAdapter {
-    private ArrayList<Uri> UriList;
+    private ArrayList<Uri> uriList;
     private Context context;
     private String[] header;
-    private List<List<Uri>> URIS;
+    private List<List<Uri>> uris;
     private PhotoWallCellItemView photoWallCellItemView;
     private PhotoWallCellHeaderView photoWallCellHeaderView;
     private View.OnLongClickListener selectModHeaderLongClickListener;
@@ -79,9 +75,9 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         itemViewCreator = new ItemViewCreator(context);
         headerViewCreator = new HeaderViewCreator(context);
         selectModData = new SelectModData(UriTreeMap,this);
-        UriList = new ArrayList<>();
+        uriList = new ArrayList<>();
         iterator = UriTreeMap.navigableKeySet().iterator();
-        URIS = new ArrayList<>(UriTreeMap.size());
+        uris = new ArrayList<>(UriTreeMap.size());
         header = new String[UriTreeMap.size()];
         for(int i =0;i<UriTreeMap.size();i++){
             Key = iterator.next();
@@ -90,30 +86,32 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             for(int j =0;j< UriTreeMap.get(Key).size();j++){
                 Uri uri = UriTreeMap.get(Key).get(j);
                 URI.add(uri);
-                UriList.add(uri);
+                uriList.add(uri);
             }
-            URIS.add(URI);
+            uris.add(URI);
         }
+        selectModData.setUriList(uriList);
     }
     public boolean isSelectMod(){
         return selectModData.isSelectMod();
     }
     public void ViewMod(){
             selectModData.clearChecked();
-            notifyItemRangeChanged(0,UriList.size()+getSectionCount());
+            notifyItemRangeChanged(0,uriList.size()+getSectionCount());
 //          notifyDataSetChanged();
     }
     public void removeItem(){
-        for(int i=0;i< selectModData.getSectionCount();i++){
+        for(int i=selectModData.getSectionCount()-1;i>=0;i--){
             int deleteCount = 0;
             selectModData.setHeaderCheck(i,false);
-            for(int j=0;j< selectModData.getPositionCount(i);j++){
+            for(int j=selectModData.getPositionCount(i)-1;j>=0;j--){
                 if(selectModData.isItemCheck(i,j)) {
                     try {
-                        URIS.get(i).remove(j - deleteCount);
+                        uris.get(i).remove(j);
                         selectModData.decCheckCount();
                         selectModData.setItemCheck(i, j, false);
-                        notifySectionItemRemoved(i, j - deleteCount);
+                        selectModData.checkRemove(i, j);
+                        notifySectionItemRemoved(i, j);
                         deleteCount++;
                     }catch (Exception e){
                         System.out.println("delete error");
@@ -121,23 +119,23 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
                 }
             }
         }
-        UriList.clear();
-        for(int i =0;i<URIS.size();i++) {
-            for (int j = 0; j < URIS.get(i).size(); j++) {
-                Uri uri = URIS.get(i).get(j);
-                UriList.add(uri);
+        uriList.clear();
+        for(int i =0;i<uris.size();i++) {
+            for (int j = 0; j < uris.get(i).size(); j++) {
+                Uri uri = uris.get(i).get(j);
+                uriList.add(uri);
             }
         }
         selectModData.setSelectMod(false);
-        notifyItemRangeChanged(0,UriList.size()+getSectionCount());
-//        notifyDataSetChanged();
+        notifyItemRangeChanged(0,uriList.size()+getSectionCount());
+        //notifyDataSetChanged();
     }
     public void shareItem(){
         ArrayList<Uri> ImageUriList = new ArrayList<>();
-        for(int i=0;i< URIS.size();i++){
-            for(int j=0;j< URIS.get(i).size();j++){
+        for(int i=0;i< uris.size();i++){
+            for(int j=0;j< uris.get(i).size();j++){
                 if(selectModData.isItemCheck(i,j)) {
-                    ImageUriList.add(URIS.get(i).get(j));
+                    ImageUriList.add(uris.get(i).get(j));
                 }
             }
         }
@@ -217,11 +215,11 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public int getSectionCount() {
-        return URIS.size();
+        return uris.size();
     }
     @Override
     public int getSectionItemCount(int section) {
-        return URIS.get(section).size();
+        return uris.get(section).size();
     }
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
@@ -255,7 +253,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final PhotoWallItemViewHolder holder = (PhotoWallItemViewHolder) viewHolder;
-        final Uri uri = URIS.get(section).get(position);
+        final Uri uri = uris.get(section).get(position);
         int count = 0;
         for(int i =0;i<section;i++)
             count += getSectionItemCount(i);
@@ -263,7 +261,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         holder.photoWallCellView.setPosition(position);
         holder.photoWallCellView.setAbsolutePosition(count + position);
         holder.photoWallCellView.setSection(section);
-        holder.photoWallCellView.setUriList(UriList);
+        holder.photoWallCellView.setUriList(uriList);
         holder.photoWallCellView.setImageUri(uri);
         if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
