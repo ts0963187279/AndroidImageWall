@@ -10,7 +10,7 @@ import android.widget.TextView;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyStaySelectionHeaderView extends PhotoWallCellHeaderView{
+public class MyStaySelectionHeaderView extends HeaderView {
     private TextView header;
     private CheckBox selectAllChecker;
     public MyStaySelectionHeaderView(Context context) {

@@ -13,7 +13,7 @@ import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyOnSelectItemView extends PhotoWallCellItemView {
+public class MyOnSelectItemView extends ItemView {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyOnSelectItemView(Context context){

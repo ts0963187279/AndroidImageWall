@@ -12,7 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyStaySelectionItemView extends PhotoWallCellItemView{
+public class MyStaySelectionItemView extends ItemView {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyStaySelectionItemView(Context context) {

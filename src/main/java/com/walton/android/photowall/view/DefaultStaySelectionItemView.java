@@ -7,13 +7,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
 
 /**
  * Created by waltonmis on 2017/8/8.
  */
 
-public class DefaultStaySelectionItemView extends PhotoWallCellItemView{
+public class DefaultStaySelectionItemView extends ItemView {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public DefaultStaySelectionItemView(Context context) {

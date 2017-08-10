@@ -4,20 +4,20 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.walton.android.photowall.view.PhotoWallCellItemView;
+import com.walton.android.photowall.view.ItemView;
 
 /**
  * Created by waltonmis on 2017/8/4.
  */
 
 public class ItemViewGestureListener extends GestureDetector.SimpleOnGestureListener {
-    PhotoWallCellItemView view;
+    ItemView view;
     View.OnClickListener onDoubleClickListener = new DefaultItemDoubleClickListener();
     View.OnClickListener onClickListener = new DefaultImageGalleryOnClickListener();
     View.OnClickListener selectModOnClickListener = new DefaultSelectModItemOnClickListener();
     View.OnLongClickListener selectModOnLongClickListener = new DefaultSelectModItemLongClickListener();
     public void setView(View view){
-        this.view = (PhotoWallCellItemView)view;
+        this.view = (ItemView)view;
     }
     public void setDoubleOnClickListener(View.OnClickListener onDoubleClickListener){
         this.onDoubleClickListener =onDoubleClickListener;

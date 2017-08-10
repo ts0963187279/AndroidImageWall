@@ -1,11 +1,8 @@
 package com.walton.android.photowall.listener;
 
-import android.net.Uri;
 import android.view.View;
 
-import com.walton.android.photowall.view.PhotoWallCellItemView;
-
-import java.util.ArrayList;
+import com.walton.android.photowall.view.ItemView;
 
 /**
  * Created by waltonmis on 2017/8/4.
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 public class DefaultItemDoubleClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
-        PhotoWallCellItemView view = (PhotoWallCellItemView)v;
+        ItemView view = (ItemView)v;
         view.setChecked(!view.isChecked());
         view.getSelectModData().adapterNotify();
     }

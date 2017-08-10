@@ -13,16 +13,23 @@ import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
  * Created by waltonmis on 2017/7/28.
  */
 
-public  class DefaultPhotoWallCellItemView extends PhotoWallCellItemView{
+public class MyItemView extends ItemView {
     private SimpleDraweeView showImage;
-    public DefaultPhotoWallCellItemView(Context context) {
+    private CheckBox selectChecker;
+    public MyItemView(Context context) {
         super(context);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         showImage = new SimpleDraweeView(context);
+        selectChecker = new CheckBox(context);
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
         showImage.setAdjustViewBounds(true);
-        setBackgroundColor(Color.GREEN);
+        selectChecker.setClickable(false);
+        selectChecker.setVisibility(GONE);
+        setBackgroundColor(Color.BLACK);
+        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
+        setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);
+        addView(selectChecker);
     }
     @Override
     public void setImageUri(Uri uri) {

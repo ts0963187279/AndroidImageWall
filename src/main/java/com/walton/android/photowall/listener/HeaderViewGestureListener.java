@@ -4,20 +4,19 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.walton.android.photowall.view.PhotoWallCellHeaderView;
-import com.walton.android.photowall.view.PhotoWallCellItemView;
+import com.walton.android.photowall.view.HeaderView;
 
 /**
  * Created by waltonmis on 2017/8/4.
  */
 
 public class HeaderViewGestureListener extends GestureDetector.SimpleOnGestureListener {
-    PhotoWallCellHeaderView view;
+    HeaderView view;
     View.OnClickListener onDoubleClickListener = new DefaultHeaderDoubleClickListener();
     View.OnClickListener selectModOnClickListener = new DefaultSelectModHeaderOnClickListener();
     View.OnLongClickListener selectModOnLongClickListener = new DefaultSelectModHeaderLongClickListener();
     public void setView(View view){
-        this.view = (PhotoWallCellHeaderView)view;
+        this.view = (HeaderView)view;
     }
     public void setOnDoubleClickListener(View.OnClickListener onDoubleClickListener){
         this.onDoubleClickListener = onDoubleClickListener;

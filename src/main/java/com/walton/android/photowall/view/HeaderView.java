@@ -13,10 +13,10 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/7/28.
  */
 
-public abstract class PhotoWallCellHeaderView extends LinearLayout{
+public abstract class HeaderView extends LinearLayout{
     private int section;
     private SelectModData selectModData;
-    public PhotoWallCellHeaderView(Context context) {
+    public HeaderView(Context context) {
         super(context);
     }
     public void setSection(int section) {

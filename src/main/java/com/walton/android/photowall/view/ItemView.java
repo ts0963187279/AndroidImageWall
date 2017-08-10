@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/7/28.
  */
 
-public abstract class PhotoWallCellItemView extends RelativeLayout{
+public abstract class ItemView extends RelativeLayout{
     private ArrayList<Uri> uriList;
     private int position;
     private int absolutePosition;
     private int section;
     private SelectModData selectModData;
-    public PhotoWallCellItemView(Context context) {
+    public ItemView(Context context) {
         super(context);
     }
     public void setAbsolutePosition(int absolutePosition){

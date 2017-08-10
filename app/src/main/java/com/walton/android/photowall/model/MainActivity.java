@@ -20,7 +20,6 @@ import com.walton.android.photowall.listener.MySelectModMenuClickListener;
 import com.walton.android.photowall.listener.MyViewModMenuClickListener;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
-import com.walton.android.photowall.processer.RecyclerViewOnChangeAnimation;
 import com.walton.android.photowall.processor.MyArrayListComparator;
 import com.walton.android.photowall.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.processor.MyItemViewCreator;
@@ -47,13 +46,14 @@ public class MainActivity extends AppCompatActivity{
 
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
 
+
         TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
         photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap);
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
         photoWallAdapter.setViewModToolBar(viewModToolBar);
         photoWallAdapter.setSelectModToolBar(selectModToolBar);
-        photoWallAdapter.setItemViewCreator(new MyItemViewCreator(getApplicationContext()));
+        photoWallAdapter.setItemCellViewCreator(new MyItemViewCreator(getApplicationContext()));
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
         photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());
         photoWallAdapter.setSelectModHeaderLongClickListener(new MyHeaderLongClickListener());

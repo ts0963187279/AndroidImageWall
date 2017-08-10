@@ -3,7 +3,7 @@ package com.walton.android.photowall.listener;
 import android.net.Uri;
 import android.view.View;
 
-import com.walton.android.photowall.view.PhotoWallCellHeaderView;
+import com.walton.android.photowall.view.HeaderView;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DefaultHeaderDoubleClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
-        PhotoWallCellHeaderView view = (PhotoWallCellHeaderView)v;
+        HeaderView view = (HeaderView)v;
         int section = view.getSection();
         ArrayList<Uri> uriList = view.getSelectModData().getUriList();
         ArrayList<ArrayList<Boolean>> isCheck = view.getSelectModData().getIsCheck();

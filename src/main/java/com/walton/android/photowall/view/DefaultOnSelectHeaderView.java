@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Created by waltonmis on 2017/8/7.
  */
 
-public class DefaultOnSelectHeaderView extends PhotoWallCellHeaderView{
+public class DefaultOnSelectHeaderView extends HeaderView {
     private TextView header;
     private CheckBox selectAllChecker;
     public DefaultOnSelectHeaderView(Context context) {

@@ -2,10 +2,9 @@ package com.walton.android.photowall.listener;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemClock;
 import android.view.View;
 
-import com.walton.android.photowall.view.PhotoWallCellItemView;
+import com.walton.android.photowall.view.ItemView;
 import com.walton.android.photowall.view.ShowImageActivity;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ItemViewOnClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         ArrayList<Uri> ImageList;
-        PhotoWallCellItemView view = (PhotoWallCellItemView) v;
+        ItemView view = (ItemView) v;
         ImageList = view.getUriList();
         int position = view.getAbsolutePosition();
         Intent intent = new Intent(v.getContext(), ShowImageActivity.class);
