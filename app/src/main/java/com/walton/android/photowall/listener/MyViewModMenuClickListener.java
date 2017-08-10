@@ -7,24 +7,24 @@ import com.walton.android.photowall.R;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 
 /**
- * Created by waltonmis on 2017/8/9.
+ * Created by waltonmis on 2017/8/10.
  */
 
-public class MyOnMenuClickListener implements Toolbar.OnMenuItemClickListener {
-    private PhotoWallAdapter photoWallAdapter;
-    public MyOnMenuClickListener(PhotoWallAdapter photoWallAdapter){
+public class MyViewModMenuClickListener implements Toolbar.OnMenuItemClickListener {
+    PhotoWallAdapter photoWallAdapter;
+    public MyViewModMenuClickListener(PhotoWallAdapter photoWallAdapter){
         this.photoWallAdapter = photoWallAdapter;
     }
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_delete:
-                photoWallAdapter.removeItem();
+            case R.id.sortByHeaderName:
+                photoWallAdapter.sortHeader();
                 return true;
-            case R.id.action_share:
-                photoWallAdapter.shareItem();
+            case R.id.sortByUri:
+                photoWallAdapter.sortArrayList();
                 return true;
-           }
-           return false;
+        }
+        return false;
     }
 }

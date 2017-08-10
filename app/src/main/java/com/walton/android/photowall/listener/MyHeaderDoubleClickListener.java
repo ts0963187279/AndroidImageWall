@@ -24,9 +24,11 @@ public class MyHeaderDoubleClickListener implements View.OnClickListener {
         }
         for (int j = 0; j < isCheck.get(section).size(); j++) {
             if (uriList.get(k++).toString().indexOf(".jpg") != -1) {
-                view.getSelectModData().setItemCheck(section, j, true);
-                view.getSelectModData().incCheckCount();
-            }
+                if(!view.getSelectModData().isItemCheck(section,j))
+                    view.getSelectModData().setItemCheck(section, j, true);
+            }else
+                if(view.getSelectModData().isItemCheck(section,j))
+                    view.getSelectModData().setItemCheck(section,j,false);
         }
         view.getSelectModData().adapterNotify();
     }

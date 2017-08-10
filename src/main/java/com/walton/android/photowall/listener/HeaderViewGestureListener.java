@@ -31,12 +31,7 @@ public class HeaderViewGestureListener extends GestureDetector.SimpleOnGestureLi
     @Override
     public boolean onDoubleTap(MotionEvent event){
         if(view.getSelectModData().getPositionCount(view.getSection()) != 0) {
-            if (!view.getSelectModData().isSelectMod()) {
                 onDoubleClickListener.onClick(view);
-                return true;
-            } else
-                selectModOnClickListener.onClick(view);
-            return true;
         }
         return false;
     }

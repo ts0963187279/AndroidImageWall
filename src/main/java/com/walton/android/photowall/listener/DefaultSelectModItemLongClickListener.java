@@ -16,7 +16,6 @@ public class DefaultSelectModItemLongClickListener implements View.OnLongClickLi
     public boolean onLongClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
         view.setChecked(!view.isChecked());
-        view.getSelectModData().incCheckCount();
         view.getSelectModData().adapterNotify();
         return true;
     }

@@ -13,17 +13,17 @@ import java.util.TreeMap;
  */
 
 public class PrepareUri {
-    TreeMap<String,ArrayList<Uri>> ImageUriTreeMap;
+    TreeMap<String,ArrayList<Uri>> imageUriTreeMap;
     public PrepareUri(){
-        ImageUriTreeMap = new TreeMap<>(new TreeMapComparator());
+        imageUriTreeMap = new TreeMap<>(/*new TreeMapComparator()*/);
         ArrayList<Uri> uriList1 = new ArrayList<>();
         uriList1.add(Uri.parse("https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png"));
         uriList1.add(Uri.parse("https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F_400x400.png"));
         uriList1.add(Uri.parse("https://www.technotification.com/wp-content/uploads/2016/07/Why-is-Java-the-best-programming-Language.png"));
         uriList1.add(Uri.parse("http://www.vjmedia.com.hk/wp-content/uploads/2017/06/02/160951/24823_963e_12.jpg"));
         uriList1.add(Uri.parse("https://java.com/ga/images/jv0h_gojava.jpg"));
-        Collections.sort(uriList1,new ArrayListComparator());
-        ImageUriTreeMap.put("Java",uriList1);
+//        Collections.sort(uriList1,new ArrayListComparator());
+        imageUriTreeMap.put("Java",uriList1);
 
         ArrayList<Uri> uriList2 = new ArrayList<>();
         uriList2.add(Uri.parse("https://isocpp.org/files/img/cpp_logo.png"));
@@ -34,8 +34,8 @@ public class PrepareUri {
         uriList2.add(Uri.parse("https://www.embarcadero.com/images/free-tools/CCompiler_Logo_256x256px.png"));
         uriList2.add(Uri.parse("http://errorpage.b0.upaiyun.com/jbcdn2-403"));
         uriList2.add(Uri.parse("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg"));
-        Collections.sort(uriList2,new ArrayListComparator());
-        ImageUriTreeMap.put("C++",uriList2);
+//        Collections.sort(uriList2,new ArrayListComparator());
+        imageUriTreeMap.put("C++",uriList2);
 
         ArrayList<Uri> uriList3 = new ArrayList<>();
         uriList3.add(Uri.parse("https://www.python.org/static/opengraph-icon-200x200.png"));
@@ -47,18 +47,18 @@ public class PrepareUri {
         uriList3.add(Uri.parse("https://ee5817f8e2e9a2e34042-3365e7f0719651e5b8d0979bce83c558.ssl.cf5.rackcdn.com/python.png"));
         uriList3.add(Uri.parse("https://realpython.com/learn/python-first-steps/images/pythonlogo.jpg"));
         uriList3.add(Uri.parse("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png"));
-        Collections.sort(uriList3,new ArrayListComparator());
-        ImageUriTreeMap.put("Python",uriList3);
+//        Collections.sort(uriList3,new ArrayListComparator());
+        imageUriTreeMap.put("Python",uriList3);
 
         ArrayList<Uri> uriList4 = new ArrayList<>();
         uriList4.add(Uri.parse("http://www.bomb01.com/upload/news/original/a7ffee577c127e703e667f1f0d3dbb79.jpg"));
         uriList4.add(Uri.parse("http://www.taiwan.net.tw/att/1/big_scenic_spots/pic_3229_24.jpg"));
         uriList4.add(Uri.parse("http://tourism.chcg.gov.tw/upload/17/2016112115184588019.jpg"));
         uriList4.add(Uri.parse("http://www.v3wall.com/wallpaper/1920_1080/1111/1920_1080_20111117090135772230.jpg"));
-        Collections.sort(uriList4,new ArrayListComparator());
-        ImageUriTreeMap.put("View",uriList4);
+//        Collections.sort(uriList4,new ArrayListComparator());
+        imageUriTreeMap.put("View",uriList4);
     }
     public TreeMap<String, ArrayList<Uri>> getPrepareUri(){
-        return ImageUriTreeMap;
+        return imageUriTreeMap;
     }
 }

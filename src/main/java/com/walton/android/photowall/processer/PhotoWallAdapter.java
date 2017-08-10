@@ -25,6 +25,8 @@ import com.walton.android.photowall.view.PhotoWallCellHeaderView;
 import com.walton.android.photowall.view.PhotoWallCellItemView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
@@ -38,6 +40,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private Context context;
     private String[] header;
     private List<List<Uri>> uris;
+    private TreeMap<String,ArrayList<Uri>> uriTreeMap;
     private PhotoWallCellItemView photoWallCellItemView;
     private PhotoWallCellHeaderView photoWallCellHeaderView;
     private View.OnLongClickListener selectModHeaderLongClickListener;
@@ -55,11 +58,12 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     private ViewCreator itemViewCreator,headerViewCreator;
     private Toolbar viewModToolBar;
     private Toolbar selectModToolBar;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> UriTreeMap){
+    private Comparator treeMapComparator;
+    private Comparator arrayListComparator;
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> uriTreeMap){
         Fresco.initialize(context);
-        Iterator iterator;
-        Object Key;
         this.context = context;
+        this.uriTreeMap = uriTreeMap;
         photoWallCellItemView = new DefaultPhotoWallCellItemView(context);
         photoWallCellHeaderView = new DefaultPhotoWallCellHeaderView(context);
         selectModHeaderLongClickListener = new DefaultSelectModHeaderLongClickListener();
@@ -74,45 +78,48 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         headerViewOnDoubleClickListener = new DefaultHeaderDoubleClickListener();
         itemViewCreator = new ItemViewCreator(context);
         headerViewCreator = new HeaderViewCreator(context);
-        selectModData = new SelectModData(UriTreeMap,this);
+        upDateData(uriTreeMap);
+    }
+    public void upDateData(TreeMap<String,ArrayList<Uri>> UriTreeMap){
+        selectModData = new SelectModData(uriTreeMap,this);
         uriList = new ArrayList<>();
+        uris = new ArrayList<>(uriTreeMap.size());
+        header = new String[uriTreeMap.size()];
+        Object key;
+        Iterator iterator;
         iterator = UriTreeMap.navigableKeySet().iterator();
-        uris = new ArrayList<>(UriTreeMap.size());
-        header = new String[UriTreeMap.size()];
         for(int i =0;i<UriTreeMap.size();i++){
-            Key = iterator.next();
-            header[i] = Key.toString();
-            List<Uri> URI = new ArrayList<>(UriTreeMap.get(Key).size());
-            for(int j =0;j< UriTreeMap.get(Key).size();j++){
-                Uri uri = UriTreeMap.get(Key).get(j);
+            key = iterator.next();
+            header[i] = key.toString();
+            List<Uri> URI = new ArrayList<>(UriTreeMap.get(key).size());
+            for(int j =0;j< UriTreeMap.get(key).size();j++){
+                Uri uri = UriTreeMap.get(key).get(j);
                 URI.add(uri);
                 uriList.add(uri);
             }
             uris.add(URI);
         }
         selectModData.setUriList(uriList);
+        notifyDataSetChanged();
     }
     public boolean isSelectMod(){
         return selectModData.isSelectMod();
     }
     public void ViewMod(){
             selectModData.clearChecked();
-            notifyItemRangeChanged(0,uriList.size()+getSectionCount());
-//          notifyDataSetChanged();
+//            notifyItemRangeChanged(0,uriList.size()+getSectionCount());
+          notifyDataSetChanged();
     }
     public void removeItem(){
         for(int i=selectModData.getSectionCount()-1;i>=0;i--){
-            int deleteCount = 0;
             selectModData.setHeaderCheck(i,false);
             for(int j=selectModData.getPositionCount(i)-1;j>=0;j--){
                 if(selectModData.isItemCheck(i,j)) {
                     try {
                         uris.get(i).remove(j);
-                        selectModData.decCheckCount();
                         selectModData.setItemCheck(i, j, false);
                         selectModData.checkRemove(i, j);
                         notifySectionItemRemoved(i, j);
-                        deleteCount++;
                     }catch (Exception e){
                         System.out.println("delete error");
                     }
@@ -141,12 +148,14 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         }
         ShareImage shareImage = new ShareImage(context, ImageUriList);
         shareImage.StartShare();
+
     }
     public void TitleOnChange(String title){
         try {
             selectModToolBar.setTitle(title);
         }catch (Exception e){}
-            notifyDataSetChanged();
+        notifyDataSetChanged();
+        //notifyItemRangeChanged(0,uriList.size()+getSectionCount());
     }
     public void setItemViewCreator(ViewCreator itemViewCreator){
         this.itemViewCreator = itemViewCreator;
@@ -159,7 +168,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     public void setSelectModToolBar(Toolbar selectModToolBar){
         this.selectModToolBar = selectModToolBar;
-        selectModToolBar.setTitle("");
         selectModToolBar.setVisibility(View.GONE);
     }
     public void setItemViewOnClickListener(View.OnClickListener itemOnClickListener){
@@ -197,9 +205,34 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         headerViewGestureListener.setOnDoubleClickListener(this.headerViewOnDoubleClickListener);
         headerViewOnTouchListener.setGestureDetector(context,headerViewGestureListener);
     }
+    public void setTreeMapComparator(Comparator treeMapComparator){
+        this.treeMapComparator = treeMapComparator;
+    }
+    public void setArrayListComparator(Comparator arrayListComparator){
+        this.arrayListComparator = arrayListComparator;
+    }
+    public void sortHeader(){
+        TreeMap<String,ArrayList<Uri>> uriTreeMapTmp = new TreeMap<>(treeMapComparator);
+        Object key;Iterator iterator = uriTreeMap.navigableKeySet().iterator();
+        while(iterator.hasNext()){
+            key = iterator.next();
+            uriTreeMapTmp.put((String)key,uriTreeMap.get(key));
+        }
+        uris.clear();
+        uriList.clear();
+        uriTreeMap = uriTreeMapTmp;
+        upDateData(uriTreeMapTmp);
+        notifyAllSectionsDataSetChanged();
+    }
+    public void sortArrayList(){
+        for(int i=0;i<uris.size();i++){
+            Collections.sort(uris.get(i),arrayListComparator);
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getSectionHeaderViewType(int section){
-        if(selectModData.isHeaderCheck(section) || selectModData.isSectionAllCheck(section,getSectionItemCount(section)))
+        if(selectModData.isSectionAllCheck(section,getSectionItemCount(section))&&selectModData.isHeaderCheck(section) )
             return 2;
         if(isSelectMod())
             return 1;

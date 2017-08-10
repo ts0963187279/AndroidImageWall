@@ -13,7 +13,6 @@ public class MyItemDoubleClickListener implements View.OnClickListener{
     public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
         view.setChecked(!view.isChecked());
-        view.getSelectModData().incCheckCount();
         view.getSelectModData().adapterNotify();
     }
 }

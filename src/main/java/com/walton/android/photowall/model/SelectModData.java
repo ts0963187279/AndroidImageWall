@@ -54,22 +54,18 @@ public class SelectModData {
         if(checked){
             for(int i=0;i<getPositionCount(section);i++){
                 if(!isItemCheck(section,i)) {
-                    incCheckCount();
-                    itemCheckCount[section]++;
+                    setItemCheck(section,i,true);
                 }
-                setItemCheck(section,i,true);
             }
-            setHeaderCheck(section,checked);
+            setHeaderCheck(section,true);
             setSelectMod(true);
         }else{
             for(int i=0;i<getPositionCount(section);i++){
                 if(isItemCheck(section,i)) {
-                    decCheckCount();
-                    itemCheckCount[section]--;
+                    setItemCheck(section,i,false);
                 }
-                setItemCheck(section,i,false);
             }
-            setHeaderCheck(section,checked);
+            setHeaderCheck(section,false);
             setSelectMod(false);
         }
     }
@@ -80,11 +76,14 @@ public class SelectModData {
         return isCheck.get(section).get(position);
     }
     public void setItemCheck(int section,int position,boolean isCheck){
-        if(isCheck)
+        if(isCheck) {
             itemCheckCount[section]++;
-        else
+            incCheckCount();
+        }else {
             itemCheckCount[section]--;
-        this.isCheck.get(section).set(position,isCheck);
+            decCheckCount();
+        }
+            this.isCheck.get(section).set(position, isCheck);
     }
     public ArrayList<ArrayList<Boolean>> getIsCheck(){
         return isCheck;
@@ -124,8 +123,10 @@ public class SelectModData {
     }
     public boolean isSectionAllCheck(int section , int positionCount){
         if(itemCheckCount[section] == positionCount) {
+            setHeaderCheck(section,true);
             return true;
         }else {
+            setHeaderCheck(section,false);
             return false;
         }
     }

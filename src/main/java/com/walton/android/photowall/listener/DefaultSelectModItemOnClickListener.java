@@ -16,11 +16,6 @@ public class DefaultSelectModItemOnClickListener implements View.OnClickListener
     public void onClick(View v) {
         PhotoWallCellItemView view = (PhotoWallCellItemView)v;
         view.setChecked(!view.isChecked());
-        if(view.isChecked()) {
-            view.getSelectModData().incCheckCount();
-        }else{
-            view.getSelectModData().decCheckCount();
-        }
         view.getSelectModData().adapterNotify();
     }
 }
