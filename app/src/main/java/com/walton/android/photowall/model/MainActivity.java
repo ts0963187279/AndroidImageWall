@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity{
         selectModToolBar.inflateMenu(R.menu.select_mod_menu);
 
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
-        RecyclerViewOnChangeAnimation recyclerViewOnChangeAnimation = new RecyclerViewOnChangeAnimation(recyclerView);
-//        recyclerViewOnChangeAnimation.setAnimationEnabled(false);
 
         TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
         photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap);

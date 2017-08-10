@@ -155,7 +155,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             selectModToolBar.setTitle(title);
         }catch (Exception e){}
         notifyDataSetChanged();
-        //notifyItemRangeChanged(0,uriList.size()+getSectionCount());
     }
     public void setItemViewCreator(ViewCreator itemViewCreator){
         this.itemViewCreator = itemViewCreator;
