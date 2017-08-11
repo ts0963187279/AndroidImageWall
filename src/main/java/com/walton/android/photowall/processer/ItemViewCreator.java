@@ -17,14 +17,15 @@ public class ItemViewCreator implements CellViewCreator {
         this.context = context;
     }
     @Override
-    public ItemView createView(int status) {
+    public ItemView createView(Status status) {
         switch (status){
-            case 1:
+            case STAYSELECT:
                 return new DefaultStaySelectionItemView(context);
-            case 2:
+            case ONSELECT:
                 return new DefaultOnSelectItemView(context);
-            default:
+            case VIEW:
                 return new DefaultItemView(context);
         }
+        return new DefaultItemView(context);
     }
 }

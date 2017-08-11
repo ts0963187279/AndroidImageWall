@@ -256,12 +256,32 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
     }
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
-        HeaderView view =labelViewCreator.createView(headerType);
+        HeaderView view;
+        switch(headerType) {
+            case 2 :
+                view = labelViewCreator.createView(Status.ONSELECT);
+                break;
+            case 1 :
+                view = labelViewCreator.createView(Status.STAYSELECT);
+                break;
+            default:
+                view = labelViewCreator.createView(Status.VIEW);
+        }
         return new PhotoWallHeaderViewHolder(view);
     }
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemType) {
-        ItemView view =cellViewCreator.createView(itemType);
+        ItemView view;
+        switch(itemType) {
+            case 2 :
+                view =cellViewCreator.createView(Status.ONSELECT);
+                break;
+            case 1 :
+                view =cellViewCreator.createView(Status.STAYSELECT);
+                break;
+            default:
+                view =cellViewCreator.createView(Status.VIEW);
+        }
         return new PhotoWallItemViewHolder(view);
     }
     @Override

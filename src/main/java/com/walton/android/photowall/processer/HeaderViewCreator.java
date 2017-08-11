@@ -18,14 +18,15 @@ public class HeaderViewCreator implements LabelViewCreator {
         this.context = context;
     }
     @Override
-    public HeaderView createView(int status) {
+    public HeaderView createView(Status status) {
         switch(status){
-            case 1 :
+            case STAYSELECT:
                 return new DefaultStaySelectionHeaderView(context);
-            case 2 :
+            case ONSELECT:
                 return new DefaultOnSelectHeaderView(context);
-            default:
+            case VIEW:
                 return new DefaultHeaderView(context);
         }
+        return new DefaultHeaderView(context);
     }
 }

@@ -2,7 +2,9 @@ package com.walton.android.photowall.processor;
 
 import android.content.Context;
 
+import com.walton.android.photowall.model.SelectModData;
 import com.walton.android.photowall.processer.LabelViewCreator;
+import com.walton.android.photowall.processer.Status;
 import com.walton.android.photowall.view.HeaderView;
 import com.walton.android.photowall.view.MyHeaderView;
 import com.walton.android.photowall.view.MyOnSelectHeaderView;
@@ -18,14 +20,15 @@ public class MyHeaderViewCreator implements LabelViewCreator {
         this.context = context;
     }
     @Override
-    public HeaderView createView(int status) {
+    public HeaderView createView(Status status) {
         switch(status){
-            case 1 :
+            case STAYSELECT:
                 return new MyStaySelectionHeaderView(context);
-            case 2 :
+            case ONSELECT:
                 return new MyOnSelectHeaderView(context);
-            default:
+            case VIEW:
                 return new MyHeaderView(context);
         }
+        return new MyHeaderView(context);
     }
 }

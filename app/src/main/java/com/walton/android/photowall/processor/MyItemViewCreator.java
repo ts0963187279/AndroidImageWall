@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.walton.android.photowall.processer.CellViewCreator;
+import com.walton.android.photowall.processer.Status;
 import com.walton.android.photowall.view.ItemView;
 import com.walton.android.photowall.view.MyOnSelectItemView;
 import com.walton.android.photowall.view.MyItemView;
@@ -19,14 +20,15 @@ public class MyItemViewCreator implements CellViewCreator {
         this.context = context;
     }
     @Override
-    public ItemView createView(int status) {
+    public ItemView createView(Status status) {
         switch (status){
-            case 1:
+            case STAYSELECT:
                 return new MyStaySelectionItemView(context);
-            case 2:
+            case ONSELECT:
                 return new MyOnSelectItemView(context);
-            default:
+            case VIEW:
                 return new MyItemView(context);
         }
+        return new MyItemView(context);
     }
 }

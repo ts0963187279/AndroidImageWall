@@ -7,5 +7,5 @@ import com.walton.android.photowall.view.ItemView;
  */
 
 public interface CellViewCreator {
-    ItemView createView(int status);
+    ItemView createView(Status status);
 }
