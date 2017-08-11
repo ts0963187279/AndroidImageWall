@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
+import com.walton.android.photowall.listener.ItemViewOnClickListener;
 
 /**
  * Created by waltonmis on 2017/7/28.
@@ -26,8 +27,6 @@ public class MyItemView extends ItemView {
         selectChecker.setClickable(false);
         selectChecker.setVisibility(GONE);
         setBackgroundColor(Color.BLACK);
-        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
-        setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);
         addView(selectChecker);
     }

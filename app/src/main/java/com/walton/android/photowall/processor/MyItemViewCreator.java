@@ -6,6 +6,7 @@ import android.view.View;
 import com.walton.android.photowall.processer.CellViewCreator;
 import com.walton.android.photowall.processer.Status;
 import com.walton.android.photowall.view.ItemView;
+import com.walton.android.photowall.view.MyMusicView;
 import com.walton.android.photowall.view.MyOnSelectItemView;
 import com.walton.android.photowall.view.MyItemView;
 import com.walton.android.photowall.view.MyStaySelectionItemView;
@@ -27,8 +28,10 @@ public class MyItemViewCreator implements CellViewCreator {
             case ONSELECT:
                 return new MyOnSelectItemView(context);
             case VIEW:
-                return new MyItemView(context);
+//                return new MyItemView(context);
+                return new MyMusicView(context);
         }
-        return new MyItemView(context);
+//        return new MyItemView(context);
+        return new MyMusicView(context);
     }
 }

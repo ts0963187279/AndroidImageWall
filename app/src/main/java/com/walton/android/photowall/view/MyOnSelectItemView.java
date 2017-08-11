@@ -25,8 +25,6 @@ public class MyOnSelectItemView extends ItemView {
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
         setBackgroundColor(Color.GREEN);
-        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
-        setOnClickListener(defaultImageGalleryOnClickListener);
         addView(showImage);
         addView(selectChecker);
         selectChecker.setChecked(true);
