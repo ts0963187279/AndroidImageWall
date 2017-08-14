@@ -16,7 +16,7 @@ import com.walton.android.photowall.processor.PrepareMusic;
 public class MyMusicView extends ItemView{
     private SimpleDraweeView showImage;
     private Context context;
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     public MyMusicView(Context context) {
         super(context);
         this.context = context;
@@ -28,6 +28,8 @@ public class MyMusicView extends ItemView{
         addView(showImage);
     }
     public void startMusic(){
+        if(mediaPlayer != null)
+            mediaPlayer.stop();
         mediaPlayer = MediaPlayer.create(context,new PrepareMusic().getMusic(this.getAbsolutePosition()));
         mediaPlayer.start();
     }
