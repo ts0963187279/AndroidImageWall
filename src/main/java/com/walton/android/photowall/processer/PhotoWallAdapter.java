@@ -320,21 +320,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
             selectModData.setSelectMod(false);
         }else
             selectModData.setSelectMod(true);
-        if(selectModData.isSelectMod()){
-            if(selectModToolBar != null) {
-                viewModToolBar.setVisibility(View.GONE);
-                selectModToolBar.setVisibility(View.VISIBLE);
-            }else if(viewModToolBar != null) {
-                viewModToolBar.setVisibility(View.GONE);
-            }
-        }else{
-            if(viewModToolBar != null) {
-                selectModToolBar.setVisibility(View.GONE);
-                viewModToolBar.setVisibility(View.VISIBLE);
-            }else if(selectModToolBar != null) {
-                selectModToolBar.setVisibility(View.GONE);
-            }
-        }
         holder.photoWallCellView.setOnTouchListener(itemViewOnTouchListener);
     }
 }
