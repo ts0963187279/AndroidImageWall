@@ -10,15 +10,6 @@ import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.R;
 import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
 import com.walton.android.photowall.listener.ItemMusicOnClickListener;
-import com.walton.android.photowall.listener.ItemViewOnClickListener;
-import com.walton.android.photowall.listener.MyHeaderDoubleClickListener;
-import com.walton.android.photowall.listener.MyHeaderLongClickListener;
-import com.walton.android.photowall.listener.MyHeaderOnClickListener;
-import com.walton.android.photowall.listener.MyItemDoubleClickListener;
-import com.walton.android.photowall.listener.MyItemLongClickListener;
-import com.walton.android.photowall.listener.MyItemSelectModOnClickListener;
-import com.walton.android.photowall.listener.MySelectModMenuClickListener;
-import com.walton.android.photowall.listener.MyViewModMenuClickListener;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 import com.walton.android.photowall.processor.MyArrayListComparator;
@@ -39,31 +30,16 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar viewModToolBar = (Toolbar)findViewById(R.id.viewModToolBar);
-        viewModToolBar.setTitle("12312312");
-        viewModToolBar.inflateMenu(R.menu.view_mod_menu);
         viewModToolBar.setTitle("PhotoWall");
-        Toolbar selectModToolBar = (Toolbar)findViewById(R.id.selectModToolBar);
-        selectModToolBar.inflateMenu(R.menu.select_mod_menu);
-
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
 
 
         TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
         photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap);
-        selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
-        viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
         photoWallAdapter.setViewModToolBar(viewModToolBar);
-        photoWallAdapter.setSelectModToolBar(selectModToolBar);
         photoWallAdapter.setItemCellViewCreator(new MyItemViewCreator(getApplicationContext()));
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
-        //photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());
         photoWallAdapter.setItemViewOnClickListener(new ItemMusicOnClickListener());
-        photoWallAdapter.setSelectModHeaderLongClickListener(new MyHeaderLongClickListener());
-        photoWallAdapter.setSelectModHeaderOnClickListener(new MyHeaderOnClickListener());
-        photoWallAdapter.setSelectModItemLongClickListener(new MyItemLongClickListener());
-        photoWallAdapter.setSelectModItemOnClickListener(new MyItemSelectModOnClickListener());
-        photoWallAdapter.setHeaderViewOnDoubleClickListener(new MyHeaderDoubleClickListener());
-        photoWallAdapter.setItemViewOnDoubleClickListener(new MyItemDoubleClickListener());
         photoWallAdapter.setTreeMapComparator(new MyTreeMapComparator());
         photoWallAdapter.setArrayListComparator(new MyArrayListComparator());
         recyclerView.setAdapter(photoWallAdapter);
