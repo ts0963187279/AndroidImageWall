@@ -18,5 +18,5 @@ include 'api'
 
 include ':library'
 project(':library').projectDir = file('../')
-include ':stickyheadergrid'
-project(':stickyheadergrid').projectDir = file('../Sticky-Header-Grid-master/stickyheadergrid')
+//include ':stickyheadergrid'
+//project(':stickyheadergrid').projectDir = file('../Sticky-Header-Grid-master/stickyheadergrid')
