@@ -2,55 +2,56 @@ project.group = 'com.walton.android.photowall'
 project.version = '1.0.0'
 
 buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath 'com.android.tools.build:gradle:2.2.1'
-	}
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.1'
+    }
 }
 apply plugin: 'com.android.application'
 
 repositories {
-	jcenter()
+    jcenter()
 }
 android {
-	compileSdkVersion 25
-	buildToolsVersion '25.0.2'
-	defaultConfig {
-		versionCode 1
-		versionName project.version
-		minSdkVersion 14
-		targetSdkVersion 22
-		multiDexEnabled true
-	}
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    defaultConfig {
+        versionCode 1
+        versionName project.version
+        minSdkVersion 14
+        targetSdkVersion 22
+        multiDexEnabled true
+    }
 
-	buildTypes {
-		release {
+    buildTypes {
+        release {
 //			minifyEnabled true
 //			proguardFiles getDefaultProguardFile('proguard-android.txt')
-		}
-	}
+        }
+    }
 
-	packagingOptions {
-		exclude 'META-INF/LICENSE.txt'
-		exclude 'META-INF/DEPENDENCIES'
-		exclude 'META-INF/NOTICE'
-		exclude 'META-INF/LICENSE'
-		exclude 'META-INF/NOTICE.txt'
-	}
-	lintOptions {
-		abortOnError false
-	}
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
+    }
 
 }
 
 dependencies {
-	compile project(':library')
-	compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile project(':library')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:appcompat-v7:25.3.1'
 }
 
 configurations {
-	compile.exclude module: 'xml-apis'
+    compile.exclude module: 'xml-apis'
 }
 
