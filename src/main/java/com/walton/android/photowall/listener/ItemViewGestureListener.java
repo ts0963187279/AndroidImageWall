@@ -33,25 +33,15 @@ public class ItemViewGestureListener extends GestureDetector.SimpleOnGestureList
     }
     @Override
     public boolean onDoubleTap(MotionEvent event){
-        if(!view.getSelectModData().isSelectMod()) {
-            onDoubleClickListener.onClick(view);
-            return true;
-        }else
-            selectModOnClickListener.onClick(view);
-            return true;
+        return false;
     }
     @Override
     public boolean onSingleTapConfirmed(MotionEvent event){
-        if(!view.getSelectModData().isSelectMod())
-            onClickListener.onClick(view);
-        else
-            selectModOnClickListener.onClick(view);
+        onClickListener.onClick(view);
         return true;
     }
     @Override
     public void onLongPress(MotionEvent event){
-        if(!view.getSelectModData().isSelectMod())
-            selectModOnLongClickListener.onLongClick(view);
     }
     @Override
     public boolean onDown(MotionEvent event){
