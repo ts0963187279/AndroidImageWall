@@ -1,7 +1,6 @@
 package com.walton.android.photowall.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.widget.RelativeLayout;
 
 import com.walton.android.photowall.model.SelectModData;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public abstract class ItemView extends RelativeLayout{
-    private ArrayList<Uri> uriList;
+    private ArrayList<String> pathList;
     private int position;
     private int absolutePosition;
     private int section;
@@ -30,8 +29,8 @@ public abstract class ItemView extends RelativeLayout{
     public void setSelectModData(SelectModData selectModData){
         this.selectModData = selectModData;
     }
-    public Uri getUri(){
-        return uriList.get(absolutePosition);
+    public String getPath(){
+        return pathList.get(absolutePosition);
     }
     public SelectModData getSelectModData(){
         return selectModData;
@@ -45,13 +44,23 @@ public abstract class ItemView extends RelativeLayout{
     public int getPosition(){
         return position;
     }
-    public void setUriList(ArrayList<Uri> uriList){
-        this.uriList = uriList;
+    public void setPathList(ArrayList<String> pathList){
+        this.pathList = pathList;
     }
-    public ArrayList<Uri> getUriList(){
-        return uriList;
+    public ArrayList<String> getPathList(){
+        return pathList;
     }
     public boolean isChecked(){return selectModData.isItemCheck(section,position);}
     public void setChecked(boolean isCheck){selectModData.setItemCheck(section,position,isCheck);}
-    public abstract void setImageUri(Uri uri);
+    public abstract void setImagePath(String string);
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec),
+                getDefaultSize(0, heightMeasureSpec));
+
+        int childWidthSize = getMeasuredWidth();
+        heightMeasureSpec = widthMeasureSpec = MeasureSpec.makeMeasureSpec(
+                childWidthSize, MeasureSpec.EXACTLY);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 }

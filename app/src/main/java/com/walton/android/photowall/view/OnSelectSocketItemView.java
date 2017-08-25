@@ -5,36 +5,41 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
+import com.walton.android.photowall.processor.GetImageSocketTask;
 
 /**
- * Created by waltonmis on 2017/8/7.
+ * Created by waltonmis on 2017/8/8.
  */
 
-public class DefaultOnSelectItemView extends ItemView {
-    private SimpleDraweeView showImage;
+public class OnSelectSocketItemView extends ItemView {
+    private ImageView imageView;
     private CheckBox selectChecker;
-    public DefaultOnSelectItemView(Context context){
+    public OnSelectSocketItemView(Context context){
         super(context);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        showImage = new SimpleDraweeView(context);
+        imageView = new ImageView(context);
+        imageView.setImageResource(android.R.color.transparent);
         selectChecker = new CheckBox(context);
-        showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-        showImage.setAdjustViewBounds(true);
+        imageView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         selectChecker.setClickable(false);
-        setBackgroundColor(Color.RED);
+        setBackgroundColor(Color.GREEN);
         DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
         setOnClickListener(defaultImageGalleryOnClickListener);
-        addView(showImage);
+        addView(imageView);
         addView(selectChecker);
         selectChecker.setChecked(true);
-        showImage.setPadding(25,25,25,25);
+        imageView.setPadding(25,25,25,25);
     }
     @Override
     public void setImagePath(String str) {
         Uri uri = Uri.parse(str);
-        showImage.setImageURI(uri);
+        GetImageSocketTask getImageSocketTask = new GetImageSocketTask(imageView);
+        getImageSocketTask.setPort(8080);
+        getImageSocketTask.setHost("192.168.0.147");
+        getImageSocketTask.execute(uri);
     }
 }

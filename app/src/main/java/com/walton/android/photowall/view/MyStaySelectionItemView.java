@@ -30,7 +30,8 @@ public class MyStaySelectionItemView extends ItemView {
     }
 
     @Override
-    public void setImageUri(Uri uri) {
+    public void setImagePath(String str) {
+        Uri uri = Uri.parse(str);
         showImage.setImageURI(uri);
     }
 }

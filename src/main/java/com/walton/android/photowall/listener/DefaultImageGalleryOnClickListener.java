@@ -19,12 +19,12 @@ public class DefaultImageGalleryOnClickListener implements View.OnClickListener{
     private String PUT_EXTRA_POSITION_KEY = "position";
     @Override
     public void onClick(View v) {
-        ArrayList<Uri> ImageList;
+        ArrayList<String> ImageList;
         ItemView view = (ItemView)v;
-        ImageList = view.getUriList();
+        ImageList = view.getPathList();
         int position = view.getAbsolutePosition();
         Intent intent = new Intent(v.getContext(), ShowImageActivity.class);
-        intent.putParcelableArrayListExtra(PUT_EXTRA_IMAGELIST_KEY,ImageList);
+        intent.putStringArrayListExtra(PUT_EXTRA_IMAGELIST_KEY,ImageList);
         intent.putExtra(PUT_EXTRA_POSITION_KEY, position);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

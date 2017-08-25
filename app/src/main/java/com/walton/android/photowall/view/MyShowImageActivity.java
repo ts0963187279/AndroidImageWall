@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.walton.android.photowall.processer.GalleryAdapter;
+import com.walton.android.photowall.processor.MyGalleryAdapter;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import start.android.library.R;
  * Created by waltonmis on 2017/7/19.
  */
 
-public class ShowImageActivity extends AppCompatActivity {
+public class MyShowImageActivity extends AppCompatActivity {
     private String GET_EXTRA_IMAGELIST_KEY = "ImageListPath";
     private String GET_EXTRA_POSITION_KEY = "position";
     private RecyclerView recyclerView;
@@ -32,7 +33,6 @@ public class ShowImageActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.showimage_layout);
         Intent intent = this.getIntent();
-        intent.getStringArrayExtra(GET_EXTRA_IMAGELIST_KEY);
         ImageUriList = intent.getStringArrayListExtra(GET_EXTRA_IMAGELIST_KEY);
         position = intent.getIntExtra(GET_EXTRA_POSITION_KEY,1);
         recyclerView = (RecyclerView)findViewById(R.id.Gallery);
@@ -40,7 +40,7 @@ public class ShowImageActivity extends AppCompatActivity {
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         layoutManager.setAutoMeasureEnabled(false);
         recyclerView.setLayoutManager(layoutManager);
-        GalleryAdapter galleryAdapter = new GalleryAdapter(this,ImageUriList);
+        MyGalleryAdapter galleryAdapter = new MyGalleryAdapter(this,ImageUriList);
         recyclerView.setAdapter(galleryAdapter);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);

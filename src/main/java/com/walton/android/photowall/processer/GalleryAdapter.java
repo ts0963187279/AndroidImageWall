@@ -27,10 +27,10 @@ import start.android.library.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryItemViewHolder>{
     private Context context;
-    private List<Uri> ImageUriList;
-    public GalleryAdapter(Context context , List<Uri> ImageUriList){
+    private List<String> ImagePathList;
+    public GalleryAdapter(Context context , List<String> ImagePathList){
         this.context = context;
-        this.ImageUriList = ImageUriList;
+        this.ImagePathList = ImagePathList;
     }
     @Override
     public GalleryItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -39,10 +39,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryItemViewHolder>{
     }
     @Override
     public void onBindViewHolder(final GalleryItemViewHolder viewHolder, final int position) {
-        viewHolder.galleryCellItemView.setImageURI(ImageUriList.get(position));
+        viewHolder.galleryCellItemView.setImagePath(ImagePathList.get(position));
     }
     @Override
     public int getItemCount() {
-        return ImageUriList.size();
+        return ImagePathList.size();
     }
 }

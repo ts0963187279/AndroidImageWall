@@ -16,7 +16,7 @@ public class DefaultHeaderDoubleClickListener implements View.OnClickListener {
     public void onClick(View v) {
         HeaderView view = (HeaderView)v;
         int section = view.getSection();
-        ArrayList<Uri> uriList = view.getSelectModData().getUriList();
+        ArrayList<String> uriList = view.getSelectModData().getUriList();
         ArrayList<ArrayList<Boolean>> isCheck = view.getSelectModData().getIsCheck();
         int k = 0;
         for(int i=0;i<section;i++){

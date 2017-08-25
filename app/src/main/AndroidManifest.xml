@@ -7,6 +7,8 @@
 	<application
 		android:icon="@drawable/ic_launcher"
 		android:theme="@style/AppTheme">
+		<activity android:name=".view.MyShowImageActivity">
+		</activity>
 		<activity android:name=".model.MainActivity"
 			android:label="StartAndroid">
 			<intent-filter>

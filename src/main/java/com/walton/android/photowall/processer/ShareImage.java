@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class ShareImage {
     private Intent intent;
     private Context context;
-    public ShareImage(Context context,ArrayList<Uri> ImageUriList){
+    public ShareImage(Context context,ArrayList<String> ImageUriList){
         this.context = context;
         intent = new Intent();
         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,ImageUriList);
+        intent.putStringArrayListExtra(Intent.EXTRA_STREAM,ImageUriList);
         intent.setType("image/*");
     }
     public void StartShare(){

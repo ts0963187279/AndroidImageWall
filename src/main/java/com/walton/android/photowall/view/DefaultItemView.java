@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -23,7 +24,8 @@ public  class DefaultItemView extends ItemView {
         addView(showImage);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setImagePath(String str) {
+        Uri uri = Uri.parse(str);
         showImage.setImageURI(uri);
     }
 }

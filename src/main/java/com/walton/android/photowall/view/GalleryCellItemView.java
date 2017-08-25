@@ -19,7 +19,8 @@ public class GalleryCellItemView extends LinearLayout {
         super(context);
         FullScreenImg = (SimpleDraweeView)itemView.findViewById(R.id.FullScreenImg);
     }
-    public void setImageURI(Uri uri){
+    public void setImagePath(String str){
+        Uri uri = Uri.parse(str);
         FullScreenImg.setImageURI(uri);
     }
 }

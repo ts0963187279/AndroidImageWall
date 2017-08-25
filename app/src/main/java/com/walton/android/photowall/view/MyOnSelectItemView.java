@@ -33,7 +33,8 @@ public class MyOnSelectItemView extends ItemView {
         showImage.setPadding(25,25,25,25);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setImagePath(String str) {
+        Uri uri = Uri.parse(str);
         showImage.setImageURI(uri);
     }
 }

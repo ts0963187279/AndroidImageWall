@@ -1,6 +1,5 @@
 package com.walton.android.photowall.model;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar viewModToolBar = (Toolbar)findViewById(R.id.viewModToolBar);
-        viewModToolBar.setTitle("12312312");
         viewModToolBar.inflateMenu(R.menu.view_mod_menu);
         viewModToolBar.setTitle("PhotoWall");
         Toolbar selectModToolBar = (Toolbar)findViewById(R.id.selectModToolBar);
@@ -46,16 +44,18 @@ public class MainActivity extends AppCompatActivity{
 
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
 
-
-        TreeMap<String,ArrayList<Uri>> uriTreeMap = new PrepareUri().getPrepareUri();
-        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),uriTreeMap);
+        TreeMap<String,ArrayList<String>> pathTreeMap = new PrepareUri().getPrepareUri();
+//        TreeMap<String,ArrayList<String>> PathTreeMap = new SocketPrepareData().getPrepareData();  //socket
+        photoWallAdapter = new PhotoWallAdapter(getApplicationContext(),pathTreeMap);
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
         photoWallAdapter.setViewModToolBar(viewModToolBar);
         photoWallAdapter.setSelectModToolBar(selectModToolBar);
         photoWallAdapter.setItemCellViewCreator(new MyItemViewCreator(getApplicationContext()));
+//        photoWallAdapter.setItemCellViewCreator(new SocketItemCreator(getApplicationContext()));   //socket
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
         photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());
+//        photoWallAdapter.setItemViewOnClickListener(new SocketItemViewOnClickListener());    //socket
         photoWallAdapter.setSelectModHeaderLongClickListener(new MyHeaderLongClickListener());
         photoWallAdapter.setSelectModHeaderOnClickListener(new MyHeaderOnClickListener());
         photoWallAdapter.setSelectModItemLongClickListener(new MyItemLongClickListener());

@@ -19,7 +19,6 @@ public class MyHeaderView extends HeaderView {
         setBackgroundColor(Color.RED);
         addView(header);
     }
-
     @Override
     public void setText(String title){
         header.setText(title);

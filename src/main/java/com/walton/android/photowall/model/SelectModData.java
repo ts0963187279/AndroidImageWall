@@ -14,13 +14,13 @@ import java.util.TreeMap;
 
 public class SelectModData {
     private ArrayList<ArrayList<Boolean>> isCheck;
-    private ArrayList<Uri> uriList;
+    private ArrayList<String> uriList;
     private boolean[] headerCheck;
     private int[] itemCheckCount;
     private boolean isSelectMod;
     private int checkCount;
     private PhotoWallAdapter photoWallAdapter;
-    public SelectModData(TreeMap<String,ArrayList<Uri>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
+    public SelectModData(TreeMap<String,ArrayList<String>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
         this.photoWallAdapter = photoWallAdapter;
         Iterator iterator;
         Object key;
@@ -91,10 +91,10 @@ public class SelectModData {
     public void checkRemove(int section,int position){
         isCheck.get(section).remove(position);
     }
-    public void setUriList(ArrayList<Uri> uriList){
+    public void setUriList(ArrayList<String> uriList){
         this.uriList = uriList;
     }
-    public ArrayList<Uri> getUriList(){
+    public ArrayList<String> getUriList(){
         return uriList;
     }
     public boolean isHeaderCheck(int section){
