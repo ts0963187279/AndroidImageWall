@@ -44,7 +44,7 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
     private RecyclerView recyclerView;
     private Toolbar viewModToolBar;
     private Toolbar selectModToolBar;
-    private TreeMap<String,ArrayList<Uri>> uriTreeMap;
+    private TreeMap<String,ArrayList<String>> strTreeMap;
     public GetPhotoUrlsAsyncTask(GooglePhotosData googlePhotosData){
         this.googlePhotosData = googlePhotosData;
         activity = googlePhotosData.getActivity();
@@ -56,7 +56,7 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         List<AlbumEntry> albums;
-        uriTreeMap = new TreeMap<>();
+        strTreeMap = new TreeMap<>();
         System.out.println("Thread.currentThread : " + Thread.currentThread());
         try{
             selectedAccountName = googlePhotosData.getSelectedAccountName();
@@ -64,11 +64,12 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
             photoUrls = new ArrayList<>();
             for(AlbumEntry mAlbum : albums){
                 List<PhotoEntry> mPhotos = getPhotos.getPhoto(selectedAccountName,mAlbum);
-                ArrayList<Uri> uris = new ArrayList<>();
+                ArrayList<String> strs = new ArrayList<>();
                 for(PhotoEntry mPhoto : mPhotos) {
-                    uris.add(Uri.parse(new URL(mPhoto.getMediaContents().get(0).getUrl()).toString()));
+                    strs.add(Uri.parse(mPhoto.getMediaContents().get(0).getUrl()).toString());
                 }
-                uriTreeMap.put(mAlbum.getTitle().toString(),uris);
+                if(strs.size() != 0)
+                    strTreeMap.put(mAlbum.getTitle().toString(),strs);
             }
             googlePhotosData.setPhotoUrls(photoUrls);
         }catch(ServiceForbiddenException e){
@@ -84,8 +85,8 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
     }
     protected void onPostExecute(Void test)
     {
-        System.out.println(uriTreeMap.size());
-        photoWallAdapter = new PhotoWallAdapter(activity.getApplicationContext(),uriTreeMap);
+        System.out.println(strTreeMap.size());
+        photoWallAdapter = new PhotoWallAdapter(activity.getApplicationContext(),strTreeMap);
         googlePhotosData.setPhotoWallAdapter(photoWallAdapter);
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));

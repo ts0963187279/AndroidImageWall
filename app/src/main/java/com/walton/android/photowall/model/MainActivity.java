@@ -6,18 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.R;
-import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processor.ActivityResult;
 import com.walton.android.photowall.processor.GetGooglePhotos;
-import com.walton.android.photowall.processer.PhotoWallAdapter;
 
 
 public class MainActivity extends AppCompatActivity{
     RecyclerView recyclerView;
-    PhotoWallAdapter photoWallAdapter;
     GooglePhotosData googlePhotosData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +27,7 @@ public class MainActivity extends AppCompatActivity{
         selectModToolBar.inflateMenu(R.menu.select_mod_menu);
         googlePhotosData = new GooglePhotosData(this);
         GetGooglePhotos getGooglePhotos = new GetGooglePhotos(googlePhotosData);
+        getGooglePhotos.get();
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
         googlePhotosData.setRecyclerView(recyclerView);
         googlePhotosData.setSelectModToolBar(selectModToolBar);

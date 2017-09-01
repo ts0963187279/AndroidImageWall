@@ -16,7 +16,8 @@ public class MyHeaderView extends HeaderView {
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header = new TextView(context);
         header.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        setBackgroundColor(Color.RED);
+        header.setTextColor(Color.BLACK);
+        setBackgroundColor(Color.WHITE);
         addView(header);
     }
 

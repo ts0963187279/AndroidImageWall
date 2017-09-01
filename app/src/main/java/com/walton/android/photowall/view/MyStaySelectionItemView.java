@@ -18,6 +18,7 @@ public class MyStaySelectionItemView extends ItemView {
     public MyStaySelectionItemView(Context context) {
         super(context);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        setPadding(5,5,5,5);
         showImage = new SimpleDraweeView(context);
         selectChecker = new CheckBox(context);
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
@@ -28,7 +29,6 @@ public class MyStaySelectionItemView extends ItemView {
         addView(selectChecker);
         selectChecker.setChecked(false);
     }
-
     @Override
     public void setImageUri(Uri uri) {
         showImage.setImageURI(uri);

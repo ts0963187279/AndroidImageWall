@@ -23,6 +23,8 @@ public class GetGooglePhotos{
         activity = googlePhotosData.getActivity();
         am = (AccountManager) activity.getSystemService(ACCOUNT_SERVICE);
         list = googlePhotosData.getList();
+    }
+    public void get(){
         Intent intent = AccountPicker.newChooseAccountIntent(null,null,new String[]{"com.google"},false,null,null,null,null);
         activity.startActivityForResult(intent,PICK_ACCOUNT_REQUEST);
     }

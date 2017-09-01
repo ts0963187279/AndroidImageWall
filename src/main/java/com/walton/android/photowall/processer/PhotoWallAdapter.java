@@ -61,10 +61,22 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Toolbar selectModToolBar;
     private Comparator treeMapComparator;
     private Comparator arrayListComparator;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<Uri>> uriTreeMap){
+    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<String>> strTreeMap){
         Fresco.initialize(context);
         this.context = context;
-        this.uriTreeMap = uriTreeMap;
+        uriTreeMap = new TreeMap<>();
+        Object key;
+        Iterator iterator;
+        iterator = strTreeMap.navigableKeySet().iterator();
+        for(int i=0;i< strTreeMap.size();i++){
+            key = iterator.next();
+            ArrayList<Uri> uris = new ArrayList<>(strTreeMap.get(key).size());
+            for(int j=0;j<strTreeMap.get(key).size();j++){
+                Uri uri = Uri.parse(strTreeMap.get(key).get(j).toString());
+                uris.add(uri);
+            }
+            uriTreeMap.put(key.toString(),uris);
+        }
         itemView = new DefaultItemView(context);
         headerView = new DefaultHeaderView(context);
         selectModHeaderLongClickListener = new DefaultSelectModHeaderLongClickListener();

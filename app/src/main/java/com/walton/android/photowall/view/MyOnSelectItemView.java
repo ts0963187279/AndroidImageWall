@@ -19,6 +19,7 @@ public class MyOnSelectItemView extends ItemView {
     public MyOnSelectItemView(Context context){
         super(context);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        setPadding(5,5,5,5);
         showImage = new SimpleDraweeView(context);
         selectChecker = new CheckBox(context);
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));

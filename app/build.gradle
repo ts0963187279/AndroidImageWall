@@ -6,7 +6,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:2.2.1'
+		classpath 'com.android.tools.build:gradle:2.3.3'
 	}
 }
 apply plugin: 'com.android.application'
@@ -54,3 +54,9 @@ configurations {
 	compile.exclude module: 'xml-apis'
 }
 
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
