@@ -35,7 +35,7 @@ import java.util.TreeMap;
  * Created by waltonmis on 2017/7/21.
  */
 
-public class PhotoWallAdapter extends StickyHeaderGridAdapter {
+public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private ArrayList<Uri> uriList;
     private Context context;
     private String[] header;
@@ -81,20 +81,21 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter {
         labelViewCreator = new HeaderViewCreator(context);
         upDateData(uriTreeMap);
     }
-    public void upDateData(TreeMap<String,ArrayList<Uri>> UriTreeMap){
+    public void upDateData(TreeMap<String,ArrayList<Uri>> uriTreeMap){
         selectModData = new SelectModData(uriTreeMap,this);
         uriList = new ArrayList<>();
         uris = new ArrayList<>(uriTreeMap.size());
+        System.out.println(uriTreeMap.size());
         header = new String[uriTreeMap.size()];
         Object key;
         Iterator iterator;
-        iterator = UriTreeMap.navigableKeySet().iterator();
-        for(int i =0;i<UriTreeMap.size();i++){
+        iterator = uriTreeMap.navigableKeySet().iterator();
+        for(int i =0;i<uriTreeMap.size();i++){
             key = iterator.next();
             header[i] = key.toString();
-            List<Uri> URI = new ArrayList<>(UriTreeMap.get(key).size());
-            for(int j =0;j< UriTreeMap.get(key).size();j++){
-                Uri uri = UriTreeMap.get(key).get(j);
+            List<Uri> URI = new ArrayList<>(uriTreeMap.get(key).size());
+            for(int j =0;j< uriTreeMap.get(key).size();j++){
+                Uri uri = uriTreeMap.get(key).get(j);
                 URI.add(uri);
                 uriList.add(uri);
             }
