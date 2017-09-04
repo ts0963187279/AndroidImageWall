@@ -61,22 +61,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Toolbar selectModToolBar;
     private Comparator treeMapComparator;
     private Comparator arrayListComparator;
-    public PhotoWallAdapter(Context context, TreeMap<String,ArrayList<String>> strTreeMap){
+    public PhotoWallAdapter(Context context){
         Fresco.initialize(context);
         this.context = context;
         uriTreeMap = new TreeMap<>();
-        Object key;
-        Iterator iterator;
-        iterator = strTreeMap.navigableKeySet().iterator();
-        for(int i=0;i< strTreeMap.size();i++){
-            key = iterator.next();
-            ArrayList<Uri> uris = new ArrayList<>(strTreeMap.get(key).size());
-            for(int j=0;j<strTreeMap.get(key).size();j++){
-                Uri uri = Uri.parse(strTreeMap.get(key).get(j).toString());
-                uris.add(uri);
-            }
-            uriTreeMap.put(key.toString(),uris);
-        }
         itemView = new DefaultItemView(context);
         headerView = new DefaultHeaderView(context);
         selectModHeaderLongClickListener = new DefaultSelectModHeaderLongClickListener();
@@ -91,6 +79,20 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         headerViewOnDoubleClickListener = new DefaultHeaderDoubleClickListener();
         cellViewCreator = new ItemViewCreator(context);
         labelViewCreator = new HeaderViewCreator(context);
+    }
+    public void setData(TreeMap<String,ArrayList<String>> strTreeMap){
+        Object key;
+        Iterator iterator;
+        iterator = strTreeMap.navigableKeySet().iterator();
+        for(int i=0;i< strTreeMap.size();i++){
+            key = iterator.next();
+            ArrayList<Uri> uris = new ArrayList<>(strTreeMap.get(key).size());
+            for(int j=0;j<strTreeMap.get(key).size();j++){
+                Uri uri = Uri.parse(strTreeMap.get(key).get(j).toString());
+                uris.add(uri);
+            }
+            uriTreeMap.put(key.toString(),uris);
+        }
         upDateData(uriTreeMap);
     }
     public void upDateData(TreeMap<String,ArrayList<Uri>> uriTreeMap){
@@ -99,8 +101,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         uris = new ArrayList<>(uriTreeMap.size());
         System.out.println(uriTreeMap.size());
         header = new String[uriTreeMap.size()];
-        Object key;
         Iterator iterator;
+        Object key;
         iterator = uriTreeMap.navigableKeySet().iterator();
         for(int i =0;i<uriTreeMap.size();i++){
             key = iterator.next();
@@ -114,7 +116,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
             uris.add(URI);
         }
         selectModData.setUriList(uriList);
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
+        notifyAllSectionsDataSetChanged();
     }
     public boolean isSelectMod(){
         return selectModData.isSelectMod();
@@ -261,6 +264,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     }
     @Override
     public int getSectionCount() {
+        if(uris == null)
+            return 0;
         return uris.size();
     }
     @Override
