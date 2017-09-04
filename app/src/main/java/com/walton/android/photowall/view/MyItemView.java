@@ -36,4 +36,4 @@ public class MyItemView extends ItemView {
     public void setImageUri(Uri uri) {
         showImage.setImageURI(uri);
     }
-}
+};

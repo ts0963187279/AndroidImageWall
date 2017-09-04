@@ -57,7 +57,6 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
     protected Void doInBackground(Void... voids) {
         List<AlbumEntry> albums;
         strTreeMap = new TreeMap<>();
-        System.out.println("Thread.currentThread : " + Thread.currentThread());
         try{
             selectedAccountName = googlePhotosData.getSelectedAccountName();
             albums = getPhotos.getAlbums(selectedAccountName);

@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar viewModToolBar = (Toolbar)findViewById(R.id.viewModToolBar);
-        viewModToolBar.setTitle("12312312");
         viewModToolBar.inflateMenu(R.menu.view_mod_menu);
         viewModToolBar.setTitle("PhotoWall");
         Toolbar selectModToolBar = (Toolbar)findViewById(R.id.selectModToolBar);
@@ -36,10 +35,8 @@ public class MainActivity extends AppCompatActivity{
         scaleViewTouchListener.setMinRow(2);
         scaleViewTouchListener.setMaxRow(4);
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
-
     }
     protected void onActivityResult(final int requestCode , final int resultCode , final Intent data){
         new ActivityResult(googlePhotosData,requestCode,resultCode,data);
-        System.out.println("Thread.currentThread : " + Thread.currentThread());
     }
 }
