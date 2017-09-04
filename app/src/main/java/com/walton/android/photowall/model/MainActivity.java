@@ -27,6 +27,7 @@ import com.walton.android.photowall.processor.MyArrayListComparator;
 import com.walton.android.photowall.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.processor.MyItemViewCreator;
 import com.walton.android.photowall.processor.MyTreeMapComparator;
+import com.walton.android.photowall.processor.PrepareUri;
 import com.walton.android.photowall.processor.UpDateAdapterData;
 
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
         getGooglePhotos.get();
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
+//        photoWallAdapter.setData(new PrepareUri().getPrepareUri());
         photoWallAdapter.setViewModToolBar(viewModToolBar);
         photoWallAdapter.setSelectModToolBar(selectModToolBar);
         photoWallAdapter.setItemCellViewCreator(new MyItemViewCreator(getApplicationContext()));
