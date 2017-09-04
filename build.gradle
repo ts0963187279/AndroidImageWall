@@ -28,10 +28,6 @@ android {
         minSdkVersion 14
 		multiDexEnabled = true
     }
-	configurations {
-		all*.exclude group: 'xpp3', module: 'xpp3'
-		compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
-	}
 	lintOptions {
 		abortOnError false
 	}
@@ -43,16 +39,5 @@ dependencies {
 	compile 'com.android.support:recyclerview-v7:25.+'
 	compile 'com.android.support:gridlayout-v7:25.+'
 	compile 'com.facebook.fresco:fresco:1.4.0'
-	compile 'com.timehop.stickyheadersrecyclerview:library:[0.4.3]@aar'
 	compile 'com.codewaves.stickyheadergrid:stickyheadergrid:0.9.4'
-	compile 'org.slf4j:slf4j-android:1.6.1-RC1'
-	compile 'com.google.android.gms:play-services:3.1.36'
-	compile 'com.google.gdata:core:1.47.1'
-	compile (group:'com.google.api-client', name:'google-api-client', version:'1.16.0-rc') {
-		exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
-		exclude (group: 'com.google.android', module: 'android')
-	}
-	compile (group: 'com.google.api-client', name: 'google-api-client-android', version: '1.16.0-rc') {
-		exclude (group: 'com.google.android.google-play-services', module: 'google-play-services')
-	}
 }

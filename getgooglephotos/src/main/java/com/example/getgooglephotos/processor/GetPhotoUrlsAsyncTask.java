@@ -3,8 +3,6 @@ package com.example.getgooglephotos.processor;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.example.getgooglephotos.module.GooglePhotosData;
 import com.google.gdata.data.photos.AlbumEntry;
@@ -28,15 +26,11 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
     private GooglePhotosData googlePhotosData;
     private ArrayList<URL> photoUrls;
     private Activity activity;
-    private Toolbar viewModToolBar;
-    private Toolbar selectModToolBar;
     private TreeMap<String,ArrayList<String>> strTreeMap;
     public GetPhotoUrlsAsyncTask(GooglePhotosData googlePhotosData){
         this.googlePhotosData = googlePhotosData;
         activity = googlePhotosData.getActivity();
         getPhotos = new GetPhotos(googlePhotosData);
-        viewModToolBar = googlePhotosData.getViewModToolBar();
-        selectModToolBar = googlePhotosData.getSelectModToolBar();
     }
     @Override
     protected Void doInBackground(Void... voids) {

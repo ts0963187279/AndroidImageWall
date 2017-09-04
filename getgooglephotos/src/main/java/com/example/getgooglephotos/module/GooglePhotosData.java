@@ -3,8 +3,6 @@ package com.example.getgooglephotos.module;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.example.getgooglephotos.processor.DoInBackground;
 import com.google.gdata.client.photos.PicasawebService;
@@ -31,9 +29,6 @@ public class GooglePhotosData {
     private Activity activity;
     private String authToken;
     private ArrayList<URL> photoUrls;
-    private RecyclerView recyclerView;
-    private Toolbar selectModToolBar;
-    private Toolbar viewModToolBar;
     private DoInBackground doInBackground;
     public GooglePhotosData(Activity activity){
         this.activity = activity;
@@ -41,9 +36,6 @@ public class GooglePhotosData {
         list = accountManager.getAccounts();
         photoUrls = new ArrayList<>();
     }
-    public Toolbar getSelectModToolBar(){return selectModToolBar; }
-    public Toolbar getViewModToolBar(){return viewModToolBar; }
-    public RecyclerView getRecyclerView(){return recyclerView; }
     public String getApiPrefix(){
         return API_PREFIX;
     }
@@ -94,15 +86,6 @@ public class GooglePhotosData {
     }
     public void setPhotoUrls(ArrayList<URL> photoUrls){
         this.photoUrls = photoUrls;
-    }
-    public void setRecyclerView(RecyclerView recyclerView){
-        this.recyclerView = recyclerView;
-    }
-    public void setSelectModToolBar(Toolbar selectModToolBar){
-        this.selectModToolBar = selectModToolBar;
-    }
-    public void setViewModToolBar(Toolbar viewModToolBar){
-        this.viewModToolBar = viewModToolBar;
     }
     public void setDoInBackground(DoInBackground doInBackground){
         this.doInBackground = doInBackground;
