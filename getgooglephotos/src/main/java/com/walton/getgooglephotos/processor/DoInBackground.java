@@ -1,4 +1,4 @@
-package com.example.getgooglephotos.processor;
+package com.walton.getgooglephotos.processor;
 
 import java.util.ArrayList;
 import java.util.TreeMap;

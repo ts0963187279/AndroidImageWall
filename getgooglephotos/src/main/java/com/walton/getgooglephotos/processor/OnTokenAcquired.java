@@ -1,4 +1,4 @@
-package com.example.getgooglephotos.processor;
+package com.walton.getgooglephotos.processor;
 
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
 import com.google.gdata.client.photos.PicasawebService;
 
 /**
@@ -38,7 +38,7 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
             if(bundle.containsKey(AccountManager.KEY_AUTHTOKEN)){
                 final String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
                 googlePhotosData.setAuthToken(authToken);
-                picasawebService = new PicasawebService("pictureframe");
+                picasawebService = new PicasawebService("GetGooglePhotos");
                 picasawebService.setUserToken(authToken);
                 googlePhotosData.setPicasawebService(picasawebService);
                 new GetPhotoUrlsAsyncTask(googlePhotosData).execute();

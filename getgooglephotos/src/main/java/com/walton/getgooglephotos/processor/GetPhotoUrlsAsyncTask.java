@@ -1,10 +1,10 @@
-package com.example.getgooglephotos.processor;
+package com.walton.getgooglephotos.processor;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import com.example.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
 import com.google.gdata.data.photos.AlbumEntry;
 import com.google.gdata.data.photos.PhotoEntry;
 import com.google.gdata.util.ServiceException;
@@ -47,7 +47,7 @@ public class GetPhotoUrlsAsyncTask extends AsyncTask<Void,Void,Void> {
                     strs.add(Uri.parse(mPhoto.getMediaContents().get(0).getUrl()).toString());
                 }
                 if(strs.size() != 0)
-                    strTreeMap.put(mAlbum.getTitle().toString(),strs);
+                    strTreeMap.put(mAlbum.getTitle().getPlainText().toString(),strs);
             }
             googlePhotosData.setPhotoUrls(photoUrls);
         }catch(ServiceForbiddenException e){

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.example.getgooglephotos">
+    package="com.walton.getgooglephotos">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission

@@ -1,11 +1,11 @@
-package com.example.getgooglephotos.processor;
+package com.walton.getgooglephotos.processor;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.example.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
 import com.google.android.gms.common.AccountPicker;
 
 import static android.content.Context.ACCOUNT_SERVICE;

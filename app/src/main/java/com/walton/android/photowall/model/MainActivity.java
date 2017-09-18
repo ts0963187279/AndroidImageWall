@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
-import com.example.getgooglephotos.module.GooglePhotosData;
-import com.example.getgooglephotos.processor.ActivityResult;
-import com.example.getgooglephotos.processor.GetGooglePhotos;
+import com.walton.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.processor.ActivityResult;
+import com.walton.getgooglephotos.processor.GetGooglePhotos;
 import com.walton.android.photowall.R;
 import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
 import com.walton.android.photowall.listener.ItemViewOnClickListener;
@@ -27,7 +27,6 @@ import com.walton.android.photowall.processor.MyArrayListComparator;
 import com.walton.android.photowall.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.processor.MyItemViewCreator;
 import com.walton.android.photowall.processor.MyTreeMapComparator;
-import com.walton.android.photowall.processor.PrepareUri;
 import com.walton.android.photowall.processor.UpDateAdapterData;
 
 

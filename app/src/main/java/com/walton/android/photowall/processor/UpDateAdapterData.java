@@ -1,6 +1,6 @@
 package com.walton.android.photowall.processor;
 
-import com.example.getgooglephotos.processor.DoInBackground;
+import com.walton.getgooglephotos.processor.DoInBackground;
 import com.walton.android.photowall.processer.PhotoWallAdapter;
 
 import java.util.ArrayList;

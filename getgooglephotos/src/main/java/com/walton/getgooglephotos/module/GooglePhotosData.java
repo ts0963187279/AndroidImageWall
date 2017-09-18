@@ -1,10 +1,10 @@
-package com.example.getgooglephotos.module;
+package com.walton.getgooglephotos.module;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 
-import com.example.getgooglephotos.processor.DoInBackground;
+import com.walton.getgooglephotos.processor.DoInBackground;
 import com.google.gdata.client.photos.PicasawebService;
 
 import java.net.URL;

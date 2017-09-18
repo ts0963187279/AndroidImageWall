@@ -1,6 +1,6 @@
-package com.example.getgooglephotos.processor;
+package com.walton.getgooglephotos.processor;
 
-import com.example.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
 import com.google.gdata.client.photos.PicasawebService;
 import com.google.gdata.data.photos.AlbumEntry;
 import com.google.gdata.data.photos.AlbumFeed;
