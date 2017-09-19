@@ -7,6 +7,6 @@ import java.util.TreeMap;
  * Created by waltonmis on 2017/9/4.
  */
 
-public interface DoInBackground {
+public interface OnBackGroundResult {
     void doIt(TreeMap<String,ArrayList<String>> strTreeMap);
 }

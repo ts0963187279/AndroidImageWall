@@ -5,10 +5,13 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.walton.getgooglephotos.module.GooglePhotosData;
 import com.google.gdata.client.photos.PicasawebService;
+import com.walton.getgooglephotos.module.GoogleContactData;
+import com.walton.getgooglephotos.module.GoogleData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
 
 /**
  * Created by waltonmis on 2017/8/29.
@@ -16,12 +19,14 @@ import com.google.gdata.client.photos.PicasawebService;
 
 public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
     Activity activity;
-    private final int REQUEST_AUTHENTICATE = 2;
-    PicasawebService picasawebService;
-    GooglePhotosData googlePhotosData;
-    public OnTokenAcquired(GooglePhotosData googlePhotosData){
-        activity = googlePhotosData.getActivity();
-        this.googlePhotosData = googlePhotosData;
+    private final int REQUEST_AUTHENTICATE;
+    Services services;
+    AsyncTask<Void,Void,Void> asyncTask;
+    public OnTokenAcquired(GoogleData googleData, AsyncTask<Void,Void,Void> asyncTask) {
+        activity = googleData.getActivity();
+        services = googleData.getService();
+        this.asyncTask = asyncTask;
+        REQUEST_AUTHENTICATE = googleData.getREQUEST_AUTHENTICATE();
     }
     @Override
     public void run(AccountManagerFuture<Bundle> result) {
@@ -31,17 +36,13 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
                 Intent intent = bundle.getParcelable(AccountManager.KEY_INTENT);
                 int flags = intent.getFlags();
                 intent.setFlags(flags);
-                flags &= ~Intent.FLAG_ACTIVITY_NEW_TASK;
                 activity.startActivityForResult(intent,REQUEST_AUTHENTICATE);
                 return;
             }
             if(bundle.containsKey(AccountManager.KEY_AUTHTOKEN)){
                 final String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-                googlePhotosData.setAuthToken(authToken);
-                picasawebService = new PicasawebService("GetGooglePhotos");
-                picasawebService.setUserToken(authToken);
-                googlePhotosData.setPicasawebService(picasawebService);
-                new GetPhotoUrlsAsyncTask(googlePhotosData).execute();
+                services.setUserToken(authToken);
+                asyncTask.execute();
             }
         }catch (Exception e){
             System.out.println(e);

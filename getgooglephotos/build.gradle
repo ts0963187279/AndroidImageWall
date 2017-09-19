@@ -29,6 +29,7 @@ dependencies {
     compile 'org.slf4j:slf4j-android:1.6.1-RC1'
     compile 'com.google.android.gms:play-services:3.1.36'
     compile 'com.google.gdata:core:1.47.1'
+    compile 'com.google.apis:google-api-services-people:v1-rev139-1.22.0'
     compile (group:'com.google.api-client', name:'google-api-client', version:'1.16.0-rc') {
         exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
         exclude (group: 'com.google.android', module: 'android')

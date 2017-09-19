@@ -7,9 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
-import com.walton.getgooglephotos.module.GooglePhotosData;
-import com.walton.getgooglephotos.processor.ActivityResult;
-import com.walton.getgooglephotos.processor.GetGooglePhotos;
+import com.google.gdata.client.photos.PicasawebService;
 import com.walton.android.photowall.R;
 import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
 import com.walton.android.photowall.listener.ItemViewOnClickListener;
@@ -28,6 +26,12 @@ import com.walton.android.photowall.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.processor.MyItemViewCreator;
 import com.walton.android.photowall.processor.MyTreeMapComparator;
 import com.walton.android.photowall.processor.UpDateAdapterData;
+import com.walton.getgooglephotos.module.GoogleContactData;
+import com.walton.getgooglephotos.module.GooglePhotosData;
+import com.walton.getgooglephotos.processor.ConnectGoogleAccount;
+import com.walton.getgooglephotos.processor.GetGooglePhotosToken;
+import com.walton.getgooglephotos.processor.SelectGoogleAccount;
+import com.walton.getgooglephotos.processor.Services;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -46,9 +50,13 @@ public class MainActivity extends AppCompatActivity{
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
         photoWallAdapter = new PhotoWallAdapter(getApplicationContext());
         googlePhotosData = new GooglePhotosData(this);
-        googlePhotosData.setDoInBackground(new UpDateAdapterData(photoWallAdapter));
-        GetGooglePhotos getGooglePhotos = new GetGooglePhotos(googlePhotosData);
-        getGooglePhotos.get();
+        googlePhotosData.setOnBackGroundResult(new UpDateAdapterData(photoWallAdapter));
+        Services services = new Services(new PicasawebService("AndroidPhotoWall"));
+        googlePhotosData.setService(services);
+
+        SelectGoogleAccount selectGoogleAccount = new SelectGoogleAccount(this);
+        selectGoogleAccount.select();
+
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
 //        photoWallAdapter.setData(new PrepareUri().getPrepareUri());
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.addOnItemTouchListener(scaleViewTouchListener);
     }
     protected void onActivityResult(final int requestCode , final int resultCode , final Intent data){
-        ActivityResult activityResult = new ActivityResult(googlePhotosData,requestCode,resultCode,data);
-        activityResult.connectGooglePhotos();
+        ConnectGoogleAccount connectGoogleAccount = new ConnectGoogleAccount(requestCode,resultCode,data);
+        connectGoogleAccount.connect(new GetGooglePhotosToken(googlePhotosData),googlePhotosData);
     }
 }

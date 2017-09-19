@@ -25,10 +25,10 @@ public class GetPhotos {
 
     public GetPhotos(GooglePhotosData googlePhotosData) {
         this.googlePhotosData = googlePhotosData;
+        this.picasawebService = googlePhotosData.getPicasawebService();
     }
 
     public <T extends GphotoFeed> T getFeed(String feedHref, Class<T> feedClass) throws IOException, ServiceException {
-        picasawebService = googlePhotosData.getPicasawebService();
         return picasawebService.getFeed(new URL(feedHref), feedClass);
     }
 
@@ -43,7 +43,8 @@ public class GetPhotos {
         }
         return albums;
     }
-    public List<PhotoEntry> getPhoto(String userID, AlbumEntry album) throws IOException, ServiceException {
+
+    public List<PhotoEntry> getPhoto(AlbumEntry album) throws IOException, ServiceException {
         AlbumFeed feed = album.getFeed();
         List<PhotoEntry> photos = new ArrayList<>();
         for (GphotoEntry entry : feed.getEntries()) {
