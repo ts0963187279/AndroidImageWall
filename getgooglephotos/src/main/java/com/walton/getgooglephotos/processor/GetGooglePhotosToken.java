@@ -3,6 +3,7 @@ package com.walton.getgooglephotos.processor;
 
 import android.accounts.AccountManager;
 
+import com.walton.getgooglephotos.module.GoogleData;
 import com.walton.getgooglephotos.module.GooglePhotosData;
 
 /**
@@ -11,8 +12,8 @@ import com.walton.getgooglephotos.module.GooglePhotosData;
 
 public class GetGooglePhotosToken implements GetToken {
     GooglePhotosData googlePhotosData;
-    public GetGooglePhotosToken(GooglePhotosData googlePhotosData){
-        this.googlePhotosData = googlePhotosData;
+    public GetGooglePhotosToken(GoogleData googleData){
+        this.googlePhotosData = (GooglePhotosData)googleData;
     }
     @Override
     public void getToken() {

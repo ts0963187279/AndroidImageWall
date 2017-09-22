@@ -8,10 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.google.gdata.client.photos.PicasawebService;
-import com.walton.getgooglephotos.module.GoogleContactData;
 import com.walton.getgooglephotos.module.GoogleData;
-import com.walton.getgooglephotos.module.GooglePhotosData;
 
 /**
  * Created by waltonmis on 2017/8/29.
@@ -20,11 +17,11 @@ import com.walton.getgooglephotos.module.GooglePhotosData;
 public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
     Activity activity;
     private final int REQUEST_AUTHENTICATE;
-    Services services;
+    GoogleServices googleServices;
     AsyncTask<Void,Void,Void> asyncTask;
     public OnTokenAcquired(GoogleData googleData, AsyncTask<Void,Void,Void> asyncTask) {
         activity = googleData.getActivity();
-        services = googleData.getService();
+        googleServices = googleData.getService();
         this.asyncTask = asyncTask;
         REQUEST_AUTHENTICATE = googleData.getREQUEST_AUTHENTICATE();
     }
@@ -41,7 +38,7 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle> {
             }
             if(bundle.containsKey(AccountManager.KEY_AUTHTOKEN)){
                 final String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-                services.setUserToken(authToken);
+                googleServices.setUserToken(authToken);
                 asyncTask.execute();
             }
         }catch (Exception e){

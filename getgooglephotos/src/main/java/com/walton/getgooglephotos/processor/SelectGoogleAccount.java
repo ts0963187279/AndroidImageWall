@@ -16,11 +16,13 @@ import static android.content.Context.ACCOUNT_SERVICE;
 
 public class SelectGoogleAccount {
     Activity activity;
-    AccountManager am;
+    AccountManager accountManager;
     private final int PICK_ACCOUNT_REQUEST = 1;
-    public SelectGoogleAccount(Activity activity){
+    public SelectGoogleAccount(GoogleData googleData,Activity activity){
         this.activity = activity;
-        am = (AccountManager) activity.getSystemService(ACCOUNT_SERVICE);
+        accountManager = (AccountManager) activity.getSystemService(ACCOUNT_SERVICE);
+        googleData.setActivity(activity);
+        googleData.setAccountManager(accountManager);
     }
     public void select(){
         Intent intent = AccountPicker.newChooseAccountIntent(null,null,new String[]{"com.google"},false,null,null,null,null);

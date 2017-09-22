@@ -10,9 +10,9 @@ import java.util.TreeMap;
  * Created by waltonmis on 2017/9/4.
  */
 
-public class UpDateAdapterData implements OnBackGroundResult {
+public class UpdateAdapter implements OnBackGroundResult {
     private PhotoWallAdapter photoWallAdapter;
-    public UpDateAdapterData(PhotoWallAdapter photoWallAdapter){
+    public UpdateAdapter(PhotoWallAdapter photoWallAdapter){
         this.photoWallAdapter = photoWallAdapter;
     }
     @Override

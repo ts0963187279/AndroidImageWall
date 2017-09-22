@@ -22,26 +22,22 @@ public class ConnectGoogleAccount {
         this.resultCode = resultCode;
         this.data = data;
     }
-    public void connect(GetToken getToken,GoogleData googleData){
+    public void connect(GoogleData googleData){
         Account[] accountList = googleData.getAccountManager().getAccounts();
         int PICK_ACCOUNT_REQUEST = googleData.getPICK_ACCOUNT_REQUEST();
         int REQUEST_AUTHENTICATE = googleData.getREQUEST_AUTHENTICATE();
-        if(requestCode == PICK_ACCOUNT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-                for (Account a : accountList) {
-                    if (a.name.equals(accountName)) {
-                        googleData.setSelectedAccount(a);
-                        break;
-                    }
+        if(requestCode == PICK_ACCOUNT_REQUEST && resultCode == RESULT_OK) {
+            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+            for (Account a : accountList) {
+                if (a.name.equals(accountName)) {
+                    googleData.setSelectedAccount(a);
+                    break;
                 }
-                getToken.getToken();
             }
+            googleData.getService().getGoogleToken();
         }
-        if(requestCode == REQUEST_AUTHENTICATE) {
-            if (resultCode == RESULT_OK) {
-                getToken.getToken();
-            }
+        if(requestCode == REQUEST_AUTHENTICATE && resultCode == RESULT_OK) {
+            googleData.getService().getGoogleToken();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.walton.getgooglephotos.processor;
 import android.accounts.AccountManager;
 
 import com.walton.getgooglephotos.module.GoogleContactData;
+import com.walton.getgooglephotos.module.GoogleData;
 
 /**
  * Created by waltonmis on 2017/9/19.
@@ -10,8 +11,8 @@ import com.walton.getgooglephotos.module.GoogleContactData;
 
 public class GetGoogleContactToken implements GetToken {
     GoogleContactData contactData;
-    public GetGoogleContactToken(GoogleContactData contactData){
-        this.contactData = contactData;
+    public GetGoogleContactToken(GoogleData googleData){
+        this.contactData = (GoogleContactData)googleData;
     }
     @Override
     public void getToken() {
