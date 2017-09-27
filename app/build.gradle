@@ -47,7 +47,6 @@ android {
 
 dependencies {
 	compile project(':library')
-	compile project(':getgooglephotos')
 }
 
 configurations {

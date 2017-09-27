@@ -15,8 +15,5 @@ rootProject.name = 'com.walton.android.photowall'
 include 'shared'
 include 'api'
 */
-
 include ':library'
 project(':library').projectDir = file('../')
-include 'getgooglephotos'
-project(':getgooglephotos').projectDir = file('../getgooglephotos')
