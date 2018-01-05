@@ -12,7 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyStaySelectionItemView extends ItemView {
+public class MyStaySelectionItemView extends ItemView<Uri> {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyStaySelectionItemView(Context context) {
@@ -30,7 +30,7 @@ public class MyStaySelectionItemView extends ItemView {
         selectChecker.setChecked(false);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setData(Uri uri) {
         showImage.setImageURI(uri);
     }
 }

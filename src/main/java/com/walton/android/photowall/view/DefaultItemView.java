@@ -11,7 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
  * Created by waltonmis on 2017/7/28.
  */
 
-public  class DefaultItemView extends ItemView {
+public  class DefaultItemView extends ItemView<Uri> {
     private SimpleDraweeView showImage;
     public DefaultItemView(Context context) {
         super(context);
@@ -23,7 +23,7 @@ public  class DefaultItemView extends ItemView {
         addView(showImage);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setData(Uri uri) {
         showImage.setImageURI(uri);
     }
 }

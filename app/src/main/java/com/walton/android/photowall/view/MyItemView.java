@@ -13,7 +13,7 @@ import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
  * Created by waltonmis on 2017/7/28.
  */
 
-public class MyItemView extends ItemView {
+public class MyItemView extends ItemView<Uri> {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyItemView(Context context) {
@@ -33,7 +33,7 @@ public class MyItemView extends ItemView {
         addView(selectChecker);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setData(Uri uri) {
         showImage.setImageURI(uri);
     }
 };

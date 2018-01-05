@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/7/28.
  */
 
-public abstract class ItemView extends RelativeLayout{
+public abstract class ItemView<T> extends RelativeLayout{
     private ArrayList<Uri> uriList;
     private int position;
     private int absolutePosition;
@@ -30,9 +30,6 @@ public abstract class ItemView extends RelativeLayout{
     public void setSelectModData(SelectModData selectModData){
         this.selectModData = selectModData;
     }
-    public Uri getUri(){
-        return uriList.get(absolutePosition);
-    }
     public SelectModData getSelectModData(){
         return selectModData;
     }
@@ -46,12 +43,12 @@ public abstract class ItemView extends RelativeLayout{
         return position;
     }
     public void setUriList(ArrayList<Uri> uriList){
-        this.uriList = uriList;
+    	this.uriList = uriList;
     }
     public ArrayList<Uri> getUriList(){
-        return uriList;
+	return uriList;
     }
     public boolean isChecked(){return selectModData.isItemCheck(section,position);}
     public void setChecked(boolean isCheck){selectModData.setItemCheck(section,position,isCheck);}
-    public abstract void setImageUri(Uri uri);
+    public abstract void setData(T data);
 }

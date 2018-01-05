@@ -313,7 +313,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         holder.photoWallCellView.setAbsolutePosition(count + position);
         holder.photoWallCellView.setSection(section);
         holder.photoWallCellView.setUriList(uriList);
-        holder.photoWallCellView.setImageUri(uri);
+        holder.photoWallCellView.setData(uri);
         if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
         }else

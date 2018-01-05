@@ -13,7 +13,7 @@ import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyOnSelectItemView extends ItemView {
+public class MyOnSelectItemView extends ItemView<Uri> {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyOnSelectItemView(Context context){
@@ -34,7 +34,7 @@ public class MyOnSelectItemView extends ItemView {
         showImage.setPadding(25,25,25,25);
     }
     @Override
-    public void setImageUri(Uri uri) {
+    public void setData(Uri uri) {
         showImage.setImageURI(uri);
     }
 }
