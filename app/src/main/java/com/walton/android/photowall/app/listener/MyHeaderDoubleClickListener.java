@@ -1,4 +1,4 @@
-package com.walton.android.photowall.listener;
+package com.walton.android.photowall.app.listener;
 
 import android.net.Uri;
 import android.view.View;

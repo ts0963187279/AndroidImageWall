@@ -1,9 +1,9 @@
-package com.walton.android.photowall.listener;
+package com.walton.android.photowall.app.listener;
 
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.walton.android.photowall.processer.PhotoWallAdapter;
+import com.walton.android.photowall.processor.PhotoWallAdapter;
 
 /**
  * Created by waltonmis on 2017/7/27.

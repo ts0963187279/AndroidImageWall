@@ -1,4 +1,4 @@
-package com.walton.android.photowall.model;
+package com.walton.android.photowall.app.model;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,24 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
-import com.walton.android.photowall.R;
-import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
-import com.walton.android.photowall.listener.ItemViewOnClickListener;
-import com.walton.android.photowall.listener.MyHeaderDoubleClickListener;
-import com.walton.android.photowall.listener.MyHeaderLongClickListener;
-import com.walton.android.photowall.listener.MyHeaderOnClickListener;
-import com.walton.android.photowall.listener.MyItemDoubleClickListener;
-import com.walton.android.photowall.listener.MyItemLongClickListener;
-import com.walton.android.photowall.listener.MyItemSelectModOnClickListener;
-import com.walton.android.photowall.listener.MySelectModMenuClickListener;
-import com.walton.android.photowall.listener.MyViewModMenuClickListener;
+import com.walton.android.photowall.app.R;
+import com.walton.android.photowall.app.listener.ExitSelectModOnKeyListener;
+import com.walton.android.photowall.app.listener.ItemViewOnClickListener;
+import com.walton.android.photowall.app.listener.MyHeaderDoubleClickListener;
+import com.walton.android.photowall.app.listener.MyHeaderLongClickListener;
+import com.walton.android.photowall.app.listener.MyHeaderOnClickListener;
+import com.walton.android.photowall.app.listener.MyItemDoubleClickListener;
+import com.walton.android.photowall.app.listener.MyItemLongClickListener;
+import com.walton.android.photowall.app.listener.MyItemSelectModOnClickListener;
+import com.walton.android.photowall.app.listener.MySelectModMenuClickListener;
+import com.walton.android.photowall.app.listener.MyViewModMenuClickListener;
 import com.walton.android.photowall.listener.ScaleViewTouchListener;
-import com.walton.android.photowall.processer.PhotoWallAdapter;
-import com.walton.android.photowall.processor.MyArrayListComparator;
-import com.walton.android.photowall.processor.MyHeaderViewCreator;
-import com.walton.android.photowall.processor.MyItemViewCreator;
-import com.walton.android.photowall.processor.MyTreeMapComparator;
-import com.walton.android.photowall.processor.PrepareUri;
+import com.walton.android.photowall.processor.PhotoWallAdapter;
+import com.walton.android.photowall.app.processor.MyArrayListComparator;
+import com.walton.android.photowall.app.processor.MyHeaderViewCreator;
+import com.walton.android.photowall.app.processor.MyItemViewCreator;
+import com.walton.android.photowall.app.processor.MyTreeMapComparator;
+import com.walton.android.photowall.app.processor.PrepareUri;
 
 
 public class MainActivity extends AppCompatActivity{

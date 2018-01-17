@@ -1,4 +1,4 @@
-package com.walton.android.photowall.processer;
+package com.walton.android.photowall.processor;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.walton.android.photowall.view.ItemView;

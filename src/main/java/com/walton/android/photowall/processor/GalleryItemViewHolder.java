@@ -1,4 +1,4 @@
-package com.walton.android.photowall.processer;
+package com.walton.android.photowall.processor;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

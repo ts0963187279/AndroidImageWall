@@ -1,4 +1,4 @@
-package com.walton.android.photowall.processor;
+package com.walton.android.photowall.app.processor;
 
 import java.util.Comparator;
 

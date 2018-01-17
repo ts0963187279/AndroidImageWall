@@ -11,7 +11,7 @@ import android.support.v7.widget.SnapHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.walton.android.photowall.processer.GalleryAdapter;
+import com.walton.android.photowall.processor.GalleryAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.walton.android.photowall.listener;
+package com.walton.android.photowall.app.listener;
 
 import android.view.View;
 
@@ -8,13 +8,12 @@ import com.walton.android.photowall.view.HeaderView;
  * Created by waltonmis on 2017/7/27.
  */
 
-public class MyHeaderLongClickListener implements View.OnLongClickListener {
+public class MyHeaderOnClickListener implements View.OnClickListener {
     @Override
-    public boolean onLongClick(View v) {
+    public void onClick(View v) {
         HeaderView view = (HeaderView)v;
         int section = view.getSection();
-        view.getSelectModData().headerOnChecked(section,true);
+        view.getSelectModData().headerOnChecked(section,!view.isChecked());
         view.getSelectModData().adapterNotify();
-        return true;
     }
 }

@@ -2,7 +2,7 @@ package com.walton.android.photowall.model;
 
 import android.net.Uri;
 
-import com.walton.android.photowall.processer.PhotoWallAdapter;
+import com.walton.android.photowall.processor.PhotoWallAdapter;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,13 +1,13 @@
-package com.walton.android.photowall.processor;
+package com.walton.android.photowall.app.processor;
 
 import android.content.Context;
 import android.view.View;
 
-import com.walton.android.photowall.processer.CellViewCreator;
 import com.walton.android.photowall.view.ItemView;
-import com.walton.android.photowall.view.MyOnSelectItemView;
-import com.walton.android.photowall.view.MyItemView;
-import com.walton.android.photowall.view.MyStaySelectionItemView;
+import com.walton.android.photowall.processor.CellViewCreator;
+import com.walton.android.photowall.app.view.MyOnSelectItemView;
+import com.walton.android.photowall.app.view.MyItemView;
+import com.walton.android.photowall.app.view.MyStaySelectionItemView;
 
 /**
  * Created by waltonmis on 2017/8/7.

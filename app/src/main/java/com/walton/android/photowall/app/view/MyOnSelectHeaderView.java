@@ -1,4 +1,4 @@
-package com.walton.android.photowall.view;
+package com.walton.android.photowall.app.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.walton.android.photowall.view.HeaderView;
 /**
  * Created by waltonmis on 2017/8/8.
  */

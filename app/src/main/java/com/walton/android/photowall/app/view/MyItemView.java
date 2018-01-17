@@ -1,4 +1,4 @@
-package com.walton.android.photowall.view;
+package com.walton.android.photowall.app.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
-
+import com.walton.android.photowall.view.ItemView;
 /**
  * Created by waltonmis on 2017/7/28.
  */

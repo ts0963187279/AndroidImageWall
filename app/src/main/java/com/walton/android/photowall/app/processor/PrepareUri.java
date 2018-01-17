@@ -1,8 +1,8 @@
-package com.walton.android.photowall.processor;
+package com.walton.android.photowall.app.processor;
 import android.net.Uri;
 
-import com.walton.android.photowall.processer.ArrayListComparator;
-import com.walton.android.photowall.processer.TreeMapComparator;
+import com.walton.android.photowall.processor.ArrayListComparator;
+import com.walton.android.photowall.processor.TreeMapComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;

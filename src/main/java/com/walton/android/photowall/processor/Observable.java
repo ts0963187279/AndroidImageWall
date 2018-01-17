@@ -1,4 +1,4 @@
-package com.walton.android.photowall.processer;
+package com.walton.android.photowall.processor;
 
 /**
  * Created by waltonmis on 2017/8/31.

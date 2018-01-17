@@ -1,4 +1,4 @@
-project.group = 'com.walton.android.photowall'
+project.group = 'com.walton.cob'
 project.version = '1.0.0'
 
 buildscript {
