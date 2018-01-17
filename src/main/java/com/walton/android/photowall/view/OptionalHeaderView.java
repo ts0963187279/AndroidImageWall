@@ -11,10 +11,10 @@ import android.widget.TextView;
  * Created by waltonmis on 2017/8/7.
  */
 
-public class DefaultOnSelectHeaderView extends HeaderView {
+public class OptionalHeaderView extends HeaderView {
     private TextView header;
     private CheckBox selectAllChecker;
-    public DefaultOnSelectHeaderView(Context context) {
+    public OptionalHeaderView(Context context) {
         super(context);
         setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header = new TextView(context);

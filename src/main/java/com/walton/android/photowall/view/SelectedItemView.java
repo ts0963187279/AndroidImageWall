@@ -7,16 +7,15 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.walton.android.photowall.listener.DefaultImageGalleryOnClickListener;
 
 /**
- * Created by waltonmis on 2017/8/7.
+ * Created by waltonmis on 2017/8/8.
  */
 
-public class DefaultOnSelectItemView extends ItemView<Uri> {
+public class SelectedItemView extends ItemView<Uri> {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
-    public DefaultOnSelectItemView(Context context){
+    public SelectedItemView(Context context) {
         super(context);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         showImage = new SimpleDraweeView(context);
@@ -24,13 +23,10 @@ public class DefaultOnSelectItemView extends ItemView<Uri> {
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
-        setBackgroundColor(Color.RED);
-        DefaultImageGalleryOnClickListener defaultImageGalleryOnClickListener = new DefaultImageGalleryOnClickListener();
-        setOnClickListener(defaultImageGalleryOnClickListener);
+        setBackgroundColor(Color.WHITE);
         addView(showImage);
         addView(selectChecker);
-        selectChecker.setChecked(true);
-        showImage.setPadding(25,25,25,25);
+        selectChecker.setChecked(false);
     }
 
     @Override

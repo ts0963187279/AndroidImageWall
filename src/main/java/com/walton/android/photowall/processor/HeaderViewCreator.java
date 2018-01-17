@@ -3,9 +3,9 @@ package com.walton.android.photowall.processor;
 import android.content.Context;
 import android.view.View;
 
-import com.walton.android.photowall.view.DefaultOnSelectHeaderView;
+import com.walton.android.photowall.view.OptionalHeaderView;
 import com.walton.android.photowall.view.DefaultHeaderView;
-import com.walton.android.photowall.view.DefaultStaySelectionHeaderView;
+import com.walton.android.photowall.view.SelectedHeaderView;
 import com.walton.android.photowall.view.HeaderView;
 
 /**
@@ -21,9 +21,9 @@ public class HeaderViewCreator implements LabelViewCreator {
     public HeaderView createView(int status) {
         switch(status){
             case 1 :
-                return new DefaultStaySelectionHeaderView(context);
+                return new SelectedHeaderView(context);
             case 2 :
-                return new DefaultOnSelectHeaderView(context);
+                return new OptionalHeaderView(context);
             default:
                 return new DefaultHeaderView(context);
         }

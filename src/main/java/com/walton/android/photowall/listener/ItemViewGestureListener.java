@@ -12,10 +12,10 @@ import com.walton.android.photowall.view.ItemView;
 
 public class ItemViewGestureListener extends GestureDetector.SimpleOnGestureListener {
     ItemView view;
-    View.OnClickListener onDoubleClickListener = new DefaultItemDoubleClickListener();
-    View.OnClickListener onClickListener = new DefaultImageGalleryOnClickListener();
-    View.OnClickListener selectModOnClickListener = new DefaultSelectModItemOnClickListener();
-    View.OnLongClickListener selectModOnLongClickListener = new DefaultSelectModItemLongClickListener();
+    View.OnClickListener onDoubleClickListener = new ItemDoubleClickListener();
+    View.OnClickListener onClickListener = new ItemViewOnClickListener();
+    View.OnClickListener selectModOnClickListener = new SelectModItemOnClickListener();
+    View.OnLongClickListener selectModOnLongClickListener = new SelectModItemLongClickListener();
     public void setView(View view){
         this.view = (ItemView)view;
     }

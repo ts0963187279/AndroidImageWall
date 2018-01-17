@@ -8,7 +8,7 @@ import com.walton.android.photowall.view.ItemView;
  * Created by waltonmis on 2017/8/4.
  */
 
-public class DefaultItemDoubleClickListener implements View.OnClickListener{
+public class ItemDoubleClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         ItemView view = (ItemView)v;

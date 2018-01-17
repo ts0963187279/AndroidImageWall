@@ -3,8 +3,8 @@ package com.walton.android.photowall.processor;
 import android.content.Context;
 
 import com.walton.android.photowall.view.DefaultItemView;
-import com.walton.android.photowall.view.DefaultOnSelectItemView;
-import com.walton.android.photowall.view.DefaultStaySelectionItemView;
+import com.walton.android.photowall.view.OptionalItemView;
+import com.walton.android.photowall.view.SelectedItemView;
 import com.walton.android.photowall.view.ItemView;
 
 /**
@@ -20,9 +20,9 @@ public class ItemViewCreator implements CellViewCreator {
     public ItemView createView(int status) {
         switch (status){
             case 1:
-                return new DefaultStaySelectionItemView(context);
+                return new SelectedItemView(context);
             case 2:
-                return new DefaultOnSelectItemView(context);
+                return new OptionalItemView(context);
             default:
                 return new DefaultItemView(context);
         }

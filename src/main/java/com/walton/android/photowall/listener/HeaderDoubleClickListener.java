@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by waltonmis on 2017/8/4.
  */
 
-public class DefaultHeaderDoubleClickListener implements View.OnClickListener {
+public class HeaderDoubleClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         HeaderView view = (HeaderView)v;

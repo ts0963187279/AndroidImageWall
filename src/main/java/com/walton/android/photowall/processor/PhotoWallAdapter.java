@@ -8,22 +8,12 @@ import android.view.ViewGroup;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.walton.android.photowall.listener.DefaultHeaderDoubleClickListener;
-import com.walton.android.photowall.listener.DefaultItemDoubleClickListener;
-import com.walton.android.photowall.listener.DefaultSelectModHeaderLongClickListener;
-import com.walton.android.photowall.listener.DefaultSelectModHeaderOnClickListener;
-import com.walton.android.photowall.listener.DefaultSelectModItemLongClickListener;
-import com.walton.android.photowall.listener.DefaultSelectModItemOnClickListener;
-import com.walton.android.photowall.listener.HeaderViewGestureListener;
-import com.walton.android.photowall.listener.HeaderViewOnTouchListener;
-import com.walton.android.photowall.listener.ItemViewGestureListener;
-import com.walton.android.photowall.listener.ItemViewOnTouchListener;
+import com.walton.android.photowall.listener.*;
 import com.walton.android.photowall.model.SelectModData;
-import com.walton.android.photowall.view.DefaultHeaderView;
-import com.walton.android.photowall.view.DefaultItemView;
 import com.walton.android.photowall.view.HeaderView;
 import com.walton.android.photowall.view.ItemView;
-
+import com.walton.android.photowall.view.DefaultHeaderView;
+import com.walton.android.photowall.view.DefaultItemView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,17 +57,18 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         uriTreeMap = new TreeMap<>();
         itemView = new DefaultItemView(context);
         headerView = new DefaultHeaderView(context);
-        selectModHeaderLongClickListener = new DefaultSelectModHeaderLongClickListener();
-        selectModHeaderOnClickListener = new DefaultSelectModHeaderOnClickListener();
-        selectModItemLongClickListener = new DefaultSelectModItemLongClickListener();
-        selectModItemOnClickListener = new DefaultSelectModItemOnClickListener();
+        selectModHeaderLongClickListener = new SelectModHeaderLongClickListener();
+        selectModHeaderOnClickListener = new SelectModHeaderOnClickListener();
+        selectModItemLongClickListener = new SelectModItemLongClickListener();
+        selectModItemOnClickListener = new SelectModItemOnClickListener();
         itemViewGestureDetectorListener = new ItemViewGestureListener();
         itemViewOnTouchListener = new ItemViewOnTouchListener();
-        itemViewOnDoubleClickListener = new DefaultItemDoubleClickListener();
+        itemViewOnDoubleClickListener = new ItemDoubleClickListener();
+		itemViewOnClickListener = new ItemViewOnClickListener();
         headerViewGestureListener = new HeaderViewGestureListener();
         headerViewOnTouchListener = new HeaderViewOnTouchListener();
-        headerViewOnDoubleClickListener = new DefaultHeaderDoubleClickListener();
-        cellViewCreator = new ItemViewCreator(context);
+        headerViewOnDoubleClickListener = new HeaderDoubleClickListener();
+		cellViewCreator = new ItemViewCreator(context);
         labelViewCreator = new HeaderViewCreator(context);
     }
     public void setData(TreeMap<String,ArrayList<String>> strTreeMap){
@@ -116,16 +107,14 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
             uris.add(URI);
         }
         selectModData.setUriList(uriList);
-//        notifyDataSetChanged();
         notifyAllSectionsDataSetChanged();
     }
     public boolean isSelectMod(){
         return selectModData.isSelectMod();
     }
     public void ViewMod(){
-            selectModData.clearChecked();
-//            notifyItemRangeChanged(0,uriList.size()+getSectionCount());
-          notifyDataSetChanged();
+		selectModData.clearChecked();
+		notifyDataSetChanged();
     }
     public void removeItem(){
         for(int i=selectModData.getSectionCount()-1;i>=0;i--){
@@ -152,7 +141,6 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         }
         selectModData.setSelectMod(false);
         notifyItemRangeChanged(0,uriList.size()+getSectionCount());
-        //notifyDataSetChanged();
     }
     public void shareItem(){
         ArrayList<Uri> ImageUriList = new ArrayList<>();

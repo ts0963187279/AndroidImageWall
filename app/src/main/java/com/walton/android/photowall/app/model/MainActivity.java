@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.app.R;
 import com.walton.android.photowall.app.listener.ExitSelectModOnKeyListener;
-import com.walton.android.photowall.app.listener.ItemViewOnClickListener;
+import com.walton.android.photowall.app.listener.MyItemViewOnClickListener;
 import com.walton.android.photowall.app.listener.MyHeaderDoubleClickListener;
 import com.walton.android.photowall.app.listener.MyHeaderLongClickListener;
 import com.walton.android.photowall.app.listener.MyHeaderOnClickListener;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
         photoWallAdapter.setSelectModToolBar(selectModToolBar);
         photoWallAdapter.setItemCellViewCreator(new MyItemViewCreator(getApplicationContext()));
         photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(getApplicationContext()));
-        photoWallAdapter.setItemViewOnClickListener(new ItemViewOnClickListener());
+        photoWallAdapter.setItemViewOnClickListener(new MyItemViewOnClickListener());
         photoWallAdapter.setSelectModHeaderLongClickListener(new MyHeaderLongClickListener());
         photoWallAdapter.setSelectModHeaderOnClickListener(new MyHeaderOnClickListener());
         photoWallAdapter.setSelectModItemLongClickListener(new MyItemLongClickListener());

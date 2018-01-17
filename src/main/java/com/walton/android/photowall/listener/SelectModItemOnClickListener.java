@@ -5,15 +5,14 @@ import android.view.View;
 import com.walton.android.photowall.view.ItemView;
 
 /**
- * Created by waltonmis on 2017/7/26.
+ * Created by waltonmis on 2017/7/27.
  */
 
-public class DefaultSelectModItemLongClickListener implements View.OnLongClickListener {
+public class SelectModItemOnClickListener implements View.OnClickListener {
     @Override
-    public boolean onLongClick(View v) {
+    public void onClick(View v) {
         ItemView view = (ItemView)v;
         view.setChecked(!view.isChecked());
         view.getSelectModData().adapterNotify();
-        return true;
     }
 }

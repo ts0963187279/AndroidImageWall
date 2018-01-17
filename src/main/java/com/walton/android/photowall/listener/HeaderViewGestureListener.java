@@ -12,9 +12,9 @@ import com.walton.android.photowall.view.HeaderView;
 
 public class HeaderViewGestureListener extends GestureDetector.SimpleOnGestureListener {
     HeaderView view;
-    View.OnClickListener onDoubleClickListener = new DefaultHeaderDoubleClickListener();
-    View.OnClickListener selectModOnClickListener = new DefaultSelectModHeaderOnClickListener();
-    View.OnLongClickListener selectModOnLongClickListener = new DefaultSelectModHeaderLongClickListener();
+    View.OnClickListener onDoubleClickListener = new HeaderDoubleClickListener();
+    View.OnClickListener selectModOnClickListener = new SelectModHeaderOnClickListener();
+    View.OnLongClickListener selectModOnLongClickListener = new SelectModHeaderLongClickListener();
     public void setView(View view){
         this.view = (HeaderView)view;
     }
