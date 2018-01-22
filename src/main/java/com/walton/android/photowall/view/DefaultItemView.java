@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.net.Uri;
 	
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.walton.android.photowall.model.ItemViewData/*
+import com.walton.android.photowall.model.ItemViewData;
 
 /**
  * Created by waltonmis on 2017/7/28.

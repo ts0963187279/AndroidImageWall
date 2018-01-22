@@ -3,7 +3,7 @@ package com.walton.android.photowall.processor;
 import android.content.Context;
 import android.view.View;
 
-import com.walton.android.photowall.view.OptionalHeaderView;
+import com.walton.android.photowall.view.NotSelectedHeaderView;
 import com.walton.android.photowall.view.DefaultHeaderView;
 import com.walton.android.photowall.view.SelectedHeaderView;
 import com.walton.android.photowall.view.HeaderView;
@@ -23,7 +23,7 @@ public class HeaderViewCreator implements LabelViewCreator {
             case 1 :
                 return new SelectedHeaderView(context);
             case 2 :
-                return new OptionalHeaderView(context);
+                return new NotSelectedHeaderView(context);
             default:
                 return new DefaultHeaderView(context);
         }

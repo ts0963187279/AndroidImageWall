@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.walton.android.photowall.view.HeaderView;
@@ -12,22 +11,21 @@ import com.walton.android.photowall.view.HeaderView;
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyOnSelectHeaderView extends HeaderView {
+public class MySelectedHeaderView extends HeaderView {
     private TextView header;
     private CheckBox selectAllChecker;
-    public MyOnSelectHeaderView(Context context) {
+    public MySelectedHeaderView(Context context) {
         super(context);
-        setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header = new TextView(context);
-        header.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        header.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         selectAllChecker = new CheckBox(context);
         selectAllChecker.setClickable(false);
-        setBackgroundColor(Color.GRAY);
+        setBackgroundColor(Color.BLUE);
         addView(selectAllChecker);
         addView(header);
-        selectAllChecker.setChecked(true);
+        selectAllChecker.setChecked(false);
     }
-
     @Override
     public void setText(String title) {
         header.setText(title);
