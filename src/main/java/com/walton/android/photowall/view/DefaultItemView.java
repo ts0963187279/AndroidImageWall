@@ -2,16 +2,17 @@ package com.walton.android.photowall.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.ViewGroup;
-
+import android.net.Uri;
+	
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.walton.android.photowall.model.ItemViewData/*
 
 /**
  * Created by waltonmis on 2017/7/28.
  */
 
-public  class DefaultItemView extends ItemView<Uri> {
+public  class DefaultItemView extends ItemView {
     private SimpleDraweeView showImage;
     public DefaultItemView(Context context) {
         super(context);
@@ -23,7 +24,8 @@ public  class DefaultItemView extends ItemView<Uri> {
         addView(showImage);
     }
     @Override
-    public void setData(Uri uri) {
-        showImage.setImageURI(uri);
+    public void setData(ItemViewData itemViewData) {
+		Uri uri = Uri.parse((String)itemViewData.getPreviewData());
+        showImage.setImageURI(uri);		
     }
 }

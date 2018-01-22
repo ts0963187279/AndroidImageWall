@@ -14,6 +14,7 @@ import com.walton.android.photowall.view.HeaderView;
 import com.walton.android.photowall.view.ItemView;
 import com.walton.android.photowall.view.DefaultHeaderView;
 import com.walton.android.photowall.view.DefaultItemView;
+import com.walton.android.photowall.model.ItemViewData;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,11 +27,11 @@ import java.util.TreeMap;
  */
 
 public class PhotoWallAdapter extends StickyHeaderGridAdapter{
-    private ArrayList<Uri> uriList;
+    private List<ItemViewData> itemViewDataList;
     private Context context;
     private String[] header;
-    private List<List<Uri>> uris;
-    private TreeMap<String,ArrayList<Uri>> uriTreeMap;
+    private List<List<ItemViewData>> itemViewDataSortList;
+	private TreeMap<String,List<ItemViewData>> itemViewDataTreeMap;
     private ItemView itemView;
     private HeaderView headerView;
     private View.OnLongClickListener selectModHeaderLongClickListener;
@@ -51,10 +52,10 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Toolbar selectModToolBar;
     private Comparator treeMapComparator;
     private Comparator arrayListComparator;
-    public PhotoWallAdapter(Context context){
+	public PhotoWallAdapter(Context context){
         Fresco.initialize(context);
         this.context = context;
-        uriTreeMap = new TreeMap<>();
+		itemViewDataTreeMap = new TreeMap<>();
         itemView = new DefaultItemView(context);
         headerView = new DefaultHeaderView(context);
         selectModHeaderLongClickListener = new SelectModHeaderLongClickListener();
@@ -71,43 +72,26 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
 		cellViewCreator = new ItemViewCreator(context);
         labelViewCreator = new HeaderViewCreator(context);
     }
-    public void setData(TreeMap<String,ArrayList<String>> strTreeMap){
-        Object key;
-        Iterator iterator;
-        iterator = strTreeMap.navigableKeySet().iterator();
-        for(int i=0;i< strTreeMap.size();i++){
-            key = iterator.next();
-            ArrayList<Uri> uris = new ArrayList<>(strTreeMap.get(key).size());
-            for(int j=0;j<strTreeMap.get(key).size();j++){
-                Uri uri = Uri.parse(strTreeMap.get(key).get(j).toString());
-                uris.add(uri);
-            }
-            uriTreeMap.put(key.toString(),uris);
-        }
-        upDateData(uriTreeMap);
-    }
-    public void upDateData(TreeMap<String,ArrayList<Uri>> uriTreeMap){
-        selectModData = new SelectModData(uriTreeMap,this);
-        uriList = new ArrayList<>();
-        uris = new ArrayList<>(uriTreeMap.size());
-        System.out.println(uriTreeMap.size());
-        header = new String[uriTreeMap.size()];
-        Iterator iterator;
-        Object key;
-        iterator = uriTreeMap.navigableKeySet().iterator();
-        for(int i =0;i<uriTreeMap.size();i++){
-            key = iterator.next();
-            header[i] = key.toString();
-            List<Uri> URI = new ArrayList<>(uriTreeMap.get(key).size());
-            for(int j =0;j< uriTreeMap.get(key).size();j++){
-                Uri uri = uriTreeMap.get(key).get(j);
-                URI.add(uri);
-                uriList.add(uri);
-            }
-            uris.add(URI);
-        }
-        selectModData.setUriList(uriList);
-        notifyAllSectionsDataSetChanged();
+    public void setData(TreeMap<String,List<ItemViewData>> itemViewDataTreeMap){
+		this.itemViewDataTreeMap = itemViewDataTreeMap;
+		itemViewDataList = new ArrayList<>();
+		itemViewDataSortList = new ArrayList<>(itemViewDataTreeMap.size());
+		selectModData = new SelectModData(itemViewDataTreeMap,this);
+		header = new String[itemViewDataTreeMap.size()];
+		Iterator iterator;
+		iterator = itemViewDataTreeMap.navigableKeySet().iterator();
+		for(int i=0;i<itemViewDataTreeMap.size();i++){
+			Object key = iterator.next();
+			header[i] = key.toString();
+			List<ItemViewData> itemViewDataListTmp = new ArrayList<>(itemViewDataTreeMap.get(key).size());
+			for(int j=0;j<itemViewDataTreeMap.get(key).size();j++){
+				ItemViewData itemViewData = itemViewDataTreeMap.get(key).get(j);
+				itemViewDataListTmp.add(itemViewData);
+				itemViewDataList.add(itemViewData);
+			}
+			itemViewDataSortList.add(itemViewDataListTmp);
+		}
+		notifyAllSectionsDataSetChanged();
     }
     public boolean isSelectMod(){
         return selectModData.isSelectMod();
@@ -122,7 +106,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
             for(int j=selectModData.getPositionCount(i)-1;j>=0;j--){
                 if(selectModData.isItemCheck(i,j)) {
                     try {
-                        uris.get(i).remove(j);
+                        itemViewDataSortList.get(i).remove(j);
                         selectModData.setItemCheck(i, j, false);
                         selectModData.checkRemove(i, j);
                         notifySectionItemRemoved(i, j);
@@ -132,28 +116,15 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
                 }
             }
         }
-        uriList.clear();
-        for(int i =0;i<uris.size();i++) {
-            for (int j = 0; j < uris.get(i).size(); j++) {
-                Uri uri = uris.get(i).get(j);
-                uriList.add(uri);
+        itemViewDataList.clear();
+        for(int i =0;i<itemViewDataSortList.size();i++) {
+            for (int j = 0; j < itemViewDataSortList.get(i).size(); j++) {
+                ItemViewData itemViewData = itemViewDataSortList.get(i).get(j);
+                itemViewDataList.add(itemViewData);
             }
         }
         selectModData.setSelectMod(false);
-        notifyItemRangeChanged(0,uriList.size()+getSectionCount());
-    }
-    public void shareItem(){
-        ArrayList<Uri> ImageUriList = new ArrayList<>();
-        for(int i=0;i< uris.size();i++){
-            for(int j=0;j< uris.get(i).size();j++){
-                if(selectModData.isItemCheck(i,j)) {
-                    ImageUriList.add(uris.get(i).get(j));
-                }
-            }
-        }
-        ShareImage shareImage = new ShareImage(context, ImageUriList);
-        shareImage.StartShare();
-
+        notifyItemRangeChanged(0,itemViewDataList.size()+getSectionCount());
     }
     public void TitleOnChange(String title){
         try {
@@ -216,21 +187,21 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         this.arrayListComparator = arrayListComparator;
     }
     public void sortHeader(){
-        TreeMap<String,ArrayList<Uri>> uriTreeMapTmp = new TreeMap<>(treeMapComparator);
-        Object key;Iterator iterator = uriTreeMap.navigableKeySet().iterator();
+        TreeMap<String,List<ItemViewData>> itemViewDataTreeMapTmp = new TreeMap<>(treeMapComparator);
+        Object key;Iterator iterator = itemViewDataTreeMap.navigableKeySet().iterator();
         while(iterator.hasNext()){
             key = iterator.next();
-            uriTreeMapTmp.put((String)key,uriTreeMap.get(key));
+            itemViewDataTreeMapTmp.put((String)key,itemViewDataTreeMap.get(key));
         }
-        uris.clear();
-        uriList.clear();
-        uriTreeMap = uriTreeMapTmp;
-        upDateData(uriTreeMapTmp);
+        itemViewDataSortList.clear();
+        itemViewDataList.clear();
+        itemViewDataTreeMap = itemViewDataTreeMapTmp;
+        setData(itemViewDataTreeMapTmp);
         notifyAllSectionsDataSetChanged();
     }
     public void sortArrayList(){
-        for(int i=0;i<uris.size();i++){
-            Collections.sort(uris.get(i),arrayListComparator);
+        for(int i=0;i<itemViewDataSortList.size();i++){
+            Collections.sort(itemViewDataSortList.get(i),arrayListComparator);
         }
         notifyDataSetChanged();
     }
@@ -252,13 +223,13 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     }
     @Override
     public int getSectionCount() {
-        if(uris == null)
+        if(itemViewDataSortList == null)
             return 0;
-        return uris.size();
+        return itemViewDataSortList.size();
     }
     @Override
     public int getSectionItemCount(int section) {
-        return uris.get(section).size();
+        return itemViewDataSortList.get(section).size();
     }
     @Override
     public HeaderViewHolder onCreateHeaderViewHolder(ViewGroup parent, int headerType) {
@@ -292,7 +263,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     @Override
     public void onBindItemViewHolder(ItemViewHolder viewHolder, final int section,final int position) {
         final PhotoWallItemViewHolder holder = (PhotoWallItemViewHolder) viewHolder;
-        final Uri uri = uris.get(section).get(position);
+        final ItemViewData itemViewData = itemViewDataSortList.get(section).get(position);
         int count = 0;
         for(int i =0;i<section;i++)
             count += getSectionItemCount(i);
@@ -300,8 +271,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         holder.photoWallCellView.setPosition(position);
         holder.photoWallCellView.setAbsolutePosition(count + position);
         holder.photoWallCellView.setSection(section);
-        holder.photoWallCellView.setUriList(uriList);
-        holder.photoWallCellView.setData(uri);
+        holder.photoWallCellView.setItemViewDataList(itemViewDataList);
+        holder.photoWallCellView.setData(itemViewData);
         if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
         }else

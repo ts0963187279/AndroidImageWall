@@ -20,9 +20,6 @@ public class MySelectModMenuClickListener implements Toolbar.OnMenuItemClickList
             case R.id.action_delete:
                 photoWallAdapter.removeItem();
                 return true;
-            case R.id.action_share:
-                photoWallAdapter.shareItem();
-                return true;
            }
            return false;
     }

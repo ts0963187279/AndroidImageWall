@@ -5,15 +5,17 @@ import android.net.Uri;
 import android.widget.RelativeLayout;
 
 import com.walton.android.photowall.model.SelectModData;
+import com.walton.android.photowall.model.ItemViewData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by waltonmis on 2017/7/28.
  */
 
-public abstract class ItemView<T> extends RelativeLayout{
-    private ArrayList<Uri> uriList;
+public abstract class ItemView extends RelativeLayout{
+    private List<ItemViewData> itemViewDataList;
     private int position;
     private int absolutePosition;
     private int section;
@@ -42,13 +44,13 @@ public abstract class ItemView<T> extends RelativeLayout{
     public int getPosition(){
         return position;
     }
-    public void setUriList(ArrayList<Uri> uriList){
-    	this.uriList = uriList;
+    public void setItemViewDataList(List<ItemViewData> itemViewDataList){
+    	this.itemViewDataList = itemViewDataList;
     }
-    public ArrayList<Uri> getUriList(){
-	return uriList;
+    public List<ItemViewData> getItemViewDataList(){
+		return itemViewDataList;
     }
     public boolean isChecked(){return selectModData.isItemCheck(section,position);}
     public void setChecked(boolean isCheck){selectModData.setItemCheck(section,position,isCheck);}
-    public abstract void setData(T data);
+    public abstract void setData(ItemViewData itemViewData);
 }

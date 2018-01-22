@@ -9,11 +9,12 @@ import android.widget.CheckBox;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.ItemViewOnClickListener;
 import com.walton.android.photowall.view.ItemView;
+import com.walton.android.photowall.model.ItemViewData;
 /**
  * Created by waltonmis on 2017/8/8.
  */
 
-public class MyOnSelectItemView extends ItemView<Uri> {
+public class MyOnSelectItemView extends ItemView {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public MyOnSelectItemView(Context context){
@@ -34,7 +35,8 @@ public class MyOnSelectItemView extends ItemView<Uri> {
         showImage.setPadding(25,25,25,25);
     }
     @Override
-    public void setData(Uri uri) {
+    public void setData(ItemViewData itemViewData) {
+		Uri uri = Uri.parse((String)itemViewData.getPreviewData());
         showImage.setImageURI(uri);
     }
 }

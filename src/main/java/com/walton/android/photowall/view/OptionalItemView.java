@@ -8,12 +8,12 @@ import android.widget.CheckBox;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.walton.android.photowall.listener.ItemViewOnClickListener;
-
+import com.walton.android.photowall.model.ItemViewData;
 /**
  * Created by waltonmis on 2017/8/7.
  */
 
-public class OptionalItemView extends ItemView<Uri> {
+public class OptionalItemView extends ItemView {
     private SimpleDraweeView showImage;
     private CheckBox selectChecker;
     public OptionalItemView(Context context){
@@ -34,7 +34,8 @@ public class OptionalItemView extends ItemView<Uri> {
     }
 
     @Override
-    public void setData(Uri uri) {
+    public void setData(ItemViewData itemViewData) {
+		Uri uri = Uri.parse((String)itemViewData.getPreviewData());
         showImage.setImageURI(uri);
     }
 }

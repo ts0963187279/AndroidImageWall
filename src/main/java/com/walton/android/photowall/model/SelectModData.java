@@ -3,8 +3,10 @@ package com.walton.android.photowall.model;
 import android.net.Uri;
 
 import com.walton.android.photowall.processor.PhotoWallAdapter;
+import com.walton.android.photowall.model.ItemViewData;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -20,7 +22,7 @@ public class SelectModData {
     private boolean isSelectMod;
     private int checkCount;
     private PhotoWallAdapter photoWallAdapter;
-    public SelectModData(TreeMap<String,ArrayList<Uri>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
+    public SelectModData(TreeMap<String,List<ItemViewData>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
         this.photoWallAdapter = photoWallAdapter;
         Iterator iterator;
         Object key;
