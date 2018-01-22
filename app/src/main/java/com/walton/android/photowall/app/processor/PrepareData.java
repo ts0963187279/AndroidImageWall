@@ -29,9 +29,9 @@ import java.util.TreeMap;
  * Created by waltonmis on 2017/7/28.
  */
 
-public class PrepareUri {
+public class PrepareData {
     TreeMap<String,List<ItemViewData>> itemViewDataTreeMap;
-    public PrepareUri(){
+    public PrepareData(){
         itemViewDataTreeMap = new TreeMap<>();
 		ItemViewData itemViewDataTmp = new PhotoItemViewData();
         List<ItemViewData> itemViewDataListTmp = new ArrayList<>();
@@ -126,7 +126,7 @@ public class PrepareUri {
 		itemViewDataListTmp.add(itemViewDataTmp);
         itemViewDataTreeMap.put("Python",itemViewDataListTmp);
     }
-    public TreeMap<String, List<ItemViewData>> getPrepareUri(){
+    public TreeMap<String, List<ItemViewData>> getPrepareData(){
         return itemViewDataTreeMap;
     }
 }

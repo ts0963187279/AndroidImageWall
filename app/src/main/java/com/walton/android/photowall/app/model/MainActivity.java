@@ -39,7 +39,7 @@ import com.walton.android.photowall.app.processor.MyArrayListComparator;
 import com.walton.android.photowall.app.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.app.processor.MyItemViewCreator;
 import com.walton.android.photowall.app.processor.MyTreeMapComparator;
-import com.walton.android.photowall.app.processor.PrepareUri;
+import com.walton.android.photowall.app.processor.PrepareData;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity{
         selectModToolBar.inflateMenu(R.menu.select_mod_menu);
         recyclerView = (RecyclerView) findViewById(R.id.PhotoWall);
         photoWallAdapter = new PhotoWallAdapter(getApplicationContext());
-        PrepareUri prepareUri = new PrepareUri();
+        PrepareData prepareData = new PrepareData();
 
-        photoWallAdapter.setData(prepareUri.getPrepareUri());
+        photoWallAdapter.setData(prepareData.getPrepareData());
 
         selectModToolBar.setOnMenuItemClickListener(new MySelectModMenuClickListener(photoWallAdapter));
         viewModToolBar.setOnMenuItemClickListener(new MyViewModMenuClickListener(photoWallAdapter));
