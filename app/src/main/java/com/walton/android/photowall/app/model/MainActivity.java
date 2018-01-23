@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.app.R;
-import com.walton.android.photowall.app.listener.ExitSelectModOnKeyListener;
 import com.walton.android.photowall.app.listener.MyItemViewOnClickListener;
 import com.walton.android.photowall.app.listener.MyHeaderDoubleClickListener;
 import com.walton.android.photowall.app.listener.MyHeaderLongClickListener;

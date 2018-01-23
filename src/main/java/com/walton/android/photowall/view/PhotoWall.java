@@ -40,10 +40,9 @@ public class PhotoWall extends LinearLayout{
 		super(context);
 		setOrientation(VERTICAL);
 		viewModToolBar = new Toolbar(context);
-		viewModToolBar.setTitle("PhotoWall (view)");
+		viewModToolBar.setLayoutParams(new LinearLayout.LayoutParams(0,0));
 		addView(viewModToolBar);
 		selectModToolBar = new Toolbar(context);
-		selectModToolBar.setTitle("PhotoWall (select)");
 		addView(selectModToolBar);
 		recyclerView = new RecyclerView(context);
 		recyclerView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
@@ -60,10 +59,12 @@ public class PhotoWall extends LinearLayout{
 	}
 	public void setViewModToolBar(Toolbar toolbar){
 		viewModToolBar = toolbar;
+		addView(viewModToolBar);
 		photoWallAdapter.setViewModToolBar(toolbar);
 	}
 	public void setSelectModToolBar(Toolbar toolbar){
 		selectModToolBar = toolbar;
+		addView(selectModToolBar);
 		photoWallAdapter.setSelectModToolBar(toolbar);
 	}
 	public void setCellViewCreator(CellViewCreator cellViewCreator){
