@@ -66,7 +66,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Toolbar viewModToolBar;
     private Toolbar selectModToolBar;
     private Comparator treeMapComparator;
-    private Comparator arrayListComparator;
+    private Comparator listComparator;
 	public PhotoWallAdapter(Context context){
         Fresco.initialize(context);
         this.context = context;
@@ -147,7 +147,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         }catch (Exception e){}
         notifyDataSetChanged();
     }
-    public void setItemCellViewCreator(CellViewCreator cellViewCreator){
+    public void setItemViewCreator(CellViewCreator cellViewCreator){
         this.cellViewCreator = cellViewCreator;
     }
     public void setHeaderViewCreator(LabelViewCreator labelViewCreator){
@@ -198,8 +198,8 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     public void setTreeMapComparator(Comparator treeMapComparator){
         this.treeMapComparator = treeMapComparator;
     }
-    public void setArrayListComparator(Comparator arrayListComparator){
-        this.arrayListComparator = arrayListComparator;
+    public void setListComparator(Comparator listComparator){
+        this.listComparator = listComparator;
     }
     public void sortHeader(){
         TreeMap<String,List<ItemViewData>> itemViewDataTreeMapTmp = new TreeMap<>(treeMapComparator);
@@ -214,9 +214,9 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         setData(itemViewDataTreeMapTmp);
         notifyAllSectionsDataSetChanged();
     }
-    public void sortArrayList(){
+    public void sortList(){
         for(int i=0;i<itemViewDataSortList.size();i++){
-            Collections.sort(itemViewDataSortList.get(i),arrayListComparator);
+            Collections.sort(itemViewDataSortList.get(i),listComparator);
         }
         notifyDataSetChanged();
     }

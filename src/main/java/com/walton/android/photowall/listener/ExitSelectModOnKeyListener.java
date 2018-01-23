@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.walton.android.photowall.app.listener;
+package com.walton.android.photowall.listener;
 
 import android.view.KeyEvent;
 import android.view.View;

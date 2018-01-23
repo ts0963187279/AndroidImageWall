@@ -45,7 +45,6 @@ public class ShowImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-
         setContentView(R.layout.showimage_layout);
         Intent intent = this.getIntent();
         ImageUriList = intent.getParcelableArrayListExtra(GET_EXTRA_IMAGELIST_KEY);
@@ -63,8 +62,6 @@ public class ShowImageActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.show_image_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 }

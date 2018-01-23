@@ -54,16 +54,16 @@ public class PrepareData {
 
 		itemViewDataListTmp = new ArrayList<>();
 		itemViewDataTmp = new PhotoItemViewData();
-		itemViewDataTmp.setPreviewData("https://isocpp.org/files/img/cpp_blogo.png");
-		itemViewDataTmp.setContentData("https://isocpp.org/files/img/cpp_blogo.png");
-		itemViewDataListTmp.add(itemViewDataTmp);
-		itemViewDataTmp = new PhotoItemViewData();
 		itemViewDataTmp.setPreviewData("https://lh3.googleusercontent.com/3vGlLyKkKC46G1qqiqyKf0jeOyUtiZk5NxOxeuRJOfP4aZzCob9kabZX252mUmVAHA=w300");
 		itemViewDataTmp.setContentData("https://lh3.googleusercontent.com/3vGlLyKkKC46G1qqiqyKf0jeOyUtiZk5NxOxeuRJOfP4aZzCob9kabZX252mUmVAHA=w300");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		itemViewDataTmp = new PhotoItemViewData();
 		itemViewDataTmp.setPreviewData("https://www.visualstudio.com/wp-content/uploads/2016/05/C-4-562x309-OPx.png");
 		itemViewDataTmp.setContentData("https://www.visualstudio.com/wp-content/uploads/2016/05/C-4-562x309-OPx.png");
+		itemViewDataListTmp.add(itemViewDataTmp);
+		itemViewDataTmp = new PhotoItemViewData();
+		itemViewDataTmp.setPreviewData("https://isocpp.org/files/img/cpp_blogo.png");
+		itemViewDataTmp.setContentData("https://isocpp.org/files/img/cpp_blogo.png");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		itemViewDataTmp = new PhotoItemViewData();
 		itemViewDataTmp.setPreviewData("https://daks2k3a4ib2z.cloudfront.net/590b02ac96d6fe11f3fcef0c/59143a1e01301267ba12abb3_cpp-1.jpg");

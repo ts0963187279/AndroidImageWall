@@ -37,7 +37,7 @@ public class MyViewModMenuClickListener implements Toolbar.OnMenuItemClickListen
                 photoWallAdapter.sortHeader();
                 return true;
             case R.id.sortByUri:
-                photoWallAdapter.sortArrayList();
+                photoWallAdapter.sortList();
                 return true;
         }
         return false;
