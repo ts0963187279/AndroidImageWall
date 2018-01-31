@@ -41,7 +41,7 @@ import com.walton.android.photowall.app.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.app.processor.MyItemViewCreator;
 import com.walton.android.photowall.app.processor.MyTreeMapComparator;
 import com.walton.android.photowall.app.processor.PrepareData;
-
+import com.walton.android.photowall.app.processor.PrepareDataAtWidth3;
 
 public class MainActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		PhotoWall photoWall = new PhotoWall(this);
-		PrepareData prepareData = new PrepareData();
-		photoWall.setData(prepareData.getPrepareData());
+		photoWall.setData(new PrepareData().getPrepareData());
+		photoWall.setDataAtWidth(3,new PrepareDataAtWidth3().getPrepareData());
 		photoWall.setCellViewCreator(new MyItemViewCreator(this));
 		photoWall.setLabelViewCreator(new MyHeaderViewCreator(this));
 		photoWall.setItemViewOnClickListener(new MyItemViewOnClickListener());
@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity{
 		photoWall.setHeaderViewOnDoubleClickListener(new MyHeaderDoubleClickListener());
 		photoWall.setItemViewOnDoubleClickListener(new MyItemDoubleClickListener());
 		photoWall.setWidth(4);
-		photoWall.setOnItemViewTouchListener(new ScaleViewTouchListener());
+		photoWall.setMaxRow(4);
+		photoWall.setMinRow(2);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 		addContentView(photoWall,layoutParams);
     }

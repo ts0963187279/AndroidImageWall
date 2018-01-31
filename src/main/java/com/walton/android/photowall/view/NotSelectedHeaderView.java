@@ -22,6 +22,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.walton.android.photowall.model.HeaderViewData;
+
 /**
  * Created by waltonmis on 2017/8/7.
  */
@@ -43,7 +45,8 @@ public class NotSelectedHeaderView extends HeaderView {
     }
 
     @Override
-    public void setText(String title) {
+    public void setData(HeaderViewData headerViewData) {
+		String title = headerViewData.getSortString();
         header.setText(title);
     }
 }

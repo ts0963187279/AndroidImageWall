@@ -42,7 +42,7 @@ public class MyItemView extends ItemView {
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
         selectChecker.setVisibility(GONE);
-        setBackgroundColor(Color.WHITE);
+        setBackgroundColor(Color.BLACK);
         ItemViewOnClickListener itemViewOnClickListener = new ItemViewOnClickListener();
         setOnClickListener(itemViewOnClickListener);
         addView(showImage);

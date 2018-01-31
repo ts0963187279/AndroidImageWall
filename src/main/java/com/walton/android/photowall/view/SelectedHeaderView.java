@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.walton.android.photowall.model.HeaderViewData;
+
 /**
  * Created by waltonmis on 2017/8/8.
  */
@@ -41,7 +43,8 @@ public class SelectedHeaderView extends HeaderView {
         selectAllChecker.setChecked(false);
     }
     @Override
-    public void setText(String title) {
+    public void setData(HeaderViewData headerViewData) {
+		String title = headerViewData.getSortString();
         header.setText(title);
     }
 }

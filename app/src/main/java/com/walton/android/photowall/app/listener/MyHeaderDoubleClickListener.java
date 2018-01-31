@@ -31,20 +31,7 @@ public class MyHeaderDoubleClickListener implements View.OnClickListener {
     public void onClick(View v) {
         HeaderView view = (HeaderView)v;
         int section = view.getSection();
-        ArrayList<Uri> uriList = view.getSelectModData().getUriList();
-        ArrayList<ArrayList<Boolean>> isCheck = view.getSelectModData().getIsCheck();
-        int k = 0;
-        for(int i=0;i<section;i++){
-            k += view.getSelectModData().getPositionCount(i);
-        }
-        for (int j = 0; j < isCheck.get(section).size(); j++) {
-            if (uriList.get(k++).toString().indexOf(".jpg") != -1) {
-                if(!view.getSelectModData().isItemCheck(section,j))
-                    view.getSelectModData().setItemCheck(section, j, true);
-            }else
-                if(view.getSelectModData().isItemCheck(section,j))
-                    view.getSelectModData().setItemCheck(section,j,false);
-        }
-        view.getSelectModData().adapterNotify();
+		view.getSelectModData().headerOnChecked(section,true);
+		view.getSelectModData().adapterNotify();
     }
 }

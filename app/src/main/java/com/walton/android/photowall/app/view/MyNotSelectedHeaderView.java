@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.walton.android.photowall.view.HeaderView;
+import com.walton.android.photowall.model.HeaderViewData;
+
 /**
  * Created by waltonmis on 2017/8/8.
  */
@@ -44,7 +46,8 @@ public class MyNotSelectedHeaderView extends HeaderView {
     }
 
     @Override
-    public void setText(String title) {
+    public void setData(HeaderViewData headerViewData) {
+		String title = headerViewData.getSortString();
         header.setText(title);
     }
 }

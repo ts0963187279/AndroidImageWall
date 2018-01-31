@@ -20,8 +20,8 @@ import com.walton.android.photowall.processor.ArrayListComparator;
 import com.walton.android.photowall.processor.TreeMapComparator;
 import com.walton.android.photowall.model.ItemViewData;
 import com.walton.android.photowall.model.PhotoItemViewData;
-import com.walton.android.photowall.model.HeaderViewData;
 import com.walton.android.photowall.model.PhotoHeaderViewData;
+import com.walton.android.photowall.model.HeaderViewData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,9 @@ import java.util.TreeMap;
  * Created by waltonmis on 2017/7/28.
  */
 
-public class PrepareData {
-    TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap;
-    public PrepareData(){
+public class PrepareDataAtWidth3 {
+	    TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap;
+    public PrepareDataAtWidth3(){
         itemViewDataTreeMap = new TreeMap<>();
 		ItemViewData itemViewDataTmp = new PhotoItemViewData();
 		HeaderViewData headerViewDataTmp = new PhotoHeaderViewData();
@@ -54,7 +54,7 @@ public class PrepareData {
 		itemViewDataTmp.setPreviewData("https://java.com/ga/images/jv0h_gojava.jpg");
 		itemViewDataTmp.setContentData("https://java.com/ga/images/jv0h_gojava.jpg");
 		itemViewDataListTmp.add(itemViewDataTmp);
-		headerViewDataTmp.setSortString("Java");
+		headerViewDataTmp.setSortString("1Java");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -91,7 +91,7 @@ public class PrepareData {
 		itemViewDataTmp.setPreviewData("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg");
 		itemViewDataTmp.setContentData("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg");
 		itemViewDataListTmp.add(itemViewDataTmp);
-		headerViewDataTmp.setSortString("C++");
+		headerViewDataTmp.setSortString("3C++");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -132,7 +132,7 @@ public class PrepareData {
 		itemViewDataTmp.setPreviewData("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png");
 		itemViewDataTmp.setContentData("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png");
 		itemViewDataListTmp.add(itemViewDataTmp);
-		headerViewDataTmp.setSortString("Python");
+		headerViewDataTmp.setSortString("2Python");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
     }
     public TreeMap<HeaderViewData, List<ItemViewData>> getPrepareData(){

@@ -30,6 +30,8 @@ import com.walton.android.photowall.view.ItemView;
 import com.walton.android.photowall.view.DefaultHeaderView;
 import com.walton.android.photowall.view.DefaultItemView;
 import com.walton.android.photowall.model.ItemViewData;
+import com.walton.android.photowall.model.HeaderViewData;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,9 +46,9 @@ import java.util.TreeMap;
 public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private List<ItemViewData> itemViewDataList;
     private Context context;
-    private String[] header;
+    private HeaderViewData[] header;
     private List<List<ItemViewData>> itemViewDataSortList;
-	private TreeMap<String,List<ItemViewData>> itemViewDataTreeMap;
+	private TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap;
     private ItemView itemView;
     private HeaderView headerView;
     private View.OnLongClickListener selectModHeaderLongClickListener;
@@ -87,17 +89,17 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
 		cellViewCreator = new ItemViewCreator(context);
         labelViewCreator = new HeaderViewCreator(context);
     }
-    public void setData(TreeMap<String,List<ItemViewData>> itemViewDataTreeMap){
+    public void setData(TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap){
 		this.itemViewDataTreeMap = itemViewDataTreeMap;
 		itemViewDataList = new ArrayList<>();
 		itemViewDataSortList = new ArrayList<>(itemViewDataTreeMap.size());
 		selectModData = new SelectModData(itemViewDataTreeMap,this);
-		header = new String[itemViewDataTreeMap.size()];
+		header = new HeaderViewData[itemViewDataTreeMap.size()];
 		Iterator iterator;
 		iterator = itemViewDataTreeMap.navigableKeySet().iterator();
 		for(int i=0;i<itemViewDataTreeMap.size();i++){
 			Object key = iterator.next();
-			header[i] = key.toString();
+			header[i] = (HeaderViewData)key;
 			List<ItemViewData> itemViewDataListTmp = new ArrayList<>(itemViewDataTreeMap.get(key).size());
 			for(int j=0;j<itemViewDataTreeMap.get(key).size();j++){
 				ItemViewData itemViewData = itemViewDataTreeMap.get(key).get(j);
@@ -202,11 +204,11 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
         this.listComparator = listComparator;
     }
     public void sortHeader(){
-        TreeMap<String,List<ItemViewData>> itemViewDataTreeMapTmp = new TreeMap<>(treeMapComparator);
+        TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMapTmp = new TreeMap<>(treeMapComparator);
         Object key;Iterator iterator = itemViewDataTreeMap.navigableKeySet().iterator();
         while(iterator.hasNext()){
             key = iterator.next();
-            itemViewDataTreeMapTmp.put((String)key,itemViewDataTreeMap.get(key));
+            itemViewDataTreeMapTmp.put((HeaderViewData)key,itemViewDataTreeMap.get(key));
         }
         itemViewDataSortList.clear();
         itemViewDataList.clear();
@@ -259,14 +261,13 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     @Override
     public void onBindHeaderViewHolder(HeaderViewHolder viewHolder, int section) {
         final PhotoWallHeaderViewHolder holder = (PhotoWallHeaderViewHolder) viewHolder;
-        final String label = header[section];
-        if(selectModData.getCheckCount() == 0) {
+		if(selectModData.getCheckCount() == 0) {
             selectModData.setSelectMod(false);
         }else
             selectModData.setSelectMod(true);
         holder.headerView.setSelectModData(selectModData);
         holder.headerView.setSection(section);
-        holder.headerView.setText(label);
+        holder.headerView.setData(header[section]);
         if(selectModData.isSelectMod()){
             if(selectModData.isHeaderCheck(section))
                 holder.headerView.setChecked(true);

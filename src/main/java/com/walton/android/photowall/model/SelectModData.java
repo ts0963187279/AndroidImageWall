@@ -37,7 +37,7 @@ public class SelectModData {
     private boolean isSelectMod;
     private int checkCount;
     private PhotoWallAdapter photoWallAdapter;
-    public SelectModData(TreeMap<String,List<ItemViewData>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
+    public SelectModData(TreeMap<HeaderViewData,List<ItemViewData>> uriTreeMap,PhotoWallAdapter photoWallAdapter){
         this.photoWallAdapter = photoWallAdapter;
         Iterator iterator;
         Object key;

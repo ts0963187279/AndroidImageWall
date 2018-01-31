@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.walton.android.photowall.model.SelectModData;
+import com.walton.android.photowall.model.HeaderViewData;
 
 import java.util.ArrayList;
 
@@ -48,5 +49,5 @@ public abstract class HeaderView extends LinearLayout{
     }
     public void setChecked(boolean isCheck){selectModData.setHeaderCheck(section,isCheck);}
     public boolean isChecked(){return selectModData.isHeaderCheck(section);}
-    public abstract void setText(String title);
+    public abstract void setData(HeaderViewData headerViewData);
 }

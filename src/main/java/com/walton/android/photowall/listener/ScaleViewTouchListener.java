@@ -23,6 +23,9 @@ import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.processor.PhotoWallAdapter;
 import com.walton.android.photowall.view.MyAnimation;
 
+import java.util.Hashtable;
+import java.util.TreeMap;
+
 /**
  * Created by waltonmis on 2017/7/21.
  */
@@ -38,18 +41,22 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
     private int row = 4;
     private int maxRow = 4;
     private int minRow = 2;
+	private Hashtable dataAtWidth;
+	public void setDataAtWidth(Hashtable dataAtWidth){
+		this.dataAtWidth = dataAtWidth;
+	}
     public void setMaxRow(int maxRow){
         this.maxRow = maxRow;
     }
     public void setMinRow(int minRow){
         this.minRow = minRow;
     }
-    private float Spacing(MotionEvent motionEvent){
+    private float spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
         double y = motionEvent.getY(0) - motionEvent.getY(1);
         return (float)Math.sqrt(x * x + y * y);
     }
-    private void MidPoint(PointF point,MotionEvent motionEvent){
+    private void midPoint(PointF point,MotionEvent motionEvent){
         float x = motionEvent.getX(0) + motionEvent.getX(1);
         float y = motionEvent.getY(0) + motionEvent.getY(1);
         point.set(x/2,y/2);
@@ -83,13 +90,12 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
         }
         return isPointerDown;
     }
-
     @Override
     public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
         if(isPointerDown){
-            Distance = Spacing(motionEvent);
+            Distance = spacing(motionEvent);
             if(Distance > 20f){
-                MidPoint(SecondPointF,motionEvent);
+                midPoint(SecondPointF,motionEvent);
                 State = STATE_ZOOM;
             }
             isPointerDown = false;
@@ -109,12 +115,20 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                         row--;
                     StickyHeaderGridLayoutManager layoutManager = new StickyHeaderGridLayoutManager(row);
                     recyclerView.setLayoutManager(layoutManager);
+					TreeMap dataTreeMap = (TreeMap)dataAtWidth.get(row);
+					PhotoWallAdapter photoWallAdapter = (PhotoWallAdapter)recyclerView.getAdapter();
+					if(dataTreeMap != null){
+						photoWallAdapter.setData(dataTreeMap);
+					}else{
+						dataTreeMap = (TreeMap)dataAtWidth.get(0);
+						photoWallAdapter.setData(dataTreeMap);
+					}
                     State = STATE_NONE;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
                 if(State == STATE_ZOOM){
-                    float NewDistance = Spacing(motionEvent);
+                    float NewDistance = spacing(motionEvent);
                     if(NewDistance > 20f){
                         NewScale = NewDistance/Distance;
                         MyAnimation myAnimation = new MyAnimation(NewScale,NewScale,NewScale,NewScale);
