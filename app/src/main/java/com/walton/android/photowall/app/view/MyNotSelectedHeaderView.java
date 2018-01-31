@@ -47,7 +47,7 @@ public class MyNotSelectedHeaderView extends HeaderView {
 
     @Override
     public void setData(HeaderViewData headerViewData) {
-		String title = headerViewData.getSortString();
+		String title = (String)headerViewData.getContent();
         header.setText(title);
     }
 }

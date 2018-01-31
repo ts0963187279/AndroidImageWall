@@ -34,7 +34,7 @@ import com.walton.android.photowall.view.GalleryCellItemView;
 import java.io.File;
 import java.util.List;
 
-import start.android.library.R;
+import com.walton.android.photowall.library.R;
 
 /**
  * Created by waltonmis on 2017/7/19.

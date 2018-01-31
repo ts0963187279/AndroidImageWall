@@ -30,7 +30,7 @@ import com.walton.android.photowall.processor.GalleryAdapter;
 
 import java.util.ArrayList;
 
-import start.android.library.R;
+import com.walton.android.photowall.library.R;
 
 /**
  * Created by waltonmis on 2017/7/19.

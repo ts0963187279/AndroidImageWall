@@ -33,9 +33,11 @@ import com.walton.android.photowall.app.listener.MyItemLongClickListener;
 import com.walton.android.photowall.app.listener.MyItemSelectModOnClickListener;
 import com.walton.android.photowall.app.listener.MySelectModMenuClickListener;
 import com.walton.android.photowall.app.listener.MyViewModMenuClickListener;
-import com.walton.android.photowall.listener.ScaleViewTouchListener;
+import com.walton.android.photowall.app.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.processor.PhotoWallAdapter;
 import com.walton.android.photowall.view.PhotoWall;
+import com.walton.android.photowall.model.ItemViewData;
+import com.walton.android.photowall.model.HeaderViewData;
 import com.walton.android.photowall.app.processor.MyArrayListComparator;
 import com.walton.android.photowall.app.processor.MyHeaderViewCreator;
 import com.walton.android.photowall.app.processor.MyItemViewCreator;
@@ -43,15 +45,18 @@ import com.walton.android.photowall.app.processor.MyTreeMapComparator;
 import com.walton.android.photowall.app.processor.PrepareData;
 import com.walton.android.photowall.app.processor.PrepareDataAtWidth3;
 
+import java.util.TreeMap;
+import java.util.Hashtable;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private PhotoWallAdapter photoWallAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
 		PhotoWall photoWall = new PhotoWall(this);
 		photoWall.setData(new PrepareData().getPrepareData());
-		photoWall.setDataAtWidth(3,new PrepareDataAtWidth3().getPrepareData());
 		photoWall.setCellViewCreator(new MyItemViewCreator(this));
 		photoWall.setLabelViewCreator(new MyHeaderViewCreator(this));
 		photoWall.setItemViewOnClickListener(new MyItemViewOnClickListener());
@@ -62,9 +67,17 @@ public class MainActivity extends AppCompatActivity{
 		photoWall.setHeaderViewOnDoubleClickListener(new MyHeaderDoubleClickListener());
 		photoWall.setItemViewOnDoubleClickListener(new MyItemDoubleClickListener());
 		photoWall.setWidth(5);
-		photoWall.setMaxRow(5);
-		photoWall.setMinRow(2);
+		ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener();
+		scaleViewTouchListener.setRow(5);
+		scaleViewTouchListener.setMaxRow(5);
+		scaleViewTouchListener.setMinRow(2);
+		Hashtable dataAtWidth = new Hashtable<Integer,TreeMap<HeaderViewData,List<ItemViewData>>>();
+		dataAtWidth.put(0,new PrepareData().getPrepareData());
+		dataAtWidth.put(3,new PrepareDataAtWidth3().getPrepareData());
+		scaleViewTouchListener.setDataAtWidth(dataAtWidth);
+		photoWall.setOnItemTouchListener(scaleViewTouchListener);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 		addContentView(photoWall,layoutParams);
+		
     }
 }

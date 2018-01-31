@@ -20,9 +20,15 @@ public class PhotoItemViewData implements ItemViewData<String>{
 	private String contentData;
 	public void setPreviewData(String input){
 		this.previewData = input;
+		if(contentData == null){
+			contentData = input;
+		}
 	}
 	public void setContentData(String input){
 		this.contentData = input;
+		if(previewData == null){
+			previewData = input;
+		}
 	}
 	public String getPreviewData(){
 		return previewData;

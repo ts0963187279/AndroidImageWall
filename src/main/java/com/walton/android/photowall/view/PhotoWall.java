@@ -26,7 +26,6 @@ import com.walton.android.photowall.model.ItemViewData;
 import com.walton.android.photowall.processor.CellViewCreator;
 import com.walton.android.photowall.processor.LabelViewCreator;
 import com.walton.android.photowall.listener.ExitSelectModOnKeyListener;
-import com.walton.android.photowall.listener.ScaleViewTouchListener;
 import com.walton.android.photowall.model.HeaderViewData;
 
 import java.util.List;
@@ -39,8 +38,6 @@ public class PhotoWall extends LinearLayout{
 	private Toolbar selectModToolBar;
 	private RecyclerView recyclerView;
 	private PhotoWallAdapter photoWallAdapter;
-	private ScaleViewTouchListener scaleViewTouchListener;
-	private Hashtable dataAtWidth;
 	public PhotoWall(Context context){
 		super(context);
 		setOrientation(VERTICAL);
@@ -58,19 +55,9 @@ public class PhotoWall extends LinearLayout{
 		recyclerView.setOnKeyListener(new ExitSelectModOnKeyListener(photoWallAdapter));
 		recyclerView.setLayoutManager(new StickyHeaderGridLayoutManager(4));
 		recyclerView.setAdapter(photoWallAdapter);
-		dataAtWidth = new Hashtable<Integer,TreeMap<String,List<ItemViewData>>>();
-		scaleViewTouchListener = new ScaleViewTouchListener();
-		scaleViewTouchListener.setDataAtWidth(dataAtWidth);
-		scaleViewTouchListener.setMaxRow(6);
-		scaleViewTouchListener.setMinRow(2);
-		recyclerView.addOnItemTouchListener(scaleViewTouchListener);
 	}
 	public void setData(TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap){
 		photoWallAdapter.setData(itemViewDataTreeMap);
-		dataAtWidth.put(0,itemViewDataTreeMap);
-	}
-	public void setDataAtWidth(int atWidth,TreeMap<HeaderViewData,List<ItemViewData>> itemViewDataTreeMap){
-		dataAtWidth.put(atWidth,itemViewDataTreeMap);
 	}
 	public void setViewModToolBar(Toolbar toolbar){
 		viewModToolBar = toolbar;
@@ -117,12 +104,8 @@ public class PhotoWall extends LinearLayout{
 	}
 	public void setWidth(int width){
 		recyclerView.setLayoutManager(new StickyHeaderGridLayoutManager(width));
-		scaleViewTouchListener.setRow(width);
 	}
-	public void setMaxRow(int maxRow){
-		scaleViewTouchListener.setMaxRow(maxRow);
-	}
-	public void setMinRow(int minRow){
-		scaleViewTouchListener.setMinRow(minRow);
+	public void setOnItemTouchListener(RecyclerView.OnItemTouchListener onItemTouchListener){
+		recyclerView.addOnItemTouchListener(onItemTouchListener);
 	}
 }

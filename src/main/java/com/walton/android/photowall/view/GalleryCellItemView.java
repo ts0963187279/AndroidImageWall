@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import start.android.library.R;
+import com.walton.android.photowall.library.R;
 
 /**
  * Created by waltonmis on 2017/8/1.
