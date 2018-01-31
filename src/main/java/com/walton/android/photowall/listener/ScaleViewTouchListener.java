@@ -51,6 +51,9 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
     public void setMinRow(int minRow){
         this.minRow = minRow;
     }
+	public void setRow(int row){
+		this.row = row;
+	}
     private float spacing(MotionEvent motionEvent){
         double x = motionEvent.getX(0) - motionEvent.getX(1);
         double y = motionEvent.getY(0) - motionEvent.getY(1);

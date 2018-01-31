@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity{
 		photoWall.setSelectModItemOnClickListener(new MyItemSelectModOnClickListener());
 		photoWall.setHeaderViewOnDoubleClickListener(new MyHeaderDoubleClickListener());
 		photoWall.setItemViewOnDoubleClickListener(new MyItemDoubleClickListener());
-		photoWall.setWidth(4);
-		photoWall.setMaxRow(4);
+		photoWall.setWidth(5);
+		photoWall.setMaxRow(5);
 		photoWall.setMinRow(2);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 		addContentView(photoWall,layoutParams);

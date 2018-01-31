@@ -117,6 +117,7 @@ public class PhotoWall extends LinearLayout{
 	}
 	public void setWidth(int width){
 		recyclerView.setLayoutManager(new StickyHeaderGridLayoutManager(width));
+		scaleViewTouchListener.setRow(width);
 	}
 	public void setMaxRow(int maxRow){
 		scaleViewTouchListener.setMaxRow(maxRow);
