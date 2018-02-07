@@ -15,7 +15,7 @@
  */
 package com.walton.android.photowall.model;
 
-public class PhotoItemViewData implements ItemViewData<String>{
+public class PhotoItemViewData implements ItemViewData<String,String>{
 	private String previewData;
 	private String contentData;
 	public void setPreviewData(String input){
