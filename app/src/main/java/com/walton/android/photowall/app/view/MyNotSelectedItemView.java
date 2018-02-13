@@ -46,7 +46,7 @@ public class MyNotSelectedItemView extends ItemView {
         setOnClickListener(itemViewOnClickListener);
         addView(showImage);
         addView(selectChecker);
-        selectChecker.setChecked(true);
+        selectChecker.setChecked(false);
         showImage.setPadding(25,25,25,25);
     }
     @Override

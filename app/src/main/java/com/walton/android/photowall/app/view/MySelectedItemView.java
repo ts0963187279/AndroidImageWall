@@ -40,10 +40,10 @@ public class MySelectedItemView extends ItemView {
         showImage.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         showImage.setAdjustViewBounds(true);
         selectChecker.setClickable(false);
-        setBackgroundColor(Color.RED);
+        setBackgroundColor(Color.BLACK);
         addView(showImage);
         addView(selectChecker);
-        selectChecker.setChecked(false);
+        selectChecker.setChecked(true);
     }
     @Override
     public void setData(ItemViewData itemViewData) {

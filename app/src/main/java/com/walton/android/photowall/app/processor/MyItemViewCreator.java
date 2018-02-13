@@ -37,9 +37,9 @@ public class MyItemViewCreator implements CellViewCreator {
     public ItemView createView(int status) {
         switch (status){
             case 1:
-                return new MySelectedItemView(context);
-            case 2:
                 return new MyNotSelectedItemView(context);
+            case 2:
+                return new MySelectedItemView(context);
             default:
                 return new MyItemView(context);
         }

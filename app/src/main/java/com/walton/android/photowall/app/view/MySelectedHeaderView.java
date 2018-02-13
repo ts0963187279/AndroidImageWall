@@ -41,11 +41,11 @@ public class MySelectedHeaderView extends HeaderView {
         setBackgroundColor(Color.BLUE);
         addView(selectAllChecker);
         addView(header);
-        selectAllChecker.setChecked(false);
+        selectAllChecker.setChecked(true);
     }
     @Override
     public void setData(HeaderViewData headerViewData) {
-		String title = (String)headerViewData.getContent();
+		String title = (String)headerViewData.getContentData();
         header.setText(title);
     }
 }

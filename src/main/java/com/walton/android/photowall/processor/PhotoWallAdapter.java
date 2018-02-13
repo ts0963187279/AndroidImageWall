@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 
 import com.codewaves.stickyheadergrid.StickyHeaderGridAdapter;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.walton.android.photowall.listener.*;
 import com.walton.android.photowall.model.SelectModData;
 import com.walton.android.photowall.view.HeaderView;
@@ -70,7 +71,7 @@ public class PhotoWallAdapter extends StickyHeaderGridAdapter{
     private Comparator treeMapComparator;
     private Comparator listComparator;
 	public PhotoWallAdapter(Context context){
-        Fresco.initialize(context);
+		Fresco.initialize(context);
         this.context = context;
 		itemViewDataTreeMap = new TreeMap<>();
         itemView = new DefaultItemView(context);

@@ -55,7 +55,7 @@ public class PrepareData {
 		itemViewDataTmp.setContentData("http://www.vjmedia.com.hk/wp-content/uploads/2017/06/02/160951/24823_963e_12.jpg");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("3");
-		headerViewDataTmp.setContent("java");
+		headerViewDataTmp.setContentData("java");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -93,7 +93,7 @@ public class PrepareData {
 		itemViewDataTmp.setContentData("http://errorpage.b0.upaiyun.com/jbcdn2-403");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("1");
-		headerViewDataTmp.setContent("C++");
+		headerViewDataTmp.setContentData("C++");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -135,7 +135,7 @@ public class PrepareData {
 		itemViewDataTmp.setContentData("https://realpython.com/learn/python-first-steps/images/pythonlogo.jpg");		
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("2");
-		headerViewDataTmp.setContent("Python");
+		headerViewDataTmp.setContentData("Python");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
     }
     public TreeMap<HeaderViewData, List<ItemViewData>> getPrepareData(){

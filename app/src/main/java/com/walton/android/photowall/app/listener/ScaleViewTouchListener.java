@@ -22,6 +22,8 @@ import android.view.MotionEvent;
 import com.codewaves.stickyheadergrid.StickyHeaderGridLayoutManager;
 import com.walton.android.photowall.processor.PhotoWallAdapter;
 import com.walton.android.photowall.view.MyAnimation;
+import com.walton.android.photowall.app.processor.MyItemViewCreator;
+import com.walton.android.photowall.app.processor.MyHeaderViewCreator;
 
 import java.util.Hashtable;
 import java.util.TreeMap;
@@ -101,7 +103,7 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
                 midPoint(SecondPointF,motionEvent);
                 State = STATE_ZOOM;
             }
-            isPointerDown = false;
+			isPointerDown = false;
         }
         switch(motionEvent.getAction() & MotionEvent.ACTION_MASK){
             case MotionEvent.ACTION_POINTER_UP:
@@ -123,6 +125,8 @@ public class ScaleViewTouchListener implements RecyclerView.OnItemTouchListener 
 					if(dataTreeMap != null){
 						photoWallAdapter.setData(dataTreeMap);
 					}else{
+						photoWallAdapter.setItemViewCreator(new MyItemViewCreator(recyclerView.getContext()));
+						photoWallAdapter.setHeaderViewCreator(new MyHeaderViewCreator(recyclerView.getContext()));
 						dataTreeMap = (TreeMap)dataAtWidth.get(0);
 						photoWallAdapter.setData(dataTreeMap);
 					}

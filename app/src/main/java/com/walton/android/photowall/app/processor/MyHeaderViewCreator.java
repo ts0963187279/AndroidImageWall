@@ -36,9 +36,9 @@ public class MyHeaderViewCreator implements LabelViewCreator {
     public HeaderView createView(int status) {
         switch(status){
             case 1 :
-                return new MySelectedHeaderView(context);
-            case 2 :
                 return new MyNotSelectedHeaderView(context);
+            case 2 :
+                return new MySelectedHeaderView(context);
             default:
                 return new MyHeaderView(context);
         }

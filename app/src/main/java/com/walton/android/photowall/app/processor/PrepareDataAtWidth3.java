@@ -51,7 +51,7 @@ public class PrepareDataAtWidth3 {
 		itemViewDataTmp.setPreviewData("https://java.com/ga/images/jv0h_gojava.jpg");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("1");
-		headerViewDataTmp.setContent("Java");
+		headerViewDataTmp.setContentData("Java");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -81,7 +81,7 @@ public class PrepareDataAtWidth3 {
 		itemViewDataTmp.setPreviewData("https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAb_AAAAJDBkMGEyNjk3LTE2OWYtNDI1YS1iOWFiLTU3ZDg1OWNmMmVhYw.jpg");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("3");
-		headerViewDataTmp.setContent("C++");
+		headerViewDataTmp.setContentData("C++");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
 
 		itemViewDataListTmp = new ArrayList<>();
@@ -114,7 +114,7 @@ public class PrepareDataAtWidth3 {
 		itemViewDataTmp.setPreviewData("https://www.visualstudio.com/wp-content/uploads/2016/06/python-1-562x309@2x-op.png");
 		itemViewDataListTmp.add(itemViewDataTmp);
 		headerViewDataTmp.setSortString("2");
-		headerViewDataTmp.setContent("Python");
+		headerViewDataTmp.setContentData("Python");
         itemViewDataTreeMap.put(headerViewDataTmp,itemViewDataListTmp);
     }
     public TreeMap<HeaderViewData, List<ItemViewData>> getPrepareData(){

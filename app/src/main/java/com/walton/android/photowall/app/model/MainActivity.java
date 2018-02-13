@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 		PhotoWall photoWall = new PhotoWall(this);
 		photoWall.setData(new PrepareData().getPrepareData());
 		photoWall.setCellViewCreator(new MyItemViewCreator(this));
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity{
 		photoWall.setItemViewOnDoubleClickListener(new MyItemDoubleClickListener());
 		photoWall.setWidth(5);
 		ScaleViewTouchListener scaleViewTouchListener = new ScaleViewTouchListener();
-		scaleViewTouchListener.setRow(5);
+		scaleViewTouchListener.setRow(4);
 		scaleViewTouchListener.setMaxRow(5);
 		scaleViewTouchListener.setMinRow(2);
 		Hashtable dataAtWidth = new Hashtable<Integer,TreeMap<HeaderViewData,List<ItemViewData>>>();
@@ -76,8 +77,6 @@ public class MainActivity extends AppCompatActivity{
 		dataAtWidth.put(3,new PrepareDataAtWidth3().getPrepareData());
 		scaleViewTouchListener.setDataAtWidth(dataAtWidth);
 		photoWall.setOnItemTouchListener(scaleViewTouchListener);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 		addContentView(photoWall,layoutParams);
-		
-    }
+	}
 }

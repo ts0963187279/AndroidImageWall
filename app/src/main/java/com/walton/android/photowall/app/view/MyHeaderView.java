@@ -40,7 +40,7 @@ public class MyHeaderView extends HeaderView {
     }
     @Override
     public void setData(HeaderViewData headerViewData){
-		String title = (String)headerViewData.getContent();
+		String title = (String)headerViewData.getContentData();
         header.setText(title);
     }
 }

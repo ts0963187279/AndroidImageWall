@@ -38,7 +38,7 @@ dependencies {
 	compile 'com.android.support:support-v4:25.+'
 	compile 'com.android.support:recyclerview-v7:25.+'
 	compile 'com.android.support:gridlayout-v7:25.+'
-	compile 'com.facebook.fresco:fresco:1.4.0'
+	compile 'com.facebook.fresco:fresco:1.8.0'
 	compile 'com.codewaves.stickyheadergrid:stickyheadergrid:0.9.4'
 }
 task makeJar(type: Copy){

@@ -42,12 +42,12 @@ public class MyNotSelectedHeaderView extends HeaderView {
         setBackgroundColor(Color.GRAY);
         addView(selectAllChecker);
         addView(header);
-        selectAllChecker.setChecked(true);
+        selectAllChecker.setChecked(false);
     }
 
     @Override
     public void setData(HeaderViewData headerViewData) {
-		String title = (String)headerViewData.getContent();
+		String title = (String)headerViewData.getContentData();
         header.setText(title);
     }
 }
